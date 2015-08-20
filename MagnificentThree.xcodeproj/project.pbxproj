@@ -11,6 +11,7 @@
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
 		AC56011C1B8582F2009571EA /* pfHay.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC56011B1B8582F2009571EA /* pfHay.sks */; };
+		AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */; };
 		AC7DBFC51B7C3D2C00822EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DBFC41B7C3D2C00822EDD /* AppDelegate.swift */; };
 		AC7DBFC91B7C3D2C00822EDD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DBFC81B7C3D2C00822EDD /* GameScene.swift */; };
 		AC7DBFCB1B7C3D2C00822EDD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DBFCA1B7C3D2C00822EDD /* GameViewController.swift */; };
@@ -57,6 +58,7 @@
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
 		AC56011B1B8582F2009571EA /* pfHay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = pfHay.sks; sourceTree = "<group>"; };
+		AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Mag3Theme.mp3; path = Audio/Mag3Theme.mp3; sourceTree = "<group>"; };
 		AC7DBFBF1B7C3D2C00822EDD /* MagnificentThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagnificentThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7DBFC31B7C3D2C00822EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC7DBFC41B7C3D2C00822EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		AC8077B31B84327A00B3D46B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */,
 				AC8077B41B84328E00B3D46B /* banjo.wav */,
 				AC8077B51B84328E00B3D46B /* bigwhip.wav */,
 				AC8077B61B84328E00B3D46B /* cock.wav */,
@@ -312,6 +315,7 @@
 				AC56011C1B8582F2009571EA /* pfHay.sks in Resources */,
 				AC7DBFF01B7C781600822EDD /* Sprites.plist in Resources */,
 				AC8077BF1B84328E00B3D46B /* gunshot.wav in Resources */,
+				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
 				AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */,
 				AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */,

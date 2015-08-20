@@ -11,6 +11,10 @@ import SpriteKit
 
 class MenuView: SKView {
     
+    // MARK: Audio
+    
+    let theme = SKAction.playSoundFileNamed("Mag3Theme.mp3", waitForCompletion: false)
+    
     // MARK: Variables
     
     let pad: CGFloat = 30.0
@@ -52,6 +56,10 @@ class MenuView: SKView {
         scene.addChild(hayParticle!)
         
         self.presentScene(scene)
+        
+        let seq = SKAction.sequence([theme, SKAction.waitForDuration(30.0)])
+        let repeatAction = SKAction.repeatActionForever(seq)
+        town?.runAction(repeatAction, withKey: "themeAction")
     }
     
     required init(coder aDecoder: NSCoder) {
