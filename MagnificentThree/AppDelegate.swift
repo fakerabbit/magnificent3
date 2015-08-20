@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        var gameController: GameViewController = GameViewController()
-        var navigationController: UINavigationController = UINavigationController(rootViewController: gameController)
+        //var controller: GameViewController = GameViewController()
+        var controller: MenuViewController = MenuViewController()
+        var navigationController: UINavigationController = UINavigationController(rootViewController: controller)
         navigationController.navigationBar.hidden = true
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
