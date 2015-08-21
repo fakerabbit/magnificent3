@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MenuViewDelegate {
     
     // MARK: variables
     
@@ -20,6 +20,7 @@ class MenuViewController: UIViewController {
         super.loadView()
         // Configure the view.
         v = MenuView(frame: UIScreen.mainScreen().bounds)
+        v?.delegate = self
         self.view = v!;
     }
     
@@ -42,5 +43,12 @@ class MenuViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    // MARK: MenuViewDelegate methods
+    
+    func MenuViewOnArcade(view: MenuView) {
+        var controller: GameViewController = GameViewController()
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 }

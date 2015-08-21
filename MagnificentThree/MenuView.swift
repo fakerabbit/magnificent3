@@ -9,7 +9,15 @@
 import UIKit
 import SpriteKit
 
+protocol MenuViewDelegate: class {
+    func MenuViewOnArcade(view: MenuView)
+}
+
 class MenuView: SKView {
+    
+    // MARK: Delegate
+    
+    weak var delegate: MenuViewDelegate?
     
     // MARK: Audio
     
@@ -129,6 +137,6 @@ class MenuView: SKView {
     }
     
     func onArcade(sender: UIButton?) {
-        
+        delegate?.MenuViewOnArcade(self)
     }
 }
