@@ -19,12 +19,15 @@ class MenuView: SKView {
     
     let pad: CGFloat = 30.0
     let tpad: CGFloat = 10.0
+    let buttonH: CGFloat = 30.0
+    let buttonW: CGFloat = 100.0
     
     private var cscene: SKScene?
     private var logoIv: UIImageView?
     private var townIv: UIImageView?
     private var town: SKSpriteNode?
     private var hayParticle: SKEmitterNode?
+    private var arcadeBtn: UIButton?
     
     // MARK: Init
     
@@ -58,6 +61,13 @@ class MenuView: SKView {
         hayParticle!.targetNode = scene
         cscene?.addChild(hayParticle!)
         
+        arcadeBtn = UIButton(frame: CGRectZero)
+        arcadeBtn?.setImage(UIImage(named: "Arcade"), forState: .Normal)
+        arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), forState: .Highlighted)
+        arcadeBtn?.contentMode = .ScaleAspectFit
+        arcadeBtn?.addTarget(self, action: Selector("onArcade:"), forControlEvents: .TouchUpInside)
+        self.addSubview(arcadeBtn!)
+        
         self.presentScene(cscene)
         
         let seq = SKAction.sequence([theme, SKAction.waitForDuration(30.0)])
@@ -84,6 +94,7 @@ class MenuView: SKView {
         logoIv?.frame = CGRectMake(pad, 0, w - pad * 2, logoIv!.frame.size.height)
         townIv?.frame = CGRectMake(-tpad, h - townIv!.frame.size.height + tpad, w + tpad * 2, townIv!.frame.size.height)
         town?.position = CGPointMake(w/2, townIv!.frame.size.height/2)
+        arcadeBtn?.frame = CGRectMake(w/2 - buttonW/2, h/2 - buttonH/2, buttonW, buttonH)
     }
     
     // MARK: Private methods
@@ -115,5 +126,9 @@ class MenuView: SKView {
             j++
             totH += tile.size().height
         }
+    }
+    
+    func onArcade(sender: UIButton?) {
+        
     }
 }
