@@ -63,7 +63,7 @@ class MenuView: SKView {
         
         var path = NSBundle.mainBundle().pathForResource("pfHay", ofType: "sks")
         hayParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as? SKEmitterNode
-        hayParticle!.position = CGPointMake(5, 15)
+        hayParticle!.position = CGPointMake(8, 15)
         hayParticle!.zPosition = 100
         hayParticle!.name = "Hay"
         hayParticle!.targetNode = scene
@@ -135,6 +135,8 @@ class MenuView: SKView {
             totH += tile.size().height
         }
     }
+    
+    // MARK: Public methods
     
     func onArcade(sender: UIButton?) {
         delegate?.MenuViewOnArcade(self)

@@ -12,17 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var navController: UINavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //var controller: GameViewController = GameViewController()
         var controller: MenuViewController = MenuViewController()
-        var navigationController: UINavigationController = UINavigationController(rootViewController: controller)
-        navigationController.navigationBar.hidden = true
+        navController = UINavigationController(rootViewController: controller)
+        navController?.navigationBar.hidden = true
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
         return true
