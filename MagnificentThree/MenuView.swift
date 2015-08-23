@@ -22,6 +22,7 @@ class MenuView: SKView {
     // MARK: Audio
     
     let theme = SKAction.playSoundFileNamed("Mag3Theme.mp3", waitForCompletion: false)
+    let clickSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
     
     // MARK: Variables
     
@@ -139,6 +140,7 @@ class MenuView: SKView {
     // MARK: Public methods
     
     func onArcade(sender: UIButton?) {
+        cscene?.runAction(clickSound)
         delegate?.MenuViewOnArcade(self)
     }
 }
