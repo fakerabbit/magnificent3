@@ -41,7 +41,6 @@ class GameScene: SKScene {
     private var swipeFromColumn: Int?
     private var swipeFromRow: Int?
     private var selectionSprite = SKSpriteNode()
-    private var selectedItem: Item?
     
     var swipeHandler: ((Swap) -> ())?
     
@@ -155,7 +154,7 @@ class GameScene: SKScene {
         }
     }
     
-    func showSelectionIndicatorForCookie(item: Item) {
+    func showSelectionIndicatorForItem(item: Item) {
         if selectionSprite.parent != nil {
             selectionSprite.removeFromParent()
         }
@@ -337,36 +336,9 @@ class GameScene: SKScene {
             
             if let item = level.itemAtColumn(column, row: row) {
                 
-                if selectedItem != nil {
-                    let swap = Swap(itemA: selectedItem!, itemB: item)
-                    if level.isPossibleSwap(swap) {
-                        if let handler = swipeHandler {
-                            hideSelectionIndicator()
-                            handler(swap)
-                        }
-                    }
-                    else {
-                        let swap = Swap(itemA: item, itemB: selectedItem!)
-                        if level.isPossibleSwap(swap) {
-                            if let handler = swipeHandler {
-                                hideSelectionIndicator()
-                                handler(swap)
-                            }
-                        }
-                        else {
-                            showSelectionIndicatorForCookie(item)
-                            swipeFromColumn = column
-                            swipeFromRow = row
-                            selectedItem = item
-                        }
-                    }
-                }
-                else {
-                    showSelectionIndicatorForCookie(item)
-                    swipeFromColumn = column
-                    swipeFromRow = row
-                    selectedItem = item
-                }
+                showSelectionIndicatorForItem(item)
+                swipeFromColumn = column
+                swipeFromRow = row
             }
         }
     }
@@ -433,6 +405,9 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if selectionSprite.parent != nil && swipeFromColumn != nil {
+            hideSelectionIndicator()
+        }
         swipeFromColumn = nil
         swipeFromRow = nil
     }
