@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
 		AC5601121B85732D009571EA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601111B85732D009571EA /* MenuViewController.swift */; };
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
 		AC5601111B85732D009571EA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC425E461B8AB63200B1BB9E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AC425E471B8AB66300B1BB9E /* Sahara.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		AC7DBFB61B7C3D2C00822EDD = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		AC7DBFC11B7C3D2C00822EDD /* MagnificentThree */ = {
 			isa = PBXGroup;
 			children = (
+				AC425E461B8AB63200B1BB9E /* Fonts */,
 				AC8077B31B84327A00B3D46B /* Audio */,
 				AC8077C21B84356900B3D46B /* Chain.swift */,
 				ACCF97451B7D93DA00989E2A /* Swap.swift */,
@@ -308,6 +319,7 @@
 				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,
 				AC7DC0001B7C92B200822EDD /* Level_3.json in Resources */,
 				AC7DBFEE1B7C781600822EDD /* Sprites.1.png in Resources */,
+				AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */,
 				AC8077BB1B84328E00B3D46B /* banjo.wav in Resources */,
 				AC7DBFFD1B7C92B200822EDD /* Level_0.json in Resources */,
 				AC7DBFD31B7C3D2C00822EDD /* LaunchScreen.xib in Resources */,

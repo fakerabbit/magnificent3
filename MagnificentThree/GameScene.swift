@@ -22,12 +22,21 @@ class GameScene: SKScene {
     
     var level: Level!
     
-    let TileWidth: CGFloat = 32.0
-    let TileHeight: CGFloat = 36.0
+    var targetLbl: SKLabelNode?,
+        movesLbl: SKLabelNode?,
+        scoreLbl: SKLabelNode?,
+        target: SKLabelNode?,
+        moves: SKLabelNode?,
+        score: SKLabelNode?
     
-    let gameLayer = SKNode()
-    let itemsLayer = SKNode()
-    let tilesLayer = SKNode()
+    let TileWidth: CGFloat = 32.0,
+        TileHeight: CGFloat = 36.0
+    
+    let topPad: CGFloat = 10.0
+    
+    let gameLayer = SKNode(),
+        itemsLayer = SKNode(),
+        tilesLayer = SKNode()
     
     private var swipeFromColumn: Int?
     private var swipeFromRow: Int?
@@ -63,6 +72,48 @@ class GameScene: SKScene {
         
         itemsLayer.position = layerPosition
         gameLayer.addChild(itemsLayer)
+        
+        targetLbl = SKLabelNode(text: "Target:")
+        targetLbl?.fontName = "Sahara"
+        targetLbl?.fontColor = UIColor.whiteColor()
+        targetLbl?.fontSize = 14
+        addChild(targetLbl!)
+        targetLbl?.position = CGPointMake(-size.width/2.5, size.height/2.2)
+        
+        movesLbl = SKLabelNode(text: "Moves:")
+        movesLbl?.fontName = "Sahara"
+        movesLbl?.fontColor = UIColor.whiteColor()
+        movesLbl?.fontSize = 14
+        addChild(movesLbl!)
+        movesLbl?.position = CGPointMake(0, size.height/2.2)
+        
+        scoreLbl = SKLabelNode(text: "Score:")
+        scoreLbl?.fontName = "Sahara"
+        scoreLbl?.fontColor = UIColor.whiteColor()
+        scoreLbl?.fontSize = 14
+        addChild(scoreLbl!)
+        scoreLbl?.position = CGPointMake(size.width/2.5, size.height/2.2)
+        
+        target = SKLabelNode(text: "0")
+        target?.fontName = "Sahara"
+        target?.fontColor = UIColor.whiteColor()
+        target?.fontSize = 20
+        addChild(target!)
+        target?.position = CGPointMake(-size.width/2.5, size.height/2.4)
+        
+        moves = SKLabelNode(text: "0")
+        moves?.fontName = "Sahara"
+        moves?.fontColor = UIColor.whiteColor()
+        moves?.fontSize = 20
+        addChild(moves!)
+        moves?.position = CGPointMake(0, size.height/2.4)
+        
+        score = SKLabelNode(text: "0")
+        score?.fontName = "Sahara"
+        score?.fontColor = UIColor.whiteColor()
+        score?.fontSize = 20
+        addChild(score!)
+        score?.position = CGPointMake(size.width/2.5, size.height/2.4)
     }
     
     // MARK: Scene methods
@@ -170,6 +221,9 @@ class GameScene: SKScene {
     
     func animateMatchedItems(chains: Set<Chain>, completion: () -> ()) {
         for chain in chains {
+            
+            animateScoreForChain(chain)
+            
             for item in chain.items {
                 if let sprite = item.sprite {
                     if sprite.actionForKey("removing") == nil {
@@ -247,6 +301,28 @@ class GameScene: SKScene {
         }
         // 7
         runAction(SKAction.waitForDuration(longestDuration), completion: completion)
+    }
+    
+    func animateScoreForChain(chain: Chain) {
+        
+        // Figure out what the midpoint of the chain is.
+        let firstSprite = chain.firstItem().sprite!
+        let lastSprite = chain.lastItem().sprite!
+        let centerPosition = CGPoint(
+            x: (firstSprite.position.x + lastSprite.position.x)/2,
+            y: (firstSprite.position.y + lastSprite.position.y)/2 - 8)
+        
+        // Add a label for the score that slowly floats up.
+        let scoreLabel = SKLabelNode(fontNamed: "Sahara")
+        scoreLabel.fontSize = 16
+        scoreLabel.text = String(format: "%ld", chain.score)
+        scoreLabel.position = centerPosition
+        scoreLabel.zPosition = 300
+        itemsLayer.addChild(scoreLabel)
+        
+        let moveAction = SKAction.moveBy(CGVector(dx: 0, dy: 3), duration: 0.7)
+        moveAction.timingMode = .EaseOut
+        scoreLabel.runAction(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
     }
     
     // MARK: Touch events

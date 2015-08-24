@@ -44,6 +44,7 @@ class MenuView: SKView {
         super.init(frame: frame)
         
         //self.backgroundColor = UIColor(patternImage: UIImage(named: "BgTile")!)
+        //self.printFontNamesInSystem()
         
         logoIv = UIImageView(image: UIImage(named: "Logo"))
         logoIv?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -134,6 +135,16 @@ class MenuView: SKView {
             
             j++
             totH += tile.size().height
+        }
+    }
+    
+    private func printFontNamesInSystem() {
+        for family in UIFont.familyNames() {
+            println("*", family);
+            
+            for name in UIFont.fontNamesForFamilyName(family as! String) {
+                println(name);
+            }
         }
     }
     

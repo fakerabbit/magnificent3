@@ -8,16 +8,22 @@
 
 import Foundation
 
-let NumColumns = 9
-let NumRows = 9
+let NumColumns = 9,
+    NumRows = 9
 
 class Level {
     
+    // MARK: Public variables
+    
+    var targetScore = 0,
+        maximumMoves = 0
+    
     // MARK: Private variables
     
-    private var items = Array2D<Item>(columns: NumColumns, rows: NumRows)
-    private var tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows)
-    private var possibleSwaps = Set<Swap>()
+    private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
+                tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
+                possibleSwaps = Set<Swap>(),
+                comboMultiplier = 0
     
     // MARK: Init
     
@@ -37,6 +43,9 @@ class Level {
                         }
                     }
                 }
+                
+                targetScore = dictionary["targetScore"] as! Int
+                maximumMoves = dictionary["moves"] as! Int
             }
         }
     }
@@ -54,7 +63,7 @@ class Level {
         do {
             set = createInitialItems()
             detectPossibleSwaps()
-            println("possible swaps: \(possibleSwaps)")
+            //println("possible swaps: \(possibleSwaps)")
         }
             while possibleSwaps.count == 0
         
@@ -143,6 +152,9 @@ class Level {
         removeItems(horizontalChains)
         removeItems(verticalChains)
         
+        calculateScores(horizontalChains)
+        calculateScores(verticalChains)
+        
         return horizontalChains.union(verticalChains)
     }
     
@@ -205,6 +217,10 @@ class Level {
             }
         }
         return columns
+    }
+    
+    func resetComboMultiplier() {
+        comboMultiplier = 1
     }
     
     // MARK: Private methods
@@ -324,6 +340,14 @@ class Level {
             for item in chain.items {
                 items[item.column, item.row] = nil
             }
+        }
+    }
+    
+    private func calculateScores(chains: Set<Chain>) {
+        // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
+        for chain in chains {
+            chain.score = 60 * (chain.length - 2) * comboMultiplier
+            ++comboMultiplier
         }
     }
 }

@@ -9,6 +9,10 @@
 import Foundation
 
 class Chain: Hashable, Printable {
+    
+    // MARK: Variables
+    
+    var score = 0
     var items = [Item]()
     
     enum ChainType: Printable {
@@ -25,9 +29,13 @@ class Chain: Hashable, Printable {
     
     var chainType: ChainType
     
+    // MARK: Init
+    
     init(chainType: ChainType) {
         self.chainType = chainType
     }
+    
+    // MARK: Public methods
     
     func addItem(item: Item) {
         items.append(item)
@@ -48,6 +56,8 @@ class Chain: Hashable, Printable {
     var description: String {
         return "type:\(chainType) items:\(items)"
     }
+    
+    // MARK: Hashable
     
     var hashValue: Int {
         return reduce(items, 0) { $0.hashValue ^ $1.hashValue }

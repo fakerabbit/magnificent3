@@ -16,6 +16,9 @@ class GameViewController: UIViewController {
     var scene: GameScene!
     var level: Level!
     
+    var movesLeft = 0
+    var score = 0
+    
     // MARK: View methods
     
     override func loadView() {
@@ -62,6 +65,10 @@ class GameViewController: UIViewController {
     // MARK: Public methods
     
     func beginGame() {
+        movesLeft = level.maximumMoves
+        score = 0
+        updateLabels()
+        level.resetComboMultiplier()
         shuffle()
     }
     
@@ -92,6 +99,12 @@ class GameViewController: UIViewController {
         }
         
         scene.animateMatchedItems(chains) {
+            
+            for chain in chains {
+                self.score += chain.score
+            }
+            self.updateLabels()
+            
             let columns = self.level.fillHoles()
             self.scene.animateFallingItems(columns) {
                 let columns = self.level.topUpCookies()
@@ -103,7 +116,20 @@ class GameViewController: UIViewController {
     }
     
     func beginNextTurn() {
+        level.resetComboMultiplier()
         level.detectPossibleSwaps()
+        decrementMoves()
         view.userInteractionEnabled = true
+    }
+    
+    func updateLabels() {
+        scene.target?.text = String(format: "%ld", level.targetScore)
+        scene.moves?.text = String(format: "%ld", movesLeft)
+        scene.score?.text = String(format: "%ld", score)
+    }
+    
+    func decrementMoves() {
+        --movesLeft
+        updateLabels()
     }
 }
