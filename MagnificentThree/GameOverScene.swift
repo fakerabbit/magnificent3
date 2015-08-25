@@ -10,6 +10,10 @@ import SpriteKit
 
 class GameOverScene: SKScene {
     
+    // MARK: Variables
+    
+    var sign: SKSpriteNode?
+    
     // MARK: Init
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,17 +28,28 @@ class GameOverScene: SKScene {
         if victory {
             let background = SKSpriteNode(imageNamed: "BgGameVictory")
             addChild(background)
+            
+            sign = SKSpriteNode(imageNamed: "Victory")
         }
         else {
             let background = SKSpriteNode(imageNamed: "BgGameOver")
             addChild(background)
+            
+            sign = SKSpriteNode(imageNamed: "Defeat")
         }
+        
+        sign?.position = CGPointMake(0, size.height/1)
+        addChild(sign!)
     }
     
     // MARK: Scene methods
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        let Duration: NSTimeInterval = 0.3
+        let moveA = SKAction.moveTo(CGPointMake(0, size.height/3), duration: Duration)
+        moveA.timingMode = .EaseOut
+        sign?.runAction(moveA, completion: nil)
     }
     
     override func update(currentTime: CFTimeInterval) {
