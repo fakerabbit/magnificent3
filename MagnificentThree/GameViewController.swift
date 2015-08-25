@@ -86,6 +86,7 @@ class GameViewController: UIViewController {
         } else {
             scene.animateInvalidSwap(swap) {
                 self.view.userInteractionEnabled = true
+                self.decrementMoves()
             }
         }
     }
@@ -131,5 +132,18 @@ class GameViewController: UIViewController {
     func decrementMoves() {
         --movesLeft
         updateLabels()
+        if score >= level.targetScore {
+            onGameOver(true)
+        } else if movesLeft == 0 {
+            onGameOver(false)
+        }
+    }
+    
+    func onGameOver(victory: Bool) {
+        scene.userInteractionEnabled = false
+        var controller: GameOverController = GameOverController(victory: victory)
+        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.pushViewController(controller, animated: true)
+        appDel.navController?.viewControllers = [controller]
     }
 }

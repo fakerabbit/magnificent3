@@ -41,6 +41,8 @@
 		AC8077C01B84328E00B3D46B /* spurs.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B91B84328E00B3D46B /* spurs.wav */; };
 		AC8077C11B84328E00B3D46B /* whip.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077BA1B84328E00B3D46B /* whip.wav */; };
 		AC8077C31B84356900B3D46B /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8077C21B84356900B3D46B /* Chain.swift */; };
+		AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7811B8C0CDF0028E14C /* GameOverController.swift */; };
+		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
 		ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCF97451B7D93DA00989E2A /* Swap.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,8 @@
 		AC8077B91B84328E00B3D46B /* spurs.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = spurs.wav; path = Audio/spurs.wav; sourceTree = "<group>"; };
 		AC8077BA1B84328E00B3D46B /* whip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = whip.wav; path = Audio/whip.wav; sourceTree = "<group>"; };
 		AC8077C21B84356900B3D46B /* Chain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
+		AC96F7811B8C0CDF0028E14C /* GameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverController.swift; sourceTree = "<group>"; };
+		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		ACCF97451B7D93DA00989E2A /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +164,8 @@
 				AC7DBFCA1B7C3D2C00822EDD /* GameViewController.swift */,
 				AC5601131B8573A6009571EA /* MenuView.swift */,
 				AC5601111B85732D009571EA /* MenuViewController.swift */,
+				AC96F7831B8C0D440028E14C /* GameOverScene.swift */,
+				AC96F7811B8C0CDF0028E14C /* GameOverController.swift */,
 				AC7DBFCF1B7C3D2C00822EDD /* Images.xcassets */,
 				AC7DBFD11B7C3D2C00822EDD /* LaunchScreen.xib */,
 				AC7DBFC21B7C3D2C00822EDD /* Supporting Files */,
@@ -353,12 +359,14 @@
 				AC7DBFE91B7C54ED00822EDD /* Item.swift in Sources */,
 				AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */,
 				AC7DBFF61B7C7A1900822EDD /* Level.swift in Sources */,
+				AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */,
 				AC8077C31B84356900B3D46B /* Chain.swift in Sources */,
 				AC7DBFF41B7C79C900822EDD /* Array2D.swift in Sources */,
 				ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */,
 				AC7DC0031B7C930E00822EDD /* Tile.swift in Sources */,
 				AC5601141B8573A6009571EA /* MenuView.swift in Sources */,
 				AC5601121B85732D009571EA /* MenuViewController.swift in Sources */,
+				AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */,
 				AC7DBFC91B7C3D2C00822EDD /* GameScene.swift in Sources */,
 				AC7DBFCB1B7C3D2C00822EDD /* GameViewController.swift in Sources */,
 				AC7DBFF21B7C782000822EDD /* sprites.swift in Sources */,
