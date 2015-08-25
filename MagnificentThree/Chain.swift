@@ -18,11 +18,13 @@ class Chain: Hashable, Printable {
     enum ChainType: Printable {
         case Horizontal
         case Vertical
+        case Lshaped
         
         var description: String {
             switch self {
             case .Horizontal: return "Horizontal"
             case .Vertical: return "Vertical"
+            case .Lshaped: return "Lshaped"
             }
         }
     }
@@ -39,6 +41,12 @@ class Chain: Hashable, Printable {
     
     func addItem(item: Item) {
         items.append(item)
+    }
+    
+    func removeItem(item: Item) {
+        if let index = find(items, item) {
+            items.removeAtIndex(index)
+        }
     }
     
     func firstItem() -> Item {

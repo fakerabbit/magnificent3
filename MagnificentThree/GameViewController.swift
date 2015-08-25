@@ -107,7 +107,7 @@ class GameViewController: UIViewController {
             
             let columns = self.level.fillHoles()
             self.scene.animateFallingItems(columns) {
-                let columns = self.level.topUpCookies()
+                let columns = self.level.topUpItems()
                 self.scene.animateNewItems(columns) {
                     self.handleMatches()
                 }

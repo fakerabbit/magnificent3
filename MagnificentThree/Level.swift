@@ -146,16 +146,24 @@ class Level {
     }
     
     func removeMatches() -> Set<Chain> {
-        let horizontalChains = detectHorizontalMatches()
-        let verticalChains = detectVerticalMatches()
+        var horizontalChains = detectHorizontalMatches()
+        var verticalChains = detectVerticalMatches()
+        var lshapedChains = detectLshapedMatches(horizontalChains, verticalChains: verticalChains)
         
         removeItems(horizontalChains)
         removeItems(verticalChains)
+        removeItems(lshapedChains)
         
         calculateScores(horizontalChains)
         calculateScores(verticalChains)
+        calculateScores(lshapedChains)
         
-        return horizontalChains.union(verticalChains)
+        if lshapedChains.count > 0 {
+            return lshapedChains
+        }
+        else {
+            return horizontalChains.union(verticalChains).union(lshapedChains)
+        }
     }
     
     func fillHoles() -> [[Item]] {
@@ -189,7 +197,7 @@ class Level {
         return columns
     }
     
-    func topUpCookies() -> [[Item]] {
+    func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
         var itemType: ItemType = .Unknown
         
@@ -335,6 +343,51 @@ class Level {
         return set
     }
     
+    private func detectLshapedMatches(horizontalChains: Set<Chain>, verticalChains: Set<Chain>) -> Set<Chain> {
+        var set = Set<Chain>()
+        var found = false
+        
+        for chain in horizontalChains {
+            let fItem = chain.firstItem()
+            let lItem = chain.lastItem()
+            found = false
+            
+            for vchain in verticalChains {
+                for item in vchain.items {
+                    
+                    if item.itemType == fItem.itemType || item.itemType == lItem.itemType {
+                        let c = Chain(chainType: .Lshaped)
+                        for i in chain.items {
+                            c.addItem(i)
+                            chain.removeItem(i)
+                        }
+                        for i in vchain.items {
+                            c.addItem(i)
+                            vchain.removeItem(i)
+                        }
+                        set.insert(c)
+                        found = true
+                    }
+                    break
+                }
+                if found {
+                    break
+                }
+            }
+            
+            if found {
+                break
+            }
+        }
+        
+        if (found) {
+            horizontalChains.subtract(set)
+            verticalChains.subtract(set)
+        }
+        
+        return set
+    }
+    
     private func removeItems(chains: Set<Chain>) {
         for chain in chains {
             for item in chain.items {
@@ -345,8 +398,15 @@ class Level {
     
     private func calculateScores(chains: Set<Chain>) {
         // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
+        var value = 60
         for chain in chains {
-            chain.score = 60 * (chain.length - 2) * comboMultiplier
+            if chain.chainType == .Lshaped {
+                value = 120
+            }
+            else {
+                value = 60
+            }
+            chain.score = value * (chain.length - 2) * comboMultiplier
             ++comboMultiplier
         }
     }
