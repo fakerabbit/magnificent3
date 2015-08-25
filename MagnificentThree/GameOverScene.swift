@@ -22,14 +22,13 @@ class GameOverScene: SKScene {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         if victory {
-            println("VICTORY")
+            let background = SKSpriteNode(imageNamed: "BgGameVictory")
+            addChild(background)
         }
         else {
-            println("FAILURE")
+            let background = SKSpriteNode(imageNamed: "BgGameOver")
+            addChild(background)
         }
-        
-        let background = SKSpriteNode(imageNamed: "BgDesert")
-        addChild(background)
     }
     
     // MARK: Scene methods
