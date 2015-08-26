@@ -72,10 +72,18 @@ class GameOverController: UIViewController, NodeButtonDelegate {
     
     func NodeButtonDelegateOnTouch(button: NodeButton) {
         if button.tag == 1 { // play
-            println("play")
+            scene.userInteractionEnabled = false
+            var controller: GameViewController = GameViewController()
+            let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+            appDel.navController?.pushViewController(controller, animated: true)
+            appDel.navController?.viewControllers = [controller]
         }
         else if button.tag == 2 { // menu
-            println("menu")
+            scene.userInteractionEnabled = false
+            var controller: MenuViewController = MenuViewController()
+            let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+            appDel.navController?.pushViewController(controller, animated: true)
+            appDel.navController?.viewControllers = [controller]
         }
     }
 }
