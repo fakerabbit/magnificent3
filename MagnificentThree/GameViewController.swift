@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, NodeButtonDelegate {
     
     // MARK: variables
     
@@ -42,6 +42,7 @@ class GameViewController: UIViewController {
         let lvlNum = Int(arc4random_uniform(4))
         level = Level(filename: "Level_\(lvlNum)")
         scene.level = level
+        scene.shuffle?.delegate = self
         scene.addTiles()
         scene.swipeHandler = handleSwipe
         beginGame()
@@ -75,6 +76,7 @@ class GameViewController: UIViewController {
     }
     
     func shuffle() {
+        scene.removeAllCookieSprites()
         let newItems = level.shuffle()
         scene.addSpritesForItems(newItems)
     }
@@ -147,5 +149,12 @@ class GameViewController: UIViewController {
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
+    }
+    
+    // MARK: NodeButtonDelegate methods
+    
+    func NodeButtonDelegateOnTouch(button: NodeButton) {
+        shuffle()
+        decrementMoves()
     }
 }

@@ -74,6 +74,7 @@ class MenuView: SKView {
         arcadeBtn = UIButton(frame: CGRectZero)
         arcadeBtn?.setImage(UIImage(named: "Arcade"), forState: .Normal)
         arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), forState: .Highlighted)
+        arcadeBtn?.sizeToFit()
         arcadeBtn?.contentMode = .ScaleAspectFit
         arcadeBtn?.addTarget(self, action: Selector("onArcade:"), forControlEvents: .TouchUpInside)
         self.addSubview(arcadeBtn!)
@@ -104,7 +105,7 @@ class MenuView: SKView {
         logoIv?.frame = CGRectMake(pad, 0, w - pad * 2, logoIv!.frame.size.height)
         townIv?.frame = CGRectMake(-tpad, h - townIv!.frame.size.height + tpad, w + tpad * 2, townIv!.frame.size.height)
         town?.position = CGPointMake(w/2, townIv!.frame.size.height/2)
-        arcadeBtn?.frame = CGRectMake(w/2 - buttonW/2, h/2 - buttonH/2, buttonW, buttonH)
+        arcadeBtn?.frame = CGRectMake(w/2 - arcadeBtn!.frame.size.width/2, h/2 - arcadeBtn!.frame.size.height/2, arcadeBtn!.frame.size.width, arcadeBtn!.frame.size.height)
     }
     
     // MARK: Private methods
