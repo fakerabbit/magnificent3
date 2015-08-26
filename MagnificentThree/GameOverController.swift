@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class GameOverController: UIViewController {
+class GameOverController: UIViewController, NodeButtonDelegate {
     
     // MARK: variables
     
@@ -40,6 +40,8 @@ class GameOverController: UIViewController {
         // Create and configure the scene.
         scene = GameOverScene(size: skView.bounds.size, victory: victory)
         scene.scaleMode = SKSceneScaleMode.AspectFit
+        scene.menu?.delegate = self
+        scene.play?.delegate = self
         
         // Present the scene.
         skView.presentScene(scene)
@@ -64,5 +66,16 @@ class GameOverController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    // MARK: NodeButtonDelegate methods
+    
+    func NodeButtonDelegateOnTouch(button: NodeButton) {
+        if button.tag == 1 { // play
+            println("play")
+        }
+        else if button.tag == 2 { // menu
+            println("menu")
+        }
     }
 }

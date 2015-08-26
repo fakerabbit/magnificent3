@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
+		AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */; };
 		AC5601121B85732D009571EA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601111B85732D009571EA /* MenuViewController.swift */; };
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
+		AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeButton.swift; sourceTree = "<group>"; };
 		AC5601111B85732D009571EA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				ACCF97451B7D93DA00989E2A /* Swap.swift */,
 				AC7DC0041B7C935600822EDD /* Extensions.swift */,
 				AC7DC0021B7C930E00822EDD /* Tile.swift */,
+				AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */,
 				AC7DBFF51B7C7A1900822EDD /* Level.swift */,
 				AC7DBFF71B7C92B200822EDD /* Levels */,
 				AC7DBFF31B7C79C900822EDD /* Array2D.swift */,
@@ -369,6 +372,7 @@
 				AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */,
 				AC7DBFC91B7C3D2C00822EDD /* GameScene.swift in Sources */,
 				AC7DBFCB1B7C3D2C00822EDD /* GameViewController.swift in Sources */,
+				AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */,
 				AC7DBFF21B7C782000822EDD /* sprites.swift in Sources */,
 				AC7DBFC51B7C3D2C00822EDD /* AppDelegate.swift in Sources */,
 			);
