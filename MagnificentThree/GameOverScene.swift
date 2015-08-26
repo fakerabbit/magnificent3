@@ -13,6 +13,8 @@ class GameOverScene: SKScene {
     // MARK: Audio
     
     let clickSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
+    let victorySound = SKAction.playSoundFileNamed("westerntune.wav", waitForCompletion: false)
+    let defeatSound = SKAction.playSoundFileNamed("harmonica.wav", waitForCompletion: false)
     
     // MARK: Variables
     
@@ -24,7 +26,8 @@ class GameOverScene: SKScene {
     
     var score: SKLabelNode?,
         initialScore: Int = 0,
-        finalScore: Int = 0
+        finalScore: Int = 0,
+        victory: Bool = false
     
     // MARK: Init
     
@@ -36,6 +39,7 @@ class GameOverScene: SKScene {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.victory = victory
         
         if victory {
             finalScore = points
@@ -91,6 +95,13 @@ class GameOverScene: SKScene {
         let waitAction = SKAction.waitForDuration(0)
         let wholeAction = SKAction.sequence([waitAction, blockAction])
         let increaseAction = SKAction.repeatAction(wholeAction, count: self.finalScore)*/
+        
+        if self.victory {
+            self.runAction(victorySound)
+        }
+        else {
+            self.runAction(defeatSound)
+        }
         
         let Duration: NSTimeInterval = 0.3
         let moveA = SKAction.moveTo(CGPointMake(0, size.height/3), duration: Duration)

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
 		AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */; };
+		AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F01B8D697D00A67BBD /* harmonica.wav */; };
+		AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F11B8D697D00A67BBD /* westerntune.wav */; };
 		AC5601121B85732D009571EA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601111B85732D009571EA /* MenuViewController.swift */; };
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
 		AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeButton.swift; sourceTree = "<group>"; };
+		AC4E43F01B8D697D00A67BBD /* harmonica.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = harmonica.wav; path = Audio/harmonica.wav; sourceTree = "<group>"; };
+		AC4E43F11B8D697D00A67BBD /* westerntune.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = westerntune.wav; path = Audio/westerntune.wav; sourceTree = "<group>"; };
 		AC5601111B85732D009571EA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */,
+				AC4E43F01B8D697D00A67BBD /* harmonica.wav */,
+				AC4E43F11B8D697D00A67BBD /* westerntune.wav */,
 				AC8077B41B84328E00B3D46B /* banjo.wav */,
 				AC8077B51B84328E00B3D46B /* bigwhip.wav */,
 				AC8077B61B84328E00B3D46B /* cock.wav */,
@@ -323,6 +329,7 @@
 			files = (
 				AC56011A1B857F3C009571EA /* hay.png in Resources */,
 				AC8077C11B84328E00B3D46B /* whip.wav in Resources */,
+				AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
 				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,
@@ -338,6 +345,7 @@
 				AC8077BF1B84328E00B3D46B /* gunshot.wav in Resources */,
 				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
+				AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */,
 				AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */,
 				AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */,
 				AC7DBFEF1B7C781600822EDD /* Sprites.1@2x.png in Resources */,
