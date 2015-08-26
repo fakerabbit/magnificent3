@@ -13,6 +13,7 @@ class GameOverScene: SKScene {
     // MARK: Variables
     
     var sign: SKSpriteNode?
+    var scoreCard: SKSpriteNode?
     
     // MARK: Init
     
@@ -30,6 +31,11 @@ class GameOverScene: SKScene {
             addChild(background)
             
             sign = SKSpriteNode(imageNamed: "Victory")
+            scoreCard = SKSpriteNode(imageNamed: "ScoreCard")
+            scoreCard?.scene?.scaleMode = .AspectFit
+            scoreCard?.position = CGPointMake(0, -scoreCard!.size.height)
+            scoreCard?.size = CGSizeMake(size.width - 20, scoreCard!.size.height/1.5)
+            addChild(scoreCard!)
         }
         else {
             let background = SKSpriteNode(imageNamed: "BgGameOver")
@@ -39,6 +45,7 @@ class GameOverScene: SKScene {
         }
         
         sign?.position = CGPointMake(0, size.height/1)
+        sign?.size = CGSizeMake(size.width, sign!.size.height)
         addChild(sign!)
     }
     
@@ -49,7 +56,11 @@ class GameOverScene: SKScene {
         let Duration: NSTimeInterval = 0.3
         let moveA = SKAction.moveTo(CGPointMake(0, size.height/3), duration: Duration)
         moveA.timingMode = .EaseOut
-        sign?.runAction(moveA, completion: nil)
+        sign?.runAction(moveA)
+        
+        let moveB = SKAction.moveTo(CGPointMake(0, size.height/3 - (scoreCard!.size.height/2 + sign!.size.height/2)), duration: 0.5)
+        moveB.timingMode = .EaseOut
+        scoreCard?.runAction(moveB)
     }
     
     override func update(currentTime: CFTimeInterval) {
