@@ -57,7 +57,7 @@ class GameScene: SKScene {
         swipeFromColumn = nil
         swipeFromRow = nil
         
-        let bgNum = Int(arc4random_uniform(3))
+        let bgNum = Int(arc4random_uniform(4))
         //println("\(bgNum)")
         let background = SKSpriteNode(imageNamed: "Bg\(bgNum)")
         addChild(background)
@@ -79,14 +79,14 @@ class GameScene: SKScene {
         targetLbl?.fontColor = UIColor.whiteColor()
         targetLbl?.fontSize = 14
         addChild(targetLbl!)
-        targetLbl?.position = CGPointMake(-size.width/2.5, size.height/2.2)
+        targetLbl?.position = CGPointMake(0, size.height/2.2)
         
         movesLbl = SKLabelNode(text: "Moves:")
         movesLbl?.fontName = "Sahara"
         movesLbl?.fontColor = UIColor.whiteColor()
         movesLbl?.fontSize = 14
         addChild(movesLbl!)
-        movesLbl?.position = CGPointMake(0, size.height/2.2)
+        movesLbl?.position = CGPointMake(size.width/4.8, size.height/2.2)
         
         scoreLbl = SKLabelNode(text: "Score:")
         scoreLbl?.fontName = "Sahara"
@@ -100,14 +100,14 @@ class GameScene: SKScene {
         target?.fontColor = UIColor.whiteColor()
         target?.fontSize = 20
         addChild(target!)
-        target?.position = CGPointMake(-size.width/2.5, size.height/2.4)
+        target?.position = CGPointMake(0, size.height/2.4)//CGPointMake(-size.width/2.5, size.height/2.4)
         
         moves = SKLabelNode(text: "0")
         moves?.fontName = "Sahara"
         moves?.fontColor = UIColor.whiteColor()
         moves?.fontSize = 20
         addChild(moves!)
-        moves?.position = CGPointMake(0, size.height/2.4)
+        moves?.position = CGPointMake(size.width/4.8, size.height/2.4)//CGPointMake(0, size.height/2.4)
         
         score = SKLabelNode(text: "0")
         score?.fontName = "Sahara"
