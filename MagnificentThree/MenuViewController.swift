@@ -12,6 +12,13 @@ class MenuViewController: UIViewController, MenuViewDelegate {
     
     // MARK: variables
     
+    /*lazy var backgroundMusic: AVAudioPlayer = {
+        let url = NSBundle.mainBundle().URLForResource("Mag3Theme", withExtension: "mp3")
+        let player = AVAudioPlayer(contentsOfURL: url, error: nil)
+        player.numberOfLoops = -1
+        return player
+        }()*/
+    
     private var v: MenuView?
     
     // MARK: View methods

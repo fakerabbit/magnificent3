@@ -15,6 +15,7 @@
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
 		AC56011C1B8582F2009571EA /* pfHay.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC56011B1B8582F2009571EA /* pfHay.sks */; };
+		AC67684C1B8E6F32004B4CEB /* Grid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AC67684B1B8E6F32004B4CEB /* Grid.atlas */; };
 		AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */; };
 		AC7DBFC51B7C3D2C00822EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DBFC41B7C3D2C00822EDD /* AppDelegate.swift */; };
 		AC7DBFC91B7C3D2C00822EDD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DBFC81B7C3D2C00822EDD /* GameScene.swift */; };
@@ -68,6 +69,7 @@
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
 		AC56011B1B8582F2009571EA /* pfHay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = pfHay.sks; sourceTree = "<group>"; };
+		AC67684B1B8E6F32004B4CEB /* Grid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Grid.atlas; sourceTree = "<group>"; };
 		AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Mag3Theme.mp3; path = Audio/Mag3Theme.mp3; sourceTree = "<group>"; };
 		AC7DBFBF1B7C3D2C00822EDD /* MagnificentThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagnificentThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7DBFC31B7C3D2C00822EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +134,17 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		AC67684A1B8E6EFA004B4CEB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				AC67684B1B8E6F32004B4CEB /* Grid.atlas */,
+				AC7DBFEA1B7C781600822EDD /* Sprites.atlasc */,
+				AC8077B31B84327A00B3D46B /* Audio */,
+				AC425E461B8AB63200B1BB9E /* Fonts */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		AC7DBFB61B7C3D2C00822EDD = {
 			isa = PBXGroup;
 			children = (
@@ -153,8 +166,7 @@
 		AC7DBFC11B7C3D2C00822EDD /* MagnificentThree */ = {
 			isa = PBXGroup;
 			children = (
-				AC425E461B8AB63200B1BB9E /* Fonts */,
-				AC8077B31B84327A00B3D46B /* Audio */,
+				AC67684A1B8E6EFA004B4CEB /* Assets */,
 				AC8077C21B84356900B3D46B /* Chain.swift */,
 				ACCF97451B7D93DA00989E2A /* Swap.swift */,
 				AC7DC0041B7C935600822EDD /* Extensions.swift */,
@@ -164,7 +176,6 @@
 				AC7DBFF71B7C92B200822EDD /* Levels */,
 				AC7DBFF31B7C79C900822EDD /* Array2D.swift */,
 				AC7DBFF11B7C782000822EDD /* sprites.swift */,
-				AC7DBFEA1B7C781600822EDD /* Sprites.atlasc */,
 				AC7DBFE81B7C54ED00822EDD /* Item.swift */,
 				AC7DBFC41B7C3D2C00822EDD /* AppDelegate.swift */,
 				AC7DBFC81B7C3D2C00822EDD /* GameScene.swift */,
@@ -346,6 +357,7 @@
 				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
 				AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */,
+				AC67684C1B8E6F32004B4CEB /* Grid.atlas in Resources */,
 				AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */,
 				AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */,
 				AC7DBFEF1B7C781600822EDD /* Sprites.1@2x.png in Resources */,
