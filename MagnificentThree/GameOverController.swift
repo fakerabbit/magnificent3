@@ -14,14 +14,16 @@ class GameOverController: UIViewController, NodeButtonDelegate {
     // MARK: variables
     
     var victory: Bool = false
+    var score = 0
     
     var scene: GameOverScene!
     
     // MARK: Init
     
-    init(victory: Bool) {
+    init(victory: Bool, score: Int) {
         super.init(nibName: nil, bundle: nil)
         self.victory = victory
+        self.score = score
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -38,7 +40,7 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         self.view = skView
         
         // Create and configure the scene.
-        scene = GameOverScene(size: skView.bounds.size, victory: victory)
+        scene = GameOverScene(size: skView.bounds.size, victory: victory, points: score)
         scene.scaleMode = SKSceneScaleMode.AspectFit
         scene.menu?.delegate = self
         scene.play?.delegate = self
@@ -71,6 +73,7 @@ class GameOverController: UIViewController, NodeButtonDelegate {
     // MARK: NodeButtonDelegate methods
     
     func NodeButtonDelegateOnTouch(button: NodeButton) {
+        scene?.playButton()
         if button.tag == 1 { // play
             scene.userInteractionEnabled = false
             var controller: GameViewController = GameViewController()

@@ -16,7 +16,7 @@ class GameScene: SKScene {
     let fallingItemSound = SKAction.playSoundFileNamed("spurs.wav", waitForCompletion: false)
     let swapSound = SKAction.playSoundFileNamed("cock.wav", waitForCompletion: false)
     let matchSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
-    let addItemSound = SKAction.playSoundFileNamed("banjo.wav", waitForCompletion: false)
+    let addItemSound = SKAction.playSoundFileNamed("spurs.wav", waitForCompletion: false)
     
     // MARK: Variables
     
