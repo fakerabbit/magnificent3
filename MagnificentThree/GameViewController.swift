@@ -38,7 +38,9 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        level = Level(filename: "Level_1")
+        
+        let lvlNum = Int(arc4random_uniform(4))
+        level = Level(filename: "Level_\(lvlNum)")
         scene.level = level
         scene.addTiles()
         scene.swipeHandler = handleSwipe
