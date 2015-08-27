@@ -11,28 +11,20 @@ import SpriteKit
 enum ItemType: Int, Printable {
     case Unknown = 0, Star, Cactus, Pistols, Boots, Hat, Shoe
     
-    var spriteTexture: SKTexture {
-        let spriteTextures = [
-            sprites().star(),
-            sprites().cactus(),
-            sprites().pistol(),
-            sprites().boots(),
-            sprites().hat(),
-            sprites().shoe()]
+    var spriteName: String {
+        let spriteNames = [
+            "star",
+            "cactus",
+            "pistol",
+            "boots",
+            "hat",
+            "shoe"]
         
-        return spriteTextures[rawValue - 1]
+        return spriteNames[rawValue - 1]
     }
     
-    var highlightedSpriteTexture: SKTexture {
-        let spriteTextures = [
-            sprites().star_highlighted(),
-            sprites().cactus_highlighted(),
-            sprites().pistol_highlighted(),
-            sprites().boots_highlighted(),
-            sprites().hat_highlighted(),
-            sprites().shoe_highlighted()]
-        
-        return spriteTextures[rawValue - 1]
+    var highlightedSpriteName: String {
+        return spriteName + "-highlighted"
     }
     
     static func random() -> ItemType {

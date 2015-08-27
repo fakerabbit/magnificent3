@@ -148,7 +148,7 @@ class GameScene: SKScene {
     
     func addSpritesForItems(items: Set<Item>) {
         for item in items {
-            let sprite = SKSpriteNode(texture: item.itemType.spriteTexture)
+            let sprite = SKSpriteNode(imageNamed: item.itemType.spriteName)
             sprite.position = pointForColumn(item.column, row:item.row)
             itemsLayer.addChild(sprite)
             item.sprite = sprite
@@ -221,7 +221,7 @@ class GameScene: SKScene {
         }
         
         if let sprite = item.sprite {
-            let texture = item.itemType.highlightedSpriteTexture
+            let texture = SKTexture(imageNamed: item.itemType.highlightedSpriteName)
             selectionSprite.size = texture.size()
             selectionSprite.runAction(SKAction.setTexture(texture))
             
@@ -339,7 +339,7 @@ class GameScene: SKScene {
             
             for (idx, item) in enumerate(array) {
                 // 3
-                let sprite = SKSpriteNode(texture: item.itemType.spriteTexture)
+                let sprite = SKSpriteNode(imageNamed: item.itemType.spriteName)
                 sprite.position = pointForColumn(item.column, row: startRow)
                 itemsLayer.addChild(sprite)
                 item.sprite = sprite
