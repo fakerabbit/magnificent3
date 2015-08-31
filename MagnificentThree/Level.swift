@@ -16,14 +16,14 @@ class Level {
     // MARK: Public variables
     
     var targetScore = 0,
-        maximumMoves = 0
+        maximumMoves = 0,
+        comboMultiplier = 0
     
     // MARK: Private variables
     
     private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
                 tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
-                possibleSwaps = Set<Swap>(),
-                comboMultiplier = 0
+                possibleSwaps = Set<Swap>()
     
     // MARK: Init
     

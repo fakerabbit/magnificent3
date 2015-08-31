@@ -16,6 +16,8 @@
 		AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */; };
 		AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD21B8FC66D005FFBBE /* Level_12.json */; };
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
+		AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AC4A9E941B94035500EE9684 /* CowboyImages.atlas */; };
+		AC4A9E971B940A4C00EE9684 /* yeehaw.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4A9E961B940A4C00EE9684 /* yeehaw.wav */; };
 		AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */; };
 		AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F01B8D697D00A67BBD /* harmonica.wav */; };
 		AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F11B8D697D00A67BBD /* westerntune.wav */; };
@@ -75,6 +77,8 @@
 		AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_11.json; sourceTree = "<group>"; };
 		AC1B0DD21B8FC66D005FFBBE /* Level_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_12.json; sourceTree = "<group>"; };
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
+		AC4A9E941B94035500EE9684 /* CowboyImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = CowboyImages.atlas; sourceTree = "<group>"; };
+		AC4A9E961B940A4C00EE9684 /* yeehaw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = yeehaw.wav; path = Audio/yeehaw.wav; sourceTree = "<group>"; };
 		AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeButton.swift; sourceTree = "<group>"; };
 		AC4E43F01B8D697D00A67BBD /* harmonica.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = harmonica.wav; path = Audio/harmonica.wav; sourceTree = "<group>"; };
 		AC4E43F11B8D697D00A67BBD /* westerntune.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = westerntune.wav; path = Audio/westerntune.wav; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		AC67684A1B8E6EFA004B4CEB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				AC4A9E941B94035500EE9684 /* CowboyImages.atlas */,
 				AC67684D1B8EAD26004B4CEB /* Sprites.atlas */,
 				AC67684B1B8E6F32004B4CEB /* Grid.atlas */,
 				AC8077B31B84327A00B3D46B /* Audio */,
@@ -251,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */,
+				AC4A9E961B940A4C00EE9684 /* yeehaw.wav */,
 				AC4E43F01B8D697D00A67BBD /* harmonica.wav */,
 				AC4E43F11B8D697D00A67BBD /* westerntune.wav */,
 				AC8077B41B84328E00B3D46B /* banjo.wav */,
@@ -351,8 +357,10 @@
 				AC1B0DC51B8FC1A9005FFBBE /* Level_5.json in Resources */,
 				AC8077C11B84328E00B3D46B /* whip.wav in Resources */,
 				AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */,
+				AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
 				AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */,
+				AC4A9E971B940A4C00EE9684 /* yeehaw.wav in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
 				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,
 				AC7DC0001B7C92B200822EDD /* Level_3.json in Resources */,

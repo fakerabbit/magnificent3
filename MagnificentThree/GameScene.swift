@@ -17,6 +17,7 @@ class GameScene: SKScene {
     let swapSound = SKAction.playSoundFileNamed("cock.wav", waitForCompletion: false)
     let matchSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
     let addItemSound = SKAction.playSoundFileNamed("spurs.wav", waitForCompletion: false)
+    let cowboySound = SKAction.playSoundFileNamed("yeehaw.wav", waitForCompletion: false)
     
     // MARK: Variables
     
@@ -47,6 +48,9 @@ class GameScene: SKScene {
     private var selectionSprite = SKSpriteNode()
     
     var swipeHandler: ((Swap) -> ())?
+    
+    var cowboy : SKSpriteNode!,
+        cowboyWalkingFrames : [SKTexture]!
     
     // MARK: Init
     
@@ -139,6 +143,21 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        let cowboyAnimatedAtlas = SKTextureAtlas(named: "CowboyImages")
+        var walkFrames = [SKTexture]()
+        
+        let numImages = cowboyAnimatedAtlas.textureNames.count
+        for var i=1; i<=numImages/2; i++ {
+            let cowboyTextureName = "cowboy\(i)"
+            walkFrames.append(cowboyAnimatedAtlas.textureNamed(cowboyTextureName))
+        }
+        
+        cowboyWalkingFrames = walkFrames
+        
+        let firstFrame = cowboyWalkingFrames[0]
+        cowboy = SKSpriteNode(texture: firstFrame)
+        cowboy.position = CGPoint(x:-view.frame.size.width, y:-(CGRectGetMidY(view.frame) - cowboy.size.height/2))
+        addChild(cowboy)
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -388,6 +407,32 @@ class GameScene: SKScene {
         let moveAction = SKAction.moveBy(CGVector(dx: 0, dy: 3), duration: 0.7)
         moveAction.timingMode = .EaseOut
         scoreLabel.runAction(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
+        
+        if level.comboMultiplier > 3 {
+            walkingCowboy()
+        }
+    }
+    
+    func walkingCowboy() {
+        if cowboy.actionForKey("walkingInPlaceCowboy") == nil {
+            let animeAction = SKAction.repeatActionForever(
+                SKAction.animateWithTextures(cowboyWalkingFrames,
+                    timePerFrame: 0.1,
+                    resize: false,
+                    restore: true))
+            cowboy.runAction(animeAction,withKey:"walkingInPlaceCowboy")
+            let moveAction = SKAction.moveBy(CGVector(dx: CGRectGetMidX(self.view!.frame) + cowboy.size.width/1.2, dy: 0), duration: 0.7)
+            let waitAction = SKAction.waitForDuration(1)
+            let moveBackAction = SKAction.moveBy(CGVector(dx: -(CGRectGetMidX(self.view!.frame) + cowboy.size.width/1.2), dy: 0), duration: 0.7)
+            let fullSequence = SKAction.sequence([moveAction, cowboySound, waitAction, moveBackAction])
+            cowboy.runAction(fullSequence, completion: { () -> Void in
+                self.cowboyMoveEnded()
+            })
+        }
+    }
+    
+    func cowboyMoveEnded() {
+        cowboy.removeAllActions()
     }
     
     // MARK: Touch events
