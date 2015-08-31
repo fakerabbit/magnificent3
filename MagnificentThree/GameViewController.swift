@@ -11,6 +11,10 @@ import SpriteKit
 
 class GameViewController: UIViewController, NodeButtonDelegate {
     
+    // MARK: Audio
+    
+    let shuffleSound = SKAction.playSoundFileNamed("banjo.wav", waitForCompletion: false)
+    
     // MARK: variables
     
     var scene: GameScene!
@@ -155,6 +159,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     // MARK: NodeButtonDelegate methods
     
     func NodeButtonDelegateOnTouch(button: NodeButton) {
+        scene.runAction(shuffleSound)
         shuffle()
         decrementMoves()
     }
