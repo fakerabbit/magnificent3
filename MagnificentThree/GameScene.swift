@@ -61,9 +61,10 @@ class GameScene: SKScene {
         swipeFromColumn = nil
         swipeFromRow = nil
         
-        let bgNum = Int(arc4random_uniform(4))
+        let bgNum = Int(arc4random_uniform(13))
         //println("\(bgNum)")
         let background = SKSpriteNode(imageNamed: "Bg\(bgNum)")
+        //let background = SKSpriteNode(imageNamed: "Bg12")
         addChild(background)
         
         addChild(gameLayer)

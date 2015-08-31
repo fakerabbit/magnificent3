@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC1B0DC51B8FC1A9005FFBBE /* Level_5.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DC41B8FC1A9005FFBBE /* Level_5.json */; };
+		AC1B0DC71B8FC2D2005FFBBE /* Level_6.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DC61B8FC2D2005FFBBE /* Level_6.json */; };
+		AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DC81B8FC396005FFBBE /* Level_7.json */; };
+		AC1B0DCB1B8FC415005FFBBE /* Level_8.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DCA1B8FC415005FFBBE /* Level_8.json */; };
+		AC1B0DCD1B8FC497005FFBBE /* Level_9.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DCC1B8FC497005FFBBE /* Level_9.json */; };
+		AC1B0DCF1B8FC51C005FFBBE /* Level_10.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */; };
+		AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */; };
+		AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD21B8FC66D005FFBBE /* Level_12.json */; };
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
 		AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */; };
 		AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F01B8D697D00A67BBD /* harmonica.wav */; };
@@ -58,6 +66,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC1B0DC41B8FC1A9005FFBBE /* Level_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_5.json; sourceTree = "<group>"; };
+		AC1B0DC61B8FC2D2005FFBBE /* Level_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_6.json; sourceTree = "<group>"; };
+		AC1B0DC81B8FC396005FFBBE /* Level_7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_7.json; sourceTree = "<group>"; };
+		AC1B0DCA1B8FC415005FFBBE /* Level_8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_8.json; sourceTree = "<group>"; };
+		AC1B0DCC1B8FC497005FFBBE /* Level_9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_9.json; sourceTree = "<group>"; };
+		AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_10.json; sourceTree = "<group>"; };
+		AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_11.json; sourceTree = "<group>"; };
+		AC1B0DD21B8FC66D005FFBBE /* Level_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_12.json; sourceTree = "<group>"; };
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
 		AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeButton.swift; sourceTree = "<group>"; };
 		AC4E43F01B8D697D00A67BBD /* harmonica.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = harmonica.wav; path = Audio/harmonica.wav; sourceTree = "<group>"; };
@@ -219,6 +235,14 @@
 				AC7DBFFA1B7C92B200822EDD /* Level_2.json */,
 				AC7DBFFB1B7C92B200822EDD /* Level_3.json */,
 				AC7DBFFC1B7C92B200822EDD /* Level_4.json */,
+				AC1B0DC41B8FC1A9005FFBBE /* Level_5.json */,
+				AC1B0DC61B8FC2D2005FFBBE /* Level_6.json */,
+				AC1B0DC81B8FC396005FFBBE /* Level_7.json */,
+				AC1B0DCA1B8FC415005FFBBE /* Level_8.json */,
+				AC1B0DCC1B8FC497005FFBBE /* Level_9.json */,
+				AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */,
+				AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */,
+				AC1B0DD21B8FC66D005FFBBE /* Level_12.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -321,24 +345,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */,
 				AC56011A1B857F3C009571EA /* hay.png in Resources */,
+				AC1B0DC71B8FC2D2005FFBBE /* Level_6.json in Resources */,
+				AC1B0DC51B8FC1A9005FFBBE /* Level_5.json in Resources */,
 				AC8077C11B84328E00B3D46B /* whip.wav in Resources */,
 				AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
+				AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
 				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,
 				AC7DC0001B7C92B200822EDD /* Level_3.json in Resources */,
+				AC1B0DCD1B8FC497005FFBBE /* Level_9.json in Resources */,
 				AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */,
 				AC8077BB1B84328E00B3D46B /* banjo.wav in Resources */,
 				AC7DBFFD1B7C92B200822EDD /* Level_0.json in Resources */,
 				AC7DBFD31B7C3D2C00822EDD /* LaunchScreen.xib in Resources */,
 				AC8077BD1B84328E00B3D46B /* cock.wav in Resources */,
+				AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */,
 				AC56011C1B8582F2009571EA /* pfHay.sks in Resources */,
+				AC1B0DCF1B8FC51C005FFBBE /* Level_10.json in Resources */,
 				AC8077BF1B84328E00B3D46B /* gunshot.wav in Resources */,
 				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
 				AC67684E1B8EAD26004B4CEB /* Sprites.atlas in Resources */,
 				AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */,
+				AC1B0DCB1B8FC415005FFBBE /* Level_8.json in Resources */,
 				AC67684C1B8E6F32004B4CEB /* Grid.atlas in Resources */,
 				AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */,
 				AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */,
