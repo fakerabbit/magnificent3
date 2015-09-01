@@ -19,12 +19,14 @@ class Chain: Hashable, Printable {
         case Horizontal
         case Vertical
         case Lshaped
+        case Bomb
         
         var description: String {
             switch self {
             case .Horizontal: return "Horizontal"
             case .Vertical: return "Vertical"
             case .Lshaped: return "Lshaped"
+            case .Bomb: return "Bomb"
             }
         }
     }

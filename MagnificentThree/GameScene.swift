@@ -179,8 +179,6 @@ class GameScene: SKScene {
         }
         
         bombShiningFrames = bombFrames
-        
-        addBomb()
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -474,6 +472,18 @@ class GameScene: SKScene {
                     resize: false,
                     restore: true))
             bomb.runAction(animeAction,withKey:"bombShiningAnime")
+        }
+    }
+    
+    func removeBomb() {
+        if selectedNode.name != nil {
+            if selectedNode.actionForKey("removing") == nil {
+                let scaleAction = SKAction.scaleTo(0.1, duration: 0.3)
+                scaleAction.timingMode = .EaseOut
+                selectedNode.runAction(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
+                    withKey:"removing")
+                bomb = nil
+            }
         }
     }
     

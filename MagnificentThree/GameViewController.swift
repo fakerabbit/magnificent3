@@ -127,7 +127,30 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     }
     
     func handleBomb(type: ItemType) {
-        println(type)
+        view.userInteractionEnabled = false
+        let chains = level.removeBombedItems(type)
+        
+        if chains.count == 0 {
+            beginNextTurn()
+            return
+        }
+        
+        scene.removeBomb()
+        scene.animateMatchedItems(chains) {
+            
+            for chain in chains {
+                self.score += chain.score
+            }
+            self.updateLabels()
+            
+            let columns = self.level.fillHoles()
+            self.scene.animateFallingItems(columns) {
+                let columns = self.level.topUpItems()
+                self.scene.animateNewItems(columns) {
+                    self.handleMatches()
+                }
+            }
+        }
     }
     
     func beginNextTurn() {

@@ -166,6 +166,15 @@ class Level {
         }
     }
     
+    func removeBombedItems(type: ItemType) -> Set<Chain> {
+        var bombChains = detectBombMatches(type)
+        
+        removeItems(bombChains)
+        calculateBombScores(bombChains)
+        
+        return bombChains
+    }
+    
     func fillHoles() -> [[Item]] {
         var columns = [[Item]]()
         // 1
@@ -388,6 +397,28 @@ class Level {
         return set
     }
     
+    private func detectBombMatches(type: ItemType) -> Set<Chain> {
+        var set = Set<Chain>()
+        
+        for row in 0..<NumRows {
+            for column in 0..<NumColumns {
+                
+                if let item = items[column, row] {
+                    let matchType = item.itemType
+                    
+                    if items[column, row]?.itemType == type {
+                        
+                        let chain = Chain(chainType: .Bomb)
+                        chain.addItem(items[column, row]!)
+                        set.insert(chain)
+                    }
+                }
+            }
+        }
+        
+        return set
+    }
+    
     private func removeItems(chains: Set<Chain>) {
         for chain in chains {
             for item in chain.items {
@@ -408,6 +439,12 @@ class Level {
             }
             chain.score = value * (chain.length - 2) * comboMultiplier
             ++comboMultiplier
+        }
+    }
+    
+    private func calculateBombScores(chains: Set<Chain>) {
+        for chain in chains {
+            chain.score = 20
         }
     }
 }
