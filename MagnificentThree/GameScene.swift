@@ -483,6 +483,7 @@ class GameScene: SKScene {
                 selectedNode.runAction(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
                     withKey:"removing")
                 bomb = nil
+                selectedNode = SKSpriteNode()
             }
         }
     }
