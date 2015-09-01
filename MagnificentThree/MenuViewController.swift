@@ -57,6 +57,7 @@ class MenuViewController: UIViewController, MenuViewDelegate {
     func MenuViewOnArcade(view: MenuView) {
         var controller: GameViewController = GameViewController()
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }

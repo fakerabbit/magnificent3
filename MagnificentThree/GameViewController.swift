@@ -180,6 +180,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         scene.userInteractionEnabled = false
         var controller: GameOverController = GameOverController(victory: victory, score: score)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
