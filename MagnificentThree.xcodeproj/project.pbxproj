@@ -55,6 +55,7 @@
 		AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7811B8C0CDF0028E14C /* GameOverController.swift */; };
 		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
 		ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCF97451B7D93DA00989E2A /* Swap.swift */; };
+		ACE0AD081B9516C900044D2B /* BombImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = ACE0AD071B9516C900044D2B /* BombImages.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		AC96F7811B8C0CDF0028E14C /* GameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverController.swift; sourceTree = "<group>"; };
 		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		ACCF97451B7D93DA00989E2A /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
+		ACE0AD071B9516C900044D2B /* BombImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BombImages.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		AC67684A1B8E6EFA004B4CEB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				ACE0AD071B9516C900044D2B /* BombImages.atlas */,
 				AC4A9E941B94035500EE9684 /* CowboyImages.atlas */,
 				AC67684D1B8EAD26004B4CEB /* Sprites.atlas */,
 				AC67684B1B8E6F32004B4CEB /* Grid.atlas */,
@@ -360,6 +363,7 @@
 				AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
 				AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */,
+				ACE0AD081B9516C900044D2B /* BombImages.atlas in Resources */,
 				AC4A9E971B940A4C00EE9684 /* yeehaw.wav in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
 				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,

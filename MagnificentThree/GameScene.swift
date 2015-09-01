@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+private let kMovableNodeName = "movable"
+
 class GameScene: SKScene {
     
     // MARK: Audio
@@ -43,14 +45,19 @@ class GameScene: SKScene {
         cropLayer = SKCropNode(),
         maskLayer = SKNode()
     
-    private var swipeFromColumn: Int?
-    private var swipeFromRow: Int?
-    private var selectionSprite = SKSpriteNode()
+    private var swipeFromColumn: Int?,
+                swipeFromRow: Int?,
+                selectionSprite = SKSpriteNode(),
+                backgroundImg: SKSpriteNode?
     
-    var swipeHandler: ((Swap) -> ())?
+    var swipeHandler: ((Swap) -> ())?,
+        bombHandler: ((ItemType) -> ())?
     
     var cowboy : SKSpriteNode!,
-        cowboyWalkingFrames : [SKTexture]!
+        cowboyWalkingFrames : [SKTexture]!,
+        bomb : SKSpriteNode!,
+        bombShiningFrames : [SKTexture]!,
+        selectedNode = SKSpriteNode()
     
     // MARK: Init
     
@@ -67,9 +74,9 @@ class GameScene: SKScene {
         
         let bgNum = Int(arc4random_uniform(13))
         //println("\(bgNum)")
-        let background = SKSpriteNode(imageNamed: "Bg\(bgNum)")
+        backgroundImg = SKSpriteNode(imageNamed: "Bg\(bgNum)")
         //let background = SKSpriteNode(imageNamed: "Bg12")
-        addChild(background)
+        addChild(backgroundImg!)
         
         addChild(gameLayer)
         
@@ -143,10 +150,12 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        // Cowboy
         let cowboyAnimatedAtlas = SKTextureAtlas(named: "CowboyImages")
         var walkFrames = [SKTexture]()
         
-        let numImages = cowboyAnimatedAtlas.textureNames.count
+        var numImages = cowboyAnimatedAtlas.textureNames.count
         for var i=1; i<=numImages/2; i++ {
             let cowboyTextureName = "cowboy\(i)"
             walkFrames.append(cowboyAnimatedAtlas.textureNamed(cowboyTextureName))
@@ -154,10 +163,24 @@ class GameScene: SKScene {
         
         cowboyWalkingFrames = walkFrames
         
-        let firstFrame = cowboyWalkingFrames[0]
+        var firstFrame = cowboyWalkingFrames[0]
         cowboy = SKSpriteNode(texture: firstFrame)
         cowboy.position = CGPoint(x:-view.frame.size.width, y:-(CGRectGetMidY(view.frame) - cowboy.size.height/2))
         addChild(cowboy)
+        
+        // Bomb
+        let bombAnimatedAtlas = SKTextureAtlas(named: "BombImages")
+        var bombFrames = [SKTexture]()
+        
+        numImages = bombAnimatedAtlas.textureNames.count
+        for var i=1; i<=numImages/2; i++ {
+            let bombTextureName = "bomb\(i)"
+            bombFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
+        }
+        
+        bombShiningFrames = bombFrames
+        
+        addBomb()
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -410,6 +433,7 @@ class GameScene: SKScene {
         
         if level.comboMultiplier > 3 {
             walkingCowboy()
+            addBomb()
         }
     }
     
@@ -435,6 +459,24 @@ class GameScene: SKScene {
         cowboy.removeAllActions()
     }
     
+    func addBomb() {
+        
+        if bomb == nil {
+            let firstFrame = bombShiningFrames[0]
+            bomb = SKSpriteNode(texture: firstFrame)
+            bomb.position = CGPoint(x: -(CGRectGetMidX(self.view!.frame) - bomb.size.width), y: -(CGRectGetMidY(self.view!.frame) - bomb.size.height/1.5))
+            bomb.name = kMovableNodeName
+            addChild(bomb)
+            
+            let animeAction = SKAction.repeatActionForever(
+                SKAction.animateWithTextures(bombShiningFrames,
+                    timePerFrame: 0.1,
+                    resize: false,
+                    restore: true))
+            bomb.runAction(animeAction,withKey:"bombShiningAnime")
+        }
+    }
+    
     // MARK: Touch events
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -452,6 +494,12 @@ class GameScene: SKScene {
                 swipeFromRow = row
             }
         }
+        else {
+            let touch = touches.first as! UITouch
+            let positionInScene = touch.locationInNode(self)
+            
+            selectNodeForTouch(positionInScene)
+        }
     }
     
     func convertPoint(point: CGPoint) -> (success: Bool, column: Int, row: Int) {
@@ -464,34 +512,38 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        // 1
-        if swipeFromColumn == nil { return }
         
-        // 2
-        let touch = touches.first as! UITouch
-        let location = touch.locationInNode(itemsLayer)
-        
-        let (success, column, row) = convertPoint(location)
-        if success {
+        if swipeFromColumn == nil {
+            let touch = touches.first as! UITouch
+            let positionInScene = touch.locationInNode(self)
+            let previousPosition = touch.previousLocationInNode(self)
+            let translation = CGPoint(x: positionInScene.x - previousPosition.x, y: positionInScene.y - previousPosition.y)
             
-            // 3
-            var horzDelta = 0, vertDelta = 0
-            if column < swipeFromColumn! {          // swipe left
-                horzDelta = -1
-            } else if column > swipeFromColumn! {   // swipe right
-                horzDelta = 1
-            } else if row < swipeFromRow! {         // swipe down
-                vertDelta = -1
-            } else if row > swipeFromRow! {         // swipe up
-                vertDelta = 1
-            }
+            panForTranslation(translation)
+        }
+        else {
+            let touch = touches.first as! UITouch
+            let location = touch.locationInNode(itemsLayer)
             
-            // 4
-            if horzDelta != 0 || vertDelta != 0 {
-                trySwapHorizontal(horzDelta, vertical: vertDelta)
-                hideSelectionIndicator()
-                // 5
-                swipeFromColumn = nil
+            let (success, column, row) = convertPoint(location)
+            if success {
+                
+                var horzDelta = 0, vertDelta = 0
+                if column < swipeFromColumn! {          // swipe left
+                    horzDelta = -1
+                } else if column > swipeFromColumn! {   // swipe right
+                    horzDelta = 1
+                } else if row < swipeFromRow! {         // swipe down
+                    vertDelta = -1
+                } else if row > swipeFromRow! {         // swipe up
+                    vertDelta = 1
+                }
+                
+                if horzDelta != 0 || vertDelta != 0 {
+                    trySwapHorizontal(horzDelta, vertical: vertDelta)
+                    hideSelectionIndicator()
+                    swipeFromColumn = nil
+                }
             }
         }
     }
@@ -521,9 +573,64 @@ class GameScene: SKScene {
         }
         swipeFromColumn = nil
         swipeFromRow = nil
+        
+        if selectedNode.name != nil {
+            
+            let touch = touches.first as! UITouch
+            let location = touch.locationInNode(itemsLayer)
+            
+            let (success, column, row) = convertPoint(location)
+            if success {
+                
+                if let item = level.itemAtColumn(column, row: row) {
+                    
+                    if let handler = bombHandler {
+                        let type = item.itemType
+                        handler(type)
+                    }
+                }
+            }
+        }
     }
     
     override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
         touchesEnded(touches, withEvent: event)
+    }
+    
+    func boundLayerPos(aNewPosition: CGPoint) -> CGPoint {
+        let winSize = self.view!.frame.size
+        var retval = aNewPosition
+        retval.x = CGFloat(min(retval.x, 0))
+        retval.x = CGFloat(max(retval.x, -(backgroundImg!.size.width) + winSize.width))
+        retval.y = self.position.y
+        
+        return retval
+    }
+    
+    func panForTranslation(translation: CGPoint) {
+        let position = selectedNode.position
+        
+        if selectedNode.name == kMovableNodeName {
+            selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+        } else {
+            let aNewPosition = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            backgroundImg?.position = self.boundLayerPos(aNewPosition)
+        }
+    }
+    
+    func degToRad(degree: Double) -> CGFloat {
+        return CGFloat(Double(degree) / 180.0 * M_PI)
+    }
+    
+    func selectNodeForTouch(touchLocation: CGPoint) {
+        
+        let touchedNode = self.nodeAtPoint(touchLocation)
+        
+        if touchedNode is SKSpriteNode {
+            
+            if !selectedNode.isEqual(touchedNode) {
+                selectedNode = touchedNode as! SKSpriteNode
+            }
+        }
     }
 }

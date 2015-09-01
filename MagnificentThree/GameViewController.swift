@@ -50,6 +50,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         scene.shuffle?.delegate = self
         scene.addTiles()
         scene.swipeHandler = handleSwipe
+        scene.bombHandler = handleBomb
         beginGame()
     }
 
@@ -123,6 +124,10 @@ class GameViewController: UIViewController, NodeButtonDelegate {
                 }
             }
         }
+    }
+    
+    func handleBomb(type: ItemType) {
+        println(type)
     }
     
     func beginNextTurn() {
