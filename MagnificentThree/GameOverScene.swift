@@ -12,9 +12,9 @@ class GameOverScene: SKScene {
     
     // MARK: Audio
     
-    let clickSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
-    let victorySound = SKAction.playSoundFileNamed("westerntune.wav", waitForCompletion: false)
-    let defeatSound = SKAction.playSoundFileNamed("harmonica.wav", waitForCompletion: false)
+    let clickSound = SKAction.playSoundFileNamed("gunshot.mp3", waitForCompletion: false)
+    let victorySound = SKAction.playSoundFileNamed("westerntune.mp3", waitForCompletion: false)
+    let defeatSound = SKAction.playSoundFileNamed("harmonica.mp3", waitForCompletion: false)
     
     // MARK: Variables
     

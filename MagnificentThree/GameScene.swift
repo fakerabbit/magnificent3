@@ -14,12 +14,12 @@ class GameScene: SKScene {
     
     // MARK: Audio
     
-    let invalidSwapSound = SKAction.playSoundFileNamed("whip.wav", waitForCompletion: false)
-    let fallingItemSound = SKAction.playSoundFileNamed("spurs.wav", waitForCompletion: false)
-    let swapSound = SKAction.playSoundFileNamed("cock.wav", waitForCompletion: false)
-    let matchSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
-    let addItemSound = SKAction.playSoundFileNamed("spurs.wav", waitForCompletion: false)
-    let cowboySound = SKAction.playSoundFileNamed("yeehaw.wav", waitForCompletion: false)
+    let invalidSwapSound = SKAction.playSoundFileNamed("whip.mp3", waitForCompletion: false)
+    let fallingItemSound = SKAction.playSoundFileNamed("spurs.mp3", waitForCompletion: false)
+    let swapSound = SKAction.playSoundFileNamed("cock.mp3", waitForCompletion: false)
+    let matchSound = SKAction.playSoundFileNamed("gunshot.mp3", waitForCompletion: false)
+    let addItemSound = SKAction.playSoundFileNamed("spurs.mp3", waitForCompletion: false)
+    let cowboySound = SKAction.playSoundFileNamed("yeehaw.mp3", waitForCompletion: false)
     
     // MARK: Variables
     
@@ -72,7 +72,7 @@ class GameScene: SKScene {
         swipeFromColumn = nil
         swipeFromRow = nil
         
-        let bgNum = Int(arc4random_uniform(13))
+        let bgNum = Int(arc4random_uniform(11))
         //println("\(bgNum)")
         backgroundImg = SKSpriteNode(imageNamed: "Bg\(bgNum)")
         //let background = SKSpriteNode(imageNamed: "Bg12")

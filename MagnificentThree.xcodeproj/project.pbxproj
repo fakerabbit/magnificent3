@@ -16,11 +16,19 @@
 		AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */; };
 		AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD21B8FC66D005FFBBE /* Level_12.json */; };
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
+		AC46C76B1B99E1FE00C1C968 /* banjo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7601B99E1FE00C1C968 /* banjo.mp3 */; };
+		AC46C76C1B99E1FE00C1C968 /* bigwhip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7611B99E1FE00C1C968 /* bigwhip.mp3 */; };
+		AC46C76D1B99E1FE00C1C968 /* cock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7621B99E1FE00C1C968 /* cock.mp3 */; };
+		AC46C76E1B99E1FE00C1C968 /* cricket.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7631B99E1FE00C1C968 /* cricket.mp3 */; };
+		AC46C76F1B99E1FE00C1C968 /* gunshot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7641B99E1FE00C1C968 /* gunshot.mp3 */; };
+		AC46C7701B99E1FE00C1C968 /* harmonica.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7651B99E1FE00C1C968 /* harmonica.mp3 */; };
+		AC46C7711B99E1FE00C1C968 /* spurs.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7661B99E1FE00C1C968 /* spurs.mp3 */; };
+		AC46C7721B99E1FE00C1C968 /* westerntune.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7671B99E1FE00C1C968 /* westerntune.mp3 */; };
+		AC46C7731B99E1FE00C1C968 /* whip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7681B99E1FE00C1C968 /* whip.mp3 */; };
+		AC46C7741B99E1FE00C1C968 /* whistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7691B99E1FE00C1C968 /* whistle.mp3 */; };
+		AC46C7751B99E1FE00C1C968 /* yeehaw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C76A1B99E1FE00C1C968 /* yeehaw.mp3 */; };
 		AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AC4A9E941B94035500EE9684 /* CowboyImages.atlas */; };
-		AC4A9E971B940A4C00EE9684 /* yeehaw.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4A9E961B940A4C00EE9684 /* yeehaw.wav */; };
 		AC4E43EF1B8D47F500A67BBD /* NodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */; };
-		AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F01B8D697D00A67BBD /* harmonica.wav */; };
-		AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC4E43F11B8D697D00A67BBD /* westerntune.wav */; };
 		AC5601121B85732D009571EA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601111B85732D009571EA /* MenuViewController.swift */; };
 		AC5601141B8573A6009571EA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5601131B8573A6009571EA /* MenuView.swift */; };
 		AC56011A1B857F3C009571EA /* hay.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5601191B857F3C009571EA /* hay.png */; };
@@ -44,13 +52,6 @@
 		AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = AC7DBFFC1B7C92B200822EDD /* Level_4.json */; };
 		AC7DC0031B7C930E00822EDD /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DC0021B7C930E00822EDD /* Tile.swift */; };
 		AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DC0041B7C935600822EDD /* Extensions.swift */; };
-		AC8077BB1B84328E00B3D46B /* banjo.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B41B84328E00B3D46B /* banjo.wav */; };
-		AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B51B84328E00B3D46B /* bigwhip.wav */; };
-		AC8077BD1B84328E00B3D46B /* cock.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B61B84328E00B3D46B /* cock.wav */; };
-		AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B71B84328E00B3D46B /* cricket.wav */; };
-		AC8077BF1B84328E00B3D46B /* gunshot.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B81B84328E00B3D46B /* gunshot.wav */; };
-		AC8077C01B84328E00B3D46B /* spurs.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077B91B84328E00B3D46B /* spurs.wav */; };
-		AC8077C11B84328E00B3D46B /* whip.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC8077BA1B84328E00B3D46B /* whip.wav */; };
 		AC8077C31B84356900B3D46B /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8077C21B84356900B3D46B /* Chain.swift */; };
 		AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7811B8C0CDF0028E14C /* GameOverController.swift */; };
 		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
@@ -78,11 +79,19 @@
 		AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_11.json; sourceTree = "<group>"; };
 		AC1B0DD21B8FC66D005FFBBE /* Level_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_12.json; sourceTree = "<group>"; };
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
+		AC46C7601B99E1FE00C1C968 /* banjo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = banjo.mp3; path = Audio/banjo.mp3; sourceTree = "<group>"; };
+		AC46C7611B99E1FE00C1C968 /* bigwhip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bigwhip.mp3; path = Audio/bigwhip.mp3; sourceTree = "<group>"; };
+		AC46C7621B99E1FE00C1C968 /* cock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cock.mp3; path = Audio/cock.mp3; sourceTree = "<group>"; };
+		AC46C7631B99E1FE00C1C968 /* cricket.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cricket.mp3; path = Audio/cricket.mp3; sourceTree = "<group>"; };
+		AC46C7641B99E1FE00C1C968 /* gunshot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gunshot.mp3; path = Audio/gunshot.mp3; sourceTree = "<group>"; };
+		AC46C7651B99E1FE00C1C968 /* harmonica.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = harmonica.mp3; path = Audio/harmonica.mp3; sourceTree = "<group>"; };
+		AC46C7661B99E1FE00C1C968 /* spurs.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = spurs.mp3; path = Audio/spurs.mp3; sourceTree = "<group>"; };
+		AC46C7671B99E1FE00C1C968 /* westerntune.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = westerntune.mp3; path = Audio/westerntune.mp3; sourceTree = "<group>"; };
+		AC46C7681B99E1FE00C1C968 /* whip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whip.mp3; path = Audio/whip.mp3; sourceTree = "<group>"; };
+		AC46C7691B99E1FE00C1C968 /* whistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whistle.mp3; path = Audio/whistle.mp3; sourceTree = "<group>"; };
+		AC46C76A1B99E1FE00C1C968 /* yeehaw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = yeehaw.mp3; path = Audio/yeehaw.mp3; sourceTree = "<group>"; };
 		AC4A9E941B94035500EE9684 /* CowboyImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = CowboyImages.atlas; sourceTree = "<group>"; };
-		AC4A9E961B940A4C00EE9684 /* yeehaw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = yeehaw.wav; path = Audio/yeehaw.wav; sourceTree = "<group>"; };
 		AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeButton.swift; sourceTree = "<group>"; };
-		AC4E43F01B8D697D00A67BBD /* harmonica.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = harmonica.wav; path = Audio/harmonica.wav; sourceTree = "<group>"; };
-		AC4E43F11B8D697D00A67BBD /* westerntune.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = westerntune.wav; path = Audio/westerntune.wav; sourceTree = "<group>"; };
 		AC5601111B85732D009571EA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AC5601131B8573A6009571EA /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AC5601191B857F3C009571EA /* hay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hay.png; sourceTree = "<group>"; };
@@ -110,13 +119,6 @@
 		AC7DBFFC1B7C92B200822EDD /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
 		AC7DC0021B7C930E00822EDD /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		AC7DC0041B7C935600822EDD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		AC8077B41B84328E00B3D46B /* banjo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = banjo.wav; path = Audio/banjo.wav; sourceTree = "<group>"; };
-		AC8077B51B84328E00B3D46B /* bigwhip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bigwhip.wav; path = Audio/bigwhip.wav; sourceTree = "<group>"; };
-		AC8077B61B84328E00B3D46B /* cock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cock.wav; path = Audio/cock.wav; sourceTree = "<group>"; };
-		AC8077B71B84328E00B3D46B /* cricket.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cricket.wav; path = Audio/cricket.wav; sourceTree = "<group>"; };
-		AC8077B81B84328E00B3D46B /* gunshot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = gunshot.wav; path = Audio/gunshot.wav; sourceTree = "<group>"; };
-		AC8077B91B84328E00B3D46B /* spurs.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = spurs.wav; path = Audio/spurs.wav; sourceTree = "<group>"; };
-		AC8077BA1B84328E00B3D46B /* whip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = whip.wav; path = Audio/whip.wav; sourceTree = "<group>"; };
 		AC8077C21B84356900B3D46B /* Chain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
 		AC96F7811B8C0CDF0028E14C /* GameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverController.swift; sourceTree = "<group>"; };
 		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
@@ -258,17 +260,18 @@
 		AC8077B31B84327A00B3D46B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				AC46C7601B99E1FE00C1C968 /* banjo.mp3 */,
+				AC46C7611B99E1FE00C1C968 /* bigwhip.mp3 */,
+				AC46C7621B99E1FE00C1C968 /* cock.mp3 */,
+				AC46C7631B99E1FE00C1C968 /* cricket.mp3 */,
+				AC46C7641B99E1FE00C1C968 /* gunshot.mp3 */,
+				AC46C7651B99E1FE00C1C968 /* harmonica.mp3 */,
+				AC46C7661B99E1FE00C1C968 /* spurs.mp3 */,
+				AC46C7671B99E1FE00C1C968 /* westerntune.mp3 */,
+				AC46C7681B99E1FE00C1C968 /* whip.mp3 */,
+				AC46C7691B99E1FE00C1C968 /* whistle.mp3 */,
+				AC46C76A1B99E1FE00C1C968 /* yeehaw.mp3 */,
 				AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */,
-				AC4A9E961B940A4C00EE9684 /* yeehaw.wav */,
-				AC4E43F01B8D697D00A67BBD /* harmonica.wav */,
-				AC4E43F11B8D697D00A67BBD /* westerntune.wav */,
-				AC8077B41B84328E00B3D46B /* banjo.wav */,
-				AC8077B51B84328E00B3D46B /* bigwhip.wav */,
-				AC8077B61B84328E00B3D46B /* cock.wav */,
-				AC8077B71B84328E00B3D46B /* cricket.wav */,
-				AC8077B81B84328E00B3D46B /* gunshot.wav */,
-				AC8077B91B84328E00B3D46B /* spurs.wav */,
-				AC8077BA1B84328E00B3D46B /* whip.wav */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -356,36 +359,37 @@
 			files = (
 				AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */,
 				AC56011A1B857F3C009571EA /* hay.png in Resources */,
+				AC46C76D1B99E1FE00C1C968 /* cock.mp3 in Resources */,
 				AC1B0DC71B8FC2D2005FFBBE /* Level_6.json in Resources */,
+				AC46C7711B99E1FE00C1C968 /* spurs.mp3 in Resources */,
 				AC1B0DC51B8FC1A9005FFBBE /* Level_5.json in Resources */,
-				AC8077C11B84328E00B3D46B /* whip.wav in Resources */,
-				AC4E43F31B8D697D00A67BBD /* westerntune.wav in Resources */,
+				AC46C76F1B99E1FE00C1C968 /* gunshot.mp3 in Resources */,
 				AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
 				AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */,
 				ACE0AD081B9516C900044D2B /* BombImages.atlas in Resources */,
-				AC4A9E971B940A4C00EE9684 /* yeehaw.wav in Resources */,
+				AC46C7741B99E1FE00C1C968 /* whistle.mp3 in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
-				AC8077C01B84328E00B3D46B /* spurs.wav in Resources */,
+				AC46C76B1B99E1FE00C1C968 /* banjo.mp3 in Resources */,
 				AC7DC0001B7C92B200822EDD /* Level_3.json in Resources */,
+				AC46C7721B99E1FE00C1C968 /* westerntune.mp3 in Resources */,
 				AC1B0DCD1B8FC497005FFBBE /* Level_9.json in Resources */,
 				AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */,
-				AC8077BB1B84328E00B3D46B /* banjo.wav in Resources */,
+				AC46C76E1B99E1FE00C1C968 /* cricket.mp3 in Resources */,
 				AC7DBFFD1B7C92B200822EDD /* Level_0.json in Resources */,
 				AC7DBFD31B7C3D2C00822EDD /* LaunchScreen.xib in Resources */,
-				AC8077BD1B84328E00B3D46B /* cock.wav in Resources */,
+				AC46C7701B99E1FE00C1C968 /* harmonica.mp3 in Resources */,
+				AC46C76C1B99E1FE00C1C968 /* bigwhip.mp3 in Resources */,
 				AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */,
 				AC56011C1B8582F2009571EA /* pfHay.sks in Resources */,
 				AC1B0DCF1B8FC51C005FFBBE /* Level_10.json in Resources */,
-				AC8077BF1B84328E00B3D46B /* gunshot.wav in Resources */,
 				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
 				AC67684E1B8EAD26004B4CEB /* Sprites.atlas in Resources */,
-				AC4E43F21B8D697D00A67BBD /* harmonica.wav in Resources */,
 				AC1B0DCB1B8FC415005FFBBE /* Level_8.json in Resources */,
 				AC67684C1B8E6F32004B4CEB /* Grid.atlas in Resources */,
-				AC8077BE1B84328E00B3D46B /* cricket.wav in Resources */,
-				AC8077BC1B84328E00B3D46B /* bigwhip.wav in Resources */,
+				AC46C7751B99E1FE00C1C968 /* yeehaw.mp3 in Resources */,
+				AC46C7731B99E1FE00C1C968 /* whip.mp3 in Resources */,
 				AC7DBFD01B7C3D2C00822EDD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

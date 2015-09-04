@@ -13,7 +13,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     
     // MARK: Audio
     
-    let shuffleSound = SKAction.playSoundFileNamed("banjo.wav", waitForCompletion: false)
+    let shuffleSound = SKAction.playSoundFileNamed("banjo.mp3", waitForCompletion: false)
     
     // MARK: variables
     

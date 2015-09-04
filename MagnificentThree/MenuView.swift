@@ -22,7 +22,7 @@ class MenuView: SKView {
     // MARK: Audio
     
     let theme = SKAction.playSoundFileNamed("Mag3Theme.mp3", waitForCompletion: false)
-    let clickSound = SKAction.playSoundFileNamed("gunshot.wav", waitForCompletion: false)
+    let clickSound = SKAction.playSoundFileNamed("gunshot.mp3", waitForCompletion: false)
     
     // MARK: Variables
     

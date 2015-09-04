@@ -7,18 +7,18 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "bg3@2x.png"
+      "filename" : "bg3@2x.jpg"
     },
     {
       "idiom" : "iphone",
-      "filename" : "bg34@2x.png",
+      "filename" : "bg34@2x.jpg",
       "subtype" : "retina4",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "bg3@3x.png"
+      "filename" : "bg3@3x.jpg"
     }
   ],
   "info" : {
