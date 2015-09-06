@@ -23,8 +23,6 @@ class RockyScene: SKScene {
     
     // MARK: Variables
     
-    var shuffle: NodeButton?
-    
     var level: Level!
     
     var targetLbl: SKLabelNode?,
@@ -140,13 +138,6 @@ class RockyScene: SKScene {
         score?.fontSize = 20
         addChild(score!)
         score?.position = CGPointMake(size.width/2.5, size.height/2.4)
-        
-        shuffle = NodeButton(normalImage: "Shuffle", selectedImage: "ShuffleOn", tag: 1)
-        if let size = shuffle?.size {
-            shuffle?.size = CGSizeMake(size.width/2, size.height/2)
-        }
-        shuffle?.position = CGPointMake(size.width/3, -(size.height/2 - shuffle!.size.height))
-        addChild(shuffle!)
     }
     
     // MARK: Scene methods

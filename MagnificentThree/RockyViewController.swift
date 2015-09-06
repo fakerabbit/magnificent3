@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class RockyViewController: UIViewController, NodeButtonDelegate {
+class RockyViewController: UIViewController {
     
     // MARK: Audio
     
@@ -45,7 +45,6 @@ class RockyViewController: UIViewController, NodeButtonDelegate {
         
         level = Level(filename: "RLevel_0")
         scene.level = level
-        scene.shuffle?.delegate = self
         scene.addTiles()
         scene.swipeHandler = handleSwipe
         scene.bombHandler = handleBomb
@@ -156,8 +155,11 @@ class RockyViewController: UIViewController, NodeButtonDelegate {
     
     func beginNextTurn() {
         level.resetComboMultiplier()
-        level.detectPossibleSwaps()
+        let swaps = level.detectPossibleSwaps()
         decrementMoves()
+        if swaps.count == 0 {
+            self.shuffle()
+        }
         view.userInteractionEnabled = true
     }
     
@@ -184,13 +186,5 @@ class RockyViewController: UIViewController, NodeButtonDelegate {
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
-    }
-    
-    // MARK: NodeButtonDelegate methods
-    
-    func NodeButtonDelegateOnTouch(button: NodeButton) {
-        scene.runAction(shuffleSound)
-        shuffle()
-        decrementMoves()
     }
 }
