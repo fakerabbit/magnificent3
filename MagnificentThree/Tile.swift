@@ -6,5 +6,38 @@
 //  Copyright (c) 2015 MT. All rights reserved.
 //
 
-class Tile {
+import SpriteKit
+
+class Tile: Printable, Hashable {
+    
+    // MARK: variables
+    
+    var column: Int,
+        row: Int,
+        rocky: Bool,
+        sprite: SKSpriteNode?
+    
+    // MARK: Init
+    
+    init(column: Int, row: Int, rocky: Bool) {
+        self.column = column
+        self.row = row
+        self.rocky = rocky
+    }
+    
+    // MARK: Public methods
+    
+    var description: String {
+        return "rocky:\(rocky) square:(\(column),\(row))"
+    }
+    
+    // MARK: Hash
+    
+    var hashValue: Int {
+        return row*10 + column
+    }
+}
+
+func ==(lhs: Tile, rhs: Tile) -> Bool {
+    return lhs.column == rhs.column && lhs.row == rhs.row
 }

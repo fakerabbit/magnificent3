@@ -61,4 +61,12 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
+    
+    func MenuViewOnRocky(view: MenuView) {
+        var controller: RockyViewController = RockyViewController()
+        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.popViewControllerAnimated(false)
+        appDel.navController?.pushViewController(controller, animated: true)
+        appDel.navController?.viewControllers = [controller]
+    }
 }

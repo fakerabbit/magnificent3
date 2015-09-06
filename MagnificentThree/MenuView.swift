@@ -11,6 +11,7 @@ import SpriteKit
 
 protocol MenuViewDelegate: class {
     func MenuViewOnArcade(view: MenuView)
+    func MenuViewOnRocky(view: MenuView)
 }
 
 class MenuView: SKView {
@@ -32,11 +33,13 @@ class MenuView: SKView {
     let buttonW: CGFloat = 100.0
     
     private var cscene: SKScene?
-    private var logoIv: UIImageView?
-    private var townIv: UIImageView?
-    private var town: SKSpriteNode?
-    private var hayParticle: SKEmitterNode?
-    private var arcadeBtn: UIButton?
+    
+    private var logoIv: UIImageView?,
+                townIv: UIImageView?,
+                town: SKSpriteNode?,
+                hayParticle: SKEmitterNode?,
+                arcadeBtn: UIButton?,
+                rockyBtn: UIButton?
     
     // MARK: Init
     
@@ -79,6 +82,14 @@ class MenuView: SKView {
         arcadeBtn?.addTarget(self, action: Selector("onArcade:"), forControlEvents: .TouchUpInside)
         self.addSubview(arcadeBtn!)
         
+        rockyBtn = UIButton(frame: CGRectZero)
+        rockyBtn?.setImage(UIImage(named: "Rocky"), forState: .Normal)
+        rockyBtn?.setImage(UIImage(named: "RockyOn"), forState: .Highlighted)
+        rockyBtn?.sizeToFit()
+        rockyBtn?.contentMode = .ScaleAspectFit
+        rockyBtn?.addTarget(self, action: Selector("onRocky:"), forControlEvents: .TouchUpInside)
+        self.addSubview(rockyBtn!)
+        
         self.presentScene(cscene)
         
         let seq = SKAction.sequence([theme, SKAction.waitForDuration(30.0)])
@@ -106,6 +117,7 @@ class MenuView: SKView {
         townIv?.frame = CGRectMake(-tpad, h - townIv!.frame.size.height + tpad, w + tpad * 2, townIv!.frame.size.height)
         town?.position = CGPointMake(w/2, townIv!.frame.size.height/2)
         arcadeBtn?.frame = CGRectMake(w/2 - arcadeBtn!.frame.size.width/2, h/2 - arcadeBtn!.frame.size.height/2, arcadeBtn!.frame.size.width, arcadeBtn!.frame.size.height)
+        rockyBtn?.frame = CGRectMake(w/2 - rockyBtn!.frame.size.width/2, CGRectGetMaxY(arcadeBtn!.frame), rockyBtn!.frame.size.width, rockyBtn!.frame.size.height)
     }
     
     // MARK: Private methods
@@ -154,5 +166,10 @@ class MenuView: SKView {
     func onArcade(sender: UIButton?) {
         cscene?.runAction(clickSound)
         delegate?.MenuViewOnArcade(self)
+    }
+    
+    func onRocky(sender: UIButton?) {
+        cscene?.runAction(clickSound)
+        delegate?.MenuViewOnRocky(self)
     }
 }

@@ -23,7 +23,8 @@ class Level {
     
     private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
                 tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
-                possibleSwaps = Set<Swap>()
+                possibleSwaps = Set<Swap>(),
+                removedRocks = [Tile]()
     
     // MARK: Init
     
@@ -39,7 +40,10 @@ class Level {
                     // 5
                     for (column, value) in enumerate(rowArray) {
                         if value == 1 {
-                            tiles[column, tileRow] = Tile()
+                            tiles[column, tileRow] = Tile(column: column, row: tileRow, rocky: false)
+                        }
+                        else if value == 2 {
+                            tiles[column, tileRow] = Tile(column: column, row: tileRow, rocky: true)
                         }
                     }
                 }
@@ -56,6 +60,16 @@ class Level {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return items[column, row]
+    }
+    
+    func isRockAtColumn(column: Int, row: Int) -> Bool {
+        var isRock = false
+        assert(column >= 0 && column < NumColumns)
+        assert(row >= 0 && row < NumRows)
+        if let tile = tiles[column, row] {
+            isRock = tile.rocky
+        }
+        return isRock
     }
     
     func shuffle() -> Set<Item> {
@@ -100,7 +114,7 @@ class Level {
                     
                     // Is it possible to swap this cookie with the one on the right?
                     if column < NumColumns - 1 {
-                        // Have a cookie in this spot? If there is no tile, there is no cookie.
+                        // Have an item in this spot? If there is no tile, there is no item.
                         if let other = items[column + 1, row] {
                             // Swap them
                             items[column, row] = other
@@ -166,6 +180,19 @@ class Level {
         }
     }
     
+    func removeRocks() {
+        for tile in removedRocks {
+            if let t = tiles[tile.column, tile.row] {
+                t.rocky = false
+                tiles[tile.column, tile.row] = t
+            }
+        }
+    }
+    
+    func markForDelete(rock: Tile) {
+        self.removedRocks.append(rock)
+    }
+    
     func removeBombedItems(type: ItemType) -> Set<Chain> {
         var bombChains = detectBombMatches(type)
         
@@ -182,18 +209,24 @@ class Level {
             var array = [Item]()
             for row in 0..<NumRows {
                 // 2
-                if tiles[column, row] != nil && items[column, row] == nil {
-                    // 3
-                    for lookup in (row + 1)..<NumRows {
-                        if let item = items[column, lookup] {
-                            // 4
-                            items[column, lookup] = nil
-                            items[column, row] = item
-                            item.row = row
-                            // 5
-                            array.append(item)
-                            // 6
-                            break
+                if let tile = tiles[column, row] {
+                    if !tile.rocky && items[column, row] == nil {
+                        // 3
+                        for lookup in (row + 1)..<NumRows {
+                            if let tile = tiles[column, lookup] {
+                                if !tile.rocky {
+                                    if let item = items[column, lookup] {
+                                        // 4
+                                        items[column, lookup] = nil
+                                        items[column, row] = item
+                                        item.row = row
+                                        // 5
+                                        array.append(item)
+                                        // 6
+                                        break
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -215,17 +248,19 @@ class Level {
             // 1
             for var row = NumRows - 1; row >= 0 && items[column, row] == nil; --row {
                 // 2
-                if tiles[column, row] != nil {
-                    // 3
-                    var newItemType: ItemType
-                    do {
-                        newItemType = ItemType.random()
-                    } while newItemType == itemType
-                    itemType = newItemType
-                    // 4
-                    let item = Item(column: column, row: row, itemType: itemType)
-                    items[column, row] = item
-                    array.append(item)
+                if let tile = tiles[column, row] {
+                    if !tile.rocky {
+                        // 3
+                        var newItemType: ItemType
+                        do {
+                            newItemType = ItemType.random()
+                        } while newItemType == itemType
+                        itemType = newItemType
+                        // 4
+                        let item = Item(column: column, row: row, itemType: itemType)
+                        items[column, row] = item
+                        array.append(item)
+                    }
                 }
             }
             // 5
@@ -238,6 +273,25 @@ class Level {
     
     func resetComboMultiplier() {
         comboMultiplier = 1
+    }
+    
+    func rockItems() -> Set<Tile> {
+        
+        var set = Set<Tile>()
+        
+        for row in 0..<NumRows {
+            for column in 0..<NumColumns {
+                
+                if let tile = tiles[column, row] {
+                    // Is it a rocky tile?
+                    if tile.rocky {
+                        set.insert(tile)
+                    }
+                }
+            }
+        }
+        
+        return set
     }
     
     // MARK: Private methods
@@ -403,14 +457,19 @@ class Level {
         for row in 0..<NumRows {
             for column in 0..<NumColumns {
                 
-                if let item = items[column, row] {
-                    let matchType = item.itemType
-                    
-                    if items[column, row]?.itemType == type {
+                if let tile = tiles[column, row] {
+                    if !tile.rocky {
                         
-                        let chain = Chain(chainType: .Bomb)
-                        chain.addItem(items[column, row]!)
-                        set.insert(chain)
+                        if let item = items[column, row] {
+                            let matchType = item.itemType
+                            
+                            if items[column, row]?.itemType == type {
+                                
+                                let chain = Chain(chainType: .Bomb)
+                                chain.addItem(items[column, row]!)
+                                set.insert(chain)
+                            }
+                        }
                     }
                 }
             }
@@ -422,7 +481,9 @@ class Level {
     private func removeItems(chains: Set<Chain>) {
         for chain in chains {
             for item in chain.items {
-                items[item.column, item.row] = nil
+                if !self.isRockAtColumn(item.column, row: item.row) {
+                    items[item.column, item.row] = nil
+                }
             }
         }
     }
