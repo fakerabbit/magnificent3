@@ -43,7 +43,7 @@ class RockyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //level = Level(filename: "RLevel_12")
+        //level = Level(filename: "RLevel_2")
         let lvlNum = Int(arc4random_uniform(13))
         level = Level(filename: "RLevel_\(lvlNum)")
         scene.level = level
@@ -103,8 +103,8 @@ class RockyViewController: UIViewController {
     }
     
     func handleMatches() {
-        let chains = level.removeMatches()
         
+        let chains = level.removeMatches()
         if chains.count == 0 {
             beginNextTurn()
             return
@@ -121,7 +121,6 @@ class RockyViewController: UIViewController {
             self.scene.animateFallingItems(columns) {
                 let columns = self.level.topUpItems()
                 self.scene.animateNewItems(columns) {
-                    self.level.removeRocks()
                     self.handleMatches()
                 }
             }

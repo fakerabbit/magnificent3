@@ -23,8 +23,7 @@ class Level {
     
     private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
                 tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
-                possibleSwaps = Set<Swap>(),
-                removedRocks = [Tile]()
+                possibleSwaps = Set<Swap>()
     
     // MARK: Init
     
@@ -188,19 +187,12 @@ class Level {
         }
     }
     
-    func removeRocks() {
-        for tile in removedRocks {
-            if let t = tiles[tile.column, tile.row] {
-                t.rocky = false
-                self.targetScore--
-                tiles[tile.column, tile.row] = t
-            }
-        }
-        removedRocks.removeAll(keepCapacity: false)
-    }
-    
     func markForDelete(rock: Tile) {
-        self.removedRocks.append(rock)
+        if let t = tiles[rock.column, rock.row] {
+            t.rocky = false
+            self.targetScore--
+            tiles[rock.column, rock.row] = t
+        }
     }
     
     func removeBombedItems(type: ItemType) -> Set<Chain> {
@@ -219,22 +211,20 @@ class Level {
             var array = [Item]()
             for row in 0..<NumRows {
                 // 2
-                if let tile = tiles[column, row] {
-                    if !tile.rocky && items[column, row] == nil {
-                        // 3
-                        for lookup in (row + 1)..<NumRows {
-                            if let tile = tiles[column, lookup] {
-                                if !tile.rocky {
-                                    if let item = items[column, lookup] {
-                                        // 4
-                                        items[column, lookup] = nil
-                                        items[column, row] = item
-                                        item.row = row
-                                        // 5
-                                        array.append(item)
-                                        // 6
-                                        break
-                                    }
+                if tiles[column, row] != nil && items[column, row] == nil {
+                    // 3
+                    for lookup in (row + 1)..<NumRows {
+                        if let tile = tiles[column, lookup] {
+                            if !tile.rocky {
+                                if let item = items[column, lookup] {
+                                    // 4
+                                    items[column, lookup] = nil
+                                    items[column, row] = item
+                                    item.row = row
+                                    // 5
+                                    array.append(item)
+                                    // 6
+                                    break
                                 }
                             }
                         }
@@ -248,7 +238,7 @@ class Level {
         }
         return columns
     }
-    // TODO: IS THIS CAUSING THE EMPTY ITEMS BUG????
+    
     func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
         var itemType: ItemType = .Unknown
@@ -256,21 +246,19 @@ class Level {
         for column in 0..<NumColumns {
             var array = [Item]()
             // 1
-            for var row = NumRows - 1; row >= 0 && items[column, row] == nil; --row {
+            for var row = NumRows - 1; row >= 0; --row {
                 // 2
-                if let tile = tiles[column, row] {
-                    if !tile.rocky {
-                        // 3
-                        var newItemType: ItemType
-                        do {
-                            newItemType = ItemType.random()
-                        } while newItemType == itemType
-                        itemType = newItemType
-                        // 4
-                        let item = Item(column: column, row: row, itemType: itemType)
-                        items[column, row] = item
-                        array.append(item)
-                    }
+                if tiles[column, row] != nil && items[column, row] == nil {
+                    // 3
+                    var newItemType: ItemType
+                    do {
+                        newItemType = ItemType.random()
+                    } while newItemType == itemType
+                    itemType = newItemType
+                    // 4
+                    let item = Item(column: column, row: row, itemType: itemType)
+                    items[column, row] = item
+                    array.append(item)
                 }
             }
             // 5
