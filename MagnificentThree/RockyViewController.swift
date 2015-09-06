@@ -170,7 +170,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate {
     func decrementMoves() {
         --movesLeft
         updateLabels()
-        if score >= level.targetScore {
+        if level.targetScore == 0 {
             onGameOver(true)
         } else if movesLeft == 0 {
             onGameOver(false)
@@ -179,7 +179,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate {
     
     func onGameOver(victory: Bool) {
         scene.userInteractionEnabled = false
-        var controller: GameOverController = GameOverController(victory: victory, score: score)
+        var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Rocky)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)

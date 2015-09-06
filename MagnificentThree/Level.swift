@@ -184,9 +184,11 @@ class Level {
         for tile in removedRocks {
             if let t = tiles[tile.column, tile.row] {
                 t.rocky = false
+                self.targetScore--
                 tiles[tile.column, tile.row] = t
             }
         }
+        removedRocks.removeAll(keepCapacity: false)
     }
     
     func markForDelete(rock: Tile) {

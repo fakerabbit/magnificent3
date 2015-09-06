@@ -9,21 +9,35 @@
 import UIKit
 import SpriteKit
 
+enum GameType: Printable {
+    case Arcade
+    case Rocky
+    
+    var description: String {
+        switch self {
+        case .Arcade: return "Arcade"
+        case .Rocky: return "Rocky"
+        }
+    }
+}
+
 class GameOverController: UIViewController, NodeButtonDelegate {
     
     // MARK: variables
     
-    var victory: Bool = false
-    var score = 0
+    var victory: Bool = false,
+        score = 0,
+        gameType: GameType = .Arcade
     
     var scene: GameOverScene!
     
     // MARK: Init
     
-    init(victory: Bool, score: Int) {
+    init(victory: Bool, score: Int, type: GameType) {
         super.init(nibName: nil, bundle: nil)
         self.victory = victory
         self.score = score
+        self.gameType = type
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -76,7 +90,13 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         scene?.playButton()
         if button.tag == 1 { // play
             scene.userInteractionEnabled = false
-            var controller: GameViewController = GameViewController()
+            var controller = UIViewController()
+            if self.gameType == .Arcade {
+                controller = GameViewController()
+            }
+            else if self.gameType == .Rocky {
+                controller = RockyViewController()
+            }
             let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
             appDel.navController?.popViewControllerAnimated(false)
             appDel.navController?.pushViewController(controller, animated: true)
