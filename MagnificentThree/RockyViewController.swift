@@ -43,7 +43,9 @@ class RockyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        level = Level(filename: "RLevel_0")
+        //level = Level(filename: "RLevel_12")
+        let lvlNum = Int(arc4random_uniform(13))
+        level = Level(filename: "RLevel_\(lvlNum)")
         scene.level = level
         scene.addTiles()
         scene.swipeHandler = handleSwipe

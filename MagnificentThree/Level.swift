@@ -114,38 +114,44 @@ class Level {
                     
                     // Is it possible to swap this cookie with the one on the right?
                     if column < NumColumns - 1 {
-                        // Have an item in this spot? If there is no tile, there is no item.
-                        if let other = items[column + 1, row] {
-                            // Swap them
-                            items[column, row] = other
-                            items[column + 1, row] = item
-                            
-                            // Is either cookie now part of a chain?
-                            if hasChainAtColumn(column + 1, row: row) ||
-                                hasChainAtColumn(column, row: row) {
-                                    set.insert(Swap(itemA: item, itemB: other))
+                        
+                        // Have a rock in this spot?
+                        if !self.isRockAtColumn(column + 1, row: row) {
+                            // Have an item in this spot? If there is no tile, there is no item.
+                            if let other = items[column + 1, row] {
+                                // Swap them
+                                items[column, row] = other
+                                items[column + 1, row] = item
+                                
+                                // Is either cookie now part of a chain?
+                                if hasChainAtColumn(column + 1, row: row) ||
+                                    hasChainAtColumn(column, row: row) {
+                                        set.insert(Swap(itemA: item, itemB: other))
+                                }
+                                
+                                // Swap them back
+                                items[column, row] = item
+                                items[column + 1, row] = other
                             }
-                            
-                            // Swap them back
-                            items[column, row] = item
-                            items[column + 1, row] = other
                         }
                     }
                     
                     if row < NumRows - 1 {
-                        if let other = items[column, row + 1] {
-                            items[column, row] = other
-                            items[column, row + 1] = item
-                            
-                            // Is either cookie now part of a chain?
-                            if hasChainAtColumn(column, row: row + 1) ||
-                                hasChainAtColumn(column, row: row) {
-                                    set.insert(Swap(itemA: item, itemB: other))
+                        if !self.isRockAtColumn(column, row: row + 1) {
+                            if let other = items[column, row + 1] {
+                                items[column, row] = other
+                                items[column, row + 1] = item
+                                
+                                // Is either cookie now part of a chain?
+                                if hasChainAtColumn(column, row: row + 1) ||
+                                    hasChainAtColumn(column, row: row) {
+                                        set.insert(Swap(itemA: item, itemB: other))
+                                }
+                                
+                                // Swap them back
+                                items[column, row] = item
+                                items[column, row + 1] = other
                             }
-                            
-                            // Swap them back
-                            items[column, row] = item
-                            items[column, row + 1] = other
                         }
                     }
                 }
@@ -242,7 +248,7 @@ class Level {
         }
         return columns
     }
-    
+    // TODO: IS THIS CAUSING THE EMPTY ITEMS BUG????
     func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
         var itemType: ItemType = .Unknown
