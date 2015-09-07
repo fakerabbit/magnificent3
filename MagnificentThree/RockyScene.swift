@@ -74,7 +74,7 @@ class RockyScene: SKScene {
         let bgNum = Int(arc4random_uniform(11))
         //println("\(bgNum)")
         backgroundImg = SKSpriteNode(imageNamed: "Bg\(bgNum)")
-        //let background = SKSpriteNode(imageNamed: "Bg12")
+        //backgroundImg = SKSpriteNode(imageNamed: "Bg10")
         addChild(backgroundImg!)
         
         addChild(gameLayer)
