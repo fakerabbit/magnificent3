@@ -48,8 +48,14 @@ class RockyViewController: UIViewController {
         level = Level(filename: "RLevel_\(lvlNum)")
         scene.level = level
         scene.addTiles()
-        scene.swipeHandler = handleSwipe
-        scene.bombHandler = handleBomb
+        scene.swipeHandler = {[unowned self]
+            (swap:Swap) in
+            self.handleSwipe(swap)
+        }
+        scene.bombHandler = {[unowned self]
+            (type:ItemType) in
+            self.handleBomb(type)
+        }
         beginGame()
     }
     

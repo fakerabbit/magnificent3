@@ -49,8 +49,14 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         scene.level = level
         scene.shuffle?.delegate = self
         scene.addTiles()
-        scene.swipeHandler = handleSwipe
-        scene.bombHandler = handleBomb
+        scene.swipeHandler = {[unowned self]
+            (swap:Swap) in
+            self.handleSwipe(swap)
+        }
+        scene.bombHandler = {[unowned self]
+            (type:ItemType) in
+            self.handleBomb(type)
+        }
         beginGame()
     }
 
