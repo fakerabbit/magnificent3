@@ -9,18 +9,6 @@
 import UIKit
 import SpriteKit
 
-enum GameType: Printable {
-    case Arcade
-    case Rocky
-    
-    var description: String {
-        switch self {
-        case .Arcade: return "Arcade"
-        case .Rocky: return "Rocky"
-        }
-    }
-}
-
 class GameOverController: UIViewController, NodeButtonDelegate {
     
     // MARK: variables
@@ -54,7 +42,7 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         self.view = skView
         
         // Create and configure the scene.
-        scene = GameOverScene(size: skView.bounds.size, victory: victory, points: score)
+        scene = GameOverScene(size: skView.bounds.size, victory: victory, points: score, type: gameType)
         scene.scaleMode = SKSceneScaleMode.AspectFit
         scene.menu?.delegate = self
         scene.play?.delegate = self

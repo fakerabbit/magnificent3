@@ -60,6 +60,9 @@
 		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
 		ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCF97451B7D93DA00989E2A /* Swap.swift */; };
 		ACE0AD081B9516C900044D2B /* BombImages.atlas in Resources */ = {isa = PBXBuildFile; fileRef = ACE0AD071B9516C900044D2B /* BombImages.atlas */; };
+		ACE4AA4E1B9E21D9005AA936 /* MTData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACE4AA4C1B9E21D9005AA936 /* MTData.xcdatamodeld */; };
+		ACE4AA511B9E2632005AA936 /* DGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE4AA501B9E2632005AA936 /* DGame.swift */; };
+		ACE4AA531B9E27EF005AA936 /* DataMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE4AA521B9E27EF005AA936 /* DataMgr.swift */; };
 		ACE6F1491B9C03940056E66B /* RLevel_1.json in Resources */ = {isa = PBXBuildFile; fileRef = ACE6F1481B9C03940056E66B /* RLevel_1.json */; };
 		ACE6F14B1B9C03E00056E66B /* RLevel_2.json in Resources */ = {isa = PBXBuildFile; fileRef = ACE6F14A1B9C03E00056E66B /* RLevel_2.json */; };
 		ACE6F14D1B9C04180056E66B /* RLevel_3.json in Resources */ = {isa = PBXBuildFile; fileRef = ACE6F14C1B9C04180056E66B /* RLevel_3.json */; };
@@ -142,6 +145,9 @@
 		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		ACCF97451B7D93DA00989E2A /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
 		ACE0AD071B9516C900044D2B /* BombImages.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BombImages.atlas; sourceTree = "<group>"; };
+		ACE4AA4D1B9E21D9005AA936 /* MTData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTData.xcdatamodel; sourceTree = "<group>"; };
+		ACE4AA501B9E2632005AA936 /* DGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DGame.swift; path = CoreData/DGame.swift; sourceTree = "<group>"; };
+		ACE4AA521B9E27EF005AA936 /* DataMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataMgr.swift; path = CoreData/DataMgr.swift; sourceTree = "<group>"; };
 		ACE6F1481B9C03940056E66B /* RLevel_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_1.json; sourceTree = "<group>"; };
 		ACE6F14A1B9C03E00056E66B /* RLevel_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_2.json; sourceTree = "<group>"; };
 		ACE6F14C1B9C04180056E66B /* RLevel_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_3.json; sourceTree = "<group>"; };
@@ -278,6 +284,7 @@
 		AC7DBFC11B7C3D2C00822EDD /* MagnificentThree */ = {
 			isa = PBXGroup;
 			children = (
+				ACE4AA4F1B9E21DF005AA936 /* CoreData */,
 				AC46C77E1B9A411000C1C968 /* Screens */,
 				AC67684A1B8E6EFA004B4CEB /* Assets */,
 				AC7DBFF71B7C92B200822EDD /* Levels */,
@@ -367,6 +374,16 @@
 				AC6BDE861B868A850047C55C /* Mag3Theme.mp3 */,
 			);
 			name = Audio;
+			sourceTree = "<group>";
+		};
+		ACE4AA4F1B9E21DF005AA936 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				ACE4AA4C1B9E21D9005AA936 /* MTData.xcdatamodeld */,
+				ACE4AA521B9E27EF005AA936 /* DataMgr.swift */,
+				ACE4AA501B9E2632005AA936 /* DGame.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -514,10 +531,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE4AA531B9E27EF005AA936 /* DataMgr.swift in Sources */,
 				AC7DBFE91B7C54ED00822EDD /* Item.swift in Sources */,
 				AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */,
 				AC7DBFF61B7C7A1900822EDD /* Level.swift in Sources */,
 				AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */,
+				ACE4AA4E1B9E21D9005AA936 /* MTData.xcdatamodeld in Sources */,
 				AC8077C31B84356900B3D46B /* Chain.swift in Sources */,
 				AC7DBFF41B7C79C900822EDD /* Array2D.swift in Sources */,
 				ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */,
@@ -526,6 +545,7 @@
 				AC5601121B85732D009571EA /* MenuViewController.swift in Sources */,
 				AC46C7861B9A41B200C1C968 /* RockyScene.swift in Sources */,
 				AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */,
+				ACE4AA511B9E2632005AA936 /* DGame.swift in Sources */,
 				AC46C7841B9A41A200C1C968 /* RockyViewController.swift in Sources */,
 				AC7DBFC91B7C3D2C00822EDD /* GameScene.swift in Sources */,
 				AC7DBFCB1B7C3D2C00822EDD /* GameViewController.swift in Sources */,
@@ -735,6 +755,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ACE4AA4C1B9E21D9005AA936 /* MTData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ACE4AA4D1B9E21D9005AA936 /* MTData.xcdatamodel */,
+			);
+			currentVersion = ACE4AA4D1B9E21D9005AA936 /* MTData.xcdatamodel */;
+			name = MTData.xcdatamodeld;
+			path = CoreData/MTData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC7DBFB71B7C3D2C00822EDD /* Project object */;
 }

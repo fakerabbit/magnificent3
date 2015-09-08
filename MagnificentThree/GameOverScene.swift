@@ -35,7 +35,7 @@ class GameOverScene: SKScene {
         fatalError("init(coder) is not used in this app")
     }
     
-    init(size: CGSize, victory: Bool, points: Int) {
+    init(size: CGSize, victory: Bool, points: Int, type: GameType) {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -61,6 +61,11 @@ class GameOverScene: SKScene {
             score?.fontSize = 24
             scoreCard?.addChild(score!)
             score?.position = CGPointMake(0, -(scoreCard!.size.height/2 - score!.frame.size.height/1))
+            
+            let maxScore = DataMgr.sharedInstance.highestScoreForGame(type)
+            println("max score: \(maxScore)")
+            let minScore = DataMgr.sharedInstance.lowestScoreForGame(type)
+            println("min score: \(minScore)")
         }
         else {
             let background = SKSpriteNode(imageNamed: "BgGameOver")

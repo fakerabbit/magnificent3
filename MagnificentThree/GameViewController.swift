@@ -184,6 +184,12 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     
     func onGameOver(victory: Bool) {
         scene.userInteractionEnabled = false
+        
+        // Save game record
+        DataMgr.sharedInstance.storeGame(.Arcade, score: score)
+        
+        
+        // Show game over controller
         var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Arcade)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
