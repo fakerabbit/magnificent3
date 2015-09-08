@@ -24,7 +24,8 @@ enum GameType: Printable {
 
 class DataMgr {
     
-    private let kGameEntity = "Game"
+    private let kGameEntity = "Game",
+                kGameEntityType = "type"
     
     var installTries: Int = 0
     
@@ -66,6 +67,7 @@ class DataMgr {
         if let entity: NSEntityDescription = NSEntityDescription.entityForName(kGameEntity, inManagedObjectContext: self.managedObjectContext!) {
             var request: NSFetchRequest = NSFetchRequest()
             request.entity = entity
+            request.predicate = NSPredicate(format: "%K == %@", argumentArray: [kGameEntityType, String(type.hashValue)])
             
             if let mutableFetchResults = self.managedObjectContext!.executeFetchRequest(request, error: nil) {
                 if mutableFetchResults.count > 0 {
@@ -85,7 +87,6 @@ class DataMgr {
             if games.count > 0 {
                 game = games.first!
                 for g: DGame in games {
-                    println(g)
                     if g.score.integerValue <= game!.score.integerValue {
                         game = g
                     }
@@ -104,7 +105,6 @@ class DataMgr {
             if games.count > 0 {
                 game = games.first!
                 for g: DGame in games {
-                    println(g)
                     if g.score.integerValue >= game!.score.integerValue {
                         game = g
                     }

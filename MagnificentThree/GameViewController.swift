@@ -186,8 +186,9 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         scene.userInteractionEnabled = false
         
         // Save game record
-        DataMgr.sharedInstance.storeGame(.Arcade, score: score)
-        
+        if victory {
+            DataMgr.sharedInstance.storeGame(.Arcade, score: score)
+        }
         
         // Show game over controller
         var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Arcade)

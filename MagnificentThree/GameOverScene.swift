@@ -12,20 +12,25 @@ class GameOverScene: SKScene {
     
     // MARK: Audio
     
-    let clickSound = SKAction.playSoundFileNamed("gunshot.mp3", waitForCompletion: false)
-    let victorySound = SKAction.playSoundFileNamed("westerntune.mp3", waitForCompletion: false)
-    let defeatSound = SKAction.playSoundFileNamed("harmonica.mp3", waitForCompletion: false)
+    let clickSound = SKAction.playSoundFileNamed("gunshot.mp3", waitForCompletion: false),
+        victorySound = SKAction.playSoundFileNamed("westerntune.mp3", waitForCompletion: false),
+        defeatSound = SKAction.playSoundFileNamed("harmonica.mp3", waitForCompletion: false)
     
     // MARK: Variables
     
     var sign: SKSpriteNode?,
-        scoreCard: SKSpriteNode?
+        scoreCard: SKSpriteNode?,
+        maxCard: SKSpriteNode?,
+        minCard: SKSpriteNode?
     
     var menu: NodeButton?,
         play: NodeButton?
     
     var score: SKLabelNode?,
-        initialScore: Int = 0,
+        maxScoreLbl: SKLabelNode?,
+        minScoreLbl: SKLabelNode?,
+        maxScore: Int = 0,
+        minScore: Int = 0,
         finalScore: Int = 0,
         victory: Bool = false
     
@@ -40,11 +45,10 @@ class GameOverScene: SKScene {
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.victory = victory
+        finalScore = points
         
         if victory {
-            finalScore = points
-            initialScore = finalScore/2
-            
+
             let background = SKSpriteNode(imageNamed: "BgGameVictory")
             addChild(background)
             
@@ -52,7 +56,7 @@ class GameOverScene: SKScene {
             scoreCard = SKSpriteNode(imageNamed: "ScoreCard")
             scoreCard?.scene?.scaleMode = .AspectFit
             scoreCard?.position = CGPointMake(0, -scoreCard!.size.height)
-            scoreCard?.size = CGSizeMake(size.width - 25, scoreCard!.size.height/1.5)
+            scoreCard?.size = CGSizeMake(size.width - 25, scoreCard!.size.height)
             addChild(scoreCard!)
             
             score = SKLabelNode(text: "0")
@@ -62,10 +66,39 @@ class GameOverScene: SKScene {
             scoreCard?.addChild(score!)
             score?.position = CGPointMake(0, -(scoreCard!.size.height/2 - score!.frame.size.height/1))
             
-            let maxScore = DataMgr.sharedInstance.highestScoreForGame(type)
-            println("max score: \(maxScore)")
-            let minScore = DataMgr.sharedInstance.lowestScoreForGame(type)
-            println("min score: \(minScore)")
+            maxScore = DataMgr.sharedInstance.highestScoreForGame(type)
+            if maxScore > 0 {
+                maxCard = SKSpriteNode(imageNamed: "MaxCard")
+                maxCard?.scene?.scaleMode = .AspectFit
+                maxCard?.position = CGPointMake(0, -maxCard!.size.height)
+                maxCard?.size = CGSizeMake(size.width - 25, maxCard!.size.height)
+                addChild(maxCard!)
+                
+                maxScoreLbl = SKLabelNode(text: "0")
+                maxScoreLbl?.fontName = "Sahara"
+                maxScoreLbl?.fontColor = UIColor.whiteColor()
+                maxScoreLbl?.fontSize = 24
+                maxCard?.addChild(maxScoreLbl!)
+                maxScoreLbl?.position = CGPointMake(0, -(maxCard!.size.height/2 - maxScoreLbl!.frame.size.height/1))
+            }
+            //println("max score: \(maxScore)")
+            
+            minScore = DataMgr.sharedInstance.lowestScoreForGame(type)
+            if minScore > 0 {
+                minCard = SKSpriteNode(imageNamed: "LowCard")
+                minCard?.scene?.scaleMode = .AspectFit
+                minCard?.position = CGPointMake(0, -minCard!.size.height)
+                minCard?.size = CGSizeMake(size.width - 25, minCard!.size.height)
+                addChild(minCard!)
+                
+                minScoreLbl = SKLabelNode(text: "0")
+                minScoreLbl?.fontName = "Sahara"
+                minScoreLbl?.fontColor = UIColor.whiteColor()
+                minScoreLbl?.fontSize = 24
+                minCard?.addChild(minScoreLbl!)
+                minScoreLbl?.position = CGPointMake(0, -(minCard!.size.height/2 - minScoreLbl!.frame.size.height/1))
+            }
+            //println("min score: \(minScore)")
         }
         else {
             let background = SKSpriteNode(imageNamed: "BgGameOver")
@@ -127,6 +160,24 @@ class GameOverScene: SKScene {
         let moveD = SKAction.moveTo(CGPointMake(-size.width/4, -(size.height/2 - play!.size.height/2)), duration: Duration)
         moveD.timingMode = .EaseOut
         play?.runAction(moveD)
+        
+        if maxCard != nil {
+            
+            let move = SKAction.moveTo(CGPointMake(0, scoreCard!.position.y + scoreCard!.size.height), duration: 0.5)
+            move.timingMode = .EaseOut
+            maxCard!.runAction(move, completion: { () -> Void in
+                self.maxScoreLbl?.text = String(self.maxScore)
+                
+                if self.minCard != nil {
+                    
+                    let move = SKAction.moveTo(CGPointMake(0, self.maxCard!.position.y - self.maxCard!.size.height), duration: 0.5)
+                    move.timingMode = .EaseOut
+                    self.minCard!.runAction(move, completion: { () -> Void in
+                        self.minScoreLbl?.text = String(self.minScore)
+                    })
+                }
+            })
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {

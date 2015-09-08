@@ -188,6 +188,13 @@ class RockyViewController: UIViewController {
     
     func onGameOver(victory: Bool) {
         scene.userInteractionEnabled = false
+        
+        // Save game record
+        if victory {
+            DataMgr.sharedInstance.storeGame(.Rocky, score: score)
+        }
+        
+        // Show game over controller
         var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Rocky)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
