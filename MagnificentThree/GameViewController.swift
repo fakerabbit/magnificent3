@@ -176,6 +176,11 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         --movesLeft
         updateLabels()
         if score >= level.targetScore {
+            while movesLeft > 0 {
+                movesLeft--
+                self.score += 100
+                updateLabels()
+            }
             onGameOver(true)
         } else if movesLeft == 0 {
             onGameOver(false)

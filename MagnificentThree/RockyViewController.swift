@@ -180,6 +180,11 @@ class RockyViewController: UIViewController {
         --movesLeft
         updateLabels()
         if level.targetScore == 0 {
+            while movesLeft > 0 {
+                movesLeft--
+                self.score += 100
+                updateLabels()
+            }
             onGameOver(true)
         } else if movesLeft == 0 {
             onGameOver(false)
