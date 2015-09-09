@@ -44,7 +44,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         super.viewDidLoad()
         
         let lvlNum = Int(arc4random_uniform(13))
-        //level = Level(filename: "Level_12")
+        //level = Level(filename: "Level_0")
         level = Level(filename: "Level_\(lvlNum)")
         scene.level = level
         scene.shuffle?.delegate = self
@@ -109,6 +109,8 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     
     func handleMatches() {
         let chains = level.removeMatches()
+        let itemsToRemove = level.itemsToRemove
+        level.itemsToRemove.removeAll(keepCapacity: false)
         
         if chains.count == 0 {
             beginNextTurn()
@@ -116,6 +118,8 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         }
         
         scene.animateMatchedItems(chains) {
+            
+            self.scene.makeSureItemsAreRemoved(itemsToRemove)
             
             for chain in chains {
                 self.score += chain.score

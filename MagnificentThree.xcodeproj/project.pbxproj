@@ -15,6 +15,7 @@
 		AC1B0DCF1B8FC51C005FFBBE /* Level_10.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */; };
 		AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */; };
 		AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */ = {isa = PBXBuildFile; fileRef = AC1B0DD21B8FC66D005FFBBE /* Level_12.json */; };
+		AC3EC7831B9F5324009F6B79 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3EC7821B9F5324009F6B79 /* Sequencer.swift */; };
 		AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC425E471B8AB66300B1BB9E /* Sahara.ttf */; };
 		AC46C76B1B99E1FE00C1C968 /* banjo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7601B99E1FE00C1C968 /* banjo.mp3 */; };
 		AC46C76C1B99E1FE00C1C968 /* bigwhip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC46C7611B99E1FE00C1C968 /* bigwhip.mp3 */; };
@@ -96,6 +97,7 @@
 		AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_10.json; sourceTree = "<group>"; };
 		AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_11.json; sourceTree = "<group>"; };
 		AC1B0DD21B8FC66D005FFBBE /* Level_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_12.json; sourceTree = "<group>"; };
+		AC3EC7821B9F5324009F6B79 /* Sequencer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sequencer.swift; path = ThirdParty/Sequencer/Sequencer.swift; sourceTree = "<group>"; };
 		AC425E471B8AB66300B1BB9E /* Sahara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sahara.ttf; path = Fonts/Sahara.ttf; sourceTree = "<group>"; };
 		AC46C7601B99E1FE00C1C968 /* banjo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = banjo.mp3; path = Audio/banjo.mp3; sourceTree = "<group>"; };
 		AC46C7611B99E1FE00C1C968 /* bigwhip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bigwhip.mp3; path = Audio/bigwhip.mp3; sourceTree = "<group>"; };
@@ -180,6 +182,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC3EC7801B9F52F0009F6B79 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				AC3EC7811B9F52F8009F6B79 /* Sequencer */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		AC3EC7811B9F52F8009F6B79 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				AC3EC7821B9F5324009F6B79 /* Sequencer.swift */,
+			);
+			name = Sequencer;
+			sourceTree = "<group>";
+		};
 		AC425E461B8AB63200B1BB9E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +302,7 @@
 		AC7DBFC11B7C3D2C00822EDD /* MagnificentThree */ = {
 			isa = PBXGroup;
 			children = (
+				AC3EC7801B9F52F0009F6B79 /* ThirdParty */,
 				ACE4AA4F1B9E21DF005AA936 /* CoreData */,
 				AC46C77E1B9A411000C1C968 /* Screens */,
 				AC67684A1B8E6EFA004B4CEB /* Assets */,
@@ -533,6 +552,7 @@
 			files = (
 				ACE4AA531B9E27EF005AA936 /* DataMgr.swift in Sources */,
 				AC7DBFE91B7C54ED00822EDD /* Item.swift in Sources */,
+				AC3EC7831B9F5324009F6B79 /* Sequencer.swift in Sources */,
 				AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */,
 				AC7DBFF61B7C7A1900822EDD /* Level.swift in Sources */,
 				AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */,

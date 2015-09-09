@@ -17,7 +17,8 @@ class Level {
     
     var targetScore = 0,
         maximumMoves = 0,
-        comboMultiplier = 0
+        comboMultiplier = 0,
+        itemsToRemove = [Item]()
     
     // MARK: Private variables
     
@@ -183,7 +184,7 @@ class Level {
             return lshapedChains
         }
         else {
-            return horizontalChains.union(verticalChains).union(lshapedChains)
+            return horizontalChains.union(verticalChains)
         }
     }
     
@@ -417,13 +418,18 @@ class Level {
                 for item in vchain.items {
                     
                     if item.itemType == fItem.itemType || item.itemType == lItem.itemType {
+                        
+                        let hchainSet = Set(chain.items)
+                        let vchainSet = Set(vchain.items)
+                        let union = hchainSet.union(vchainSet)
                         let c = Chain(chainType: .Lshaped)
-                        for i in chain.items {
+                        for i in union {
                             c.addItem(i)
+                        }
+                        for i in chain.items {
                             chain.removeItem(i)
                         }
                         for i in vchain.items {
-                            c.addItem(i)
                             vchain.removeItem(i)
                         }
                         set.insert(c)
@@ -480,7 +486,9 @@ class Level {
         for chain in chains {
             for item in chain.items {
                 if !self.isRockAtColumn(item.column, row: item.row) {
+                    //println("removing item: \(item)")
                     items[item.column, item.row] = nil
+                    itemsToRemove.append(item)
                 }
             }
         }

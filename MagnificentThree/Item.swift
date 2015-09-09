@@ -32,7 +32,7 @@ enum ItemType: Int, Printable {
     }
     
     var description: String {
-        return "\(rawValue)"
+        return spriteName
     }
 }
 

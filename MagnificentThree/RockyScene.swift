@@ -298,6 +298,14 @@ class RockyScene: SKScene {
         }
     }
     
+    func makeSureItemsAreRemoved(items: [Item]) {
+        for item in items {
+            if let sprite = item.sprite {
+                sprite.removeFromParent()
+            }
+        }
+    }
+    
     // MARK: Animations
     
     func animateSwap(swap: Swap, completion: () -> ()) {

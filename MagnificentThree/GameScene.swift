@@ -281,6 +281,14 @@ class GameScene: SKScene {
         itemsLayer.removeAllChildren()
     }
     
+    func makeSureItemsAreRemoved(items: [Item]) {
+        for item in items {
+            if let sprite = item.sprite {
+                sprite.removeFromParent()
+            }
+        }
+    }
+    
     // MARK: Animations
     
     func animateSwap(swap: Swap, completion: () -> ()) {
@@ -325,23 +333,41 @@ class GameScene: SKScene {
     }
     
     func animateMatchedItems(chains: Set<Chain>, completion: () -> ()) {
+        
+        let sequencer = Sequencer()
+        
         for chain in chains {
             
-            animateScoreForChain(chain)
+            sequencer.enqueueStep() { result, next in
+                self.animateScoreForChain(chain)
+                next(nil)
+            }
             
             for item in chain.items {
                 if let sprite = item.sprite {
-                    if sprite.actionForKey("removing") == nil {
+                    
+                    sequencer.enqueueStep() { result, next in
+                        //println("removing sprite: \(sprite), for item: \(item)")
                         let scaleAction = SKAction.scaleTo(0.1, duration: 0.3)
                         scaleAction.timingMode = .EaseOut
-                        sprite.runAction(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
-                            withKey:"removing")
+                        let completeAction = SKAction.sequence([scaleAction, SKAction.removeFromParent()])
+                        sprite.runAction(completeAction)
+                        next(nil)
                     }
                 }
             }
         }
-        runAction(matchSound)
-        runAction(SKAction.waitForDuration(0.3), completion: completion)
+        
+        sequencer.enqueueStep() { result, next in
+            self.runAction(self.matchSound)
+            next(nil)
+        }
+        
+        sequencer.enqueueStep() { result, next in
+            self.runAction(SKAction.waitForDuration(0.3), completion: completion)
+        }
+        
+        sequencer.run()
     }
     
     func animateFallingItems(columns: [[Item]], completion: () -> ()) {

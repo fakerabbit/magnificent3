@@ -109,14 +109,18 @@ class RockyViewController: UIViewController {
     }
     
     func handleMatches() {
-        
         let chains = level.removeMatches()
+        let itemsToRemove = level.itemsToRemove
+        level.itemsToRemove.removeAll(keepCapacity: false)
+        
         if chains.count == 0 {
             beginNextTurn()
             return
         }
         
         scene.animateMatchedItems(chains) {
+            
+            self.scene.makeSureItemsAreRemoved(itemsToRemove)
             
             for chain in chains {
                 self.score += chain.score
