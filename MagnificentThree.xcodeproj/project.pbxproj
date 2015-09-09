@@ -57,6 +57,15 @@
 		AC7DC0031B7C930E00822EDD /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DC0021B7C930E00822EDD /* Tile.swift */; };
 		AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DC0041B7C935600822EDD /* Extensions.swift */; };
 		AC8077C31B84356900B3D46B /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8077C21B84356900B3D46B /* Chain.swift */; };
+		AC908BE21BA0DFF9001C83D7 /* RLevel_13.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BE11BA0DFF9001C83D7 /* RLevel_13.json */; };
+		AC908BE41BA0E250001C83D7 /* RLevel_14.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BE31BA0E250001C83D7 /* RLevel_14.json */; };
+		AC908BE61BA0E48C001C83D7 /* RLevel_15.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BE51BA0E48C001C83D7 /* RLevel_15.json */; };
+		AC908BE81BA0E4EB001C83D7 /* Level_13.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BE71BA0E4EB001C83D7 /* Level_13.json */; };
+		AC908BEA1BA0E643001C83D7 /* Level_14.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BE91BA0E643001C83D7 /* Level_14.json */; };
+		AC908BEC1BA0E785001C83D7 /* Level_15.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BEB1BA0E785001C83D7 /* Level_15.json */; };
+		AC908BEE1BA0E8FA001C83D7 /* Level_16.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BED1BA0E8FA001C83D7 /* Level_16.json */; };
+		AC908BF01BA0E9D8001C83D7 /* RLevel_16.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BEF1BA0E9D8001C83D7 /* RLevel_16.json */; };
+		AC908BF21BA0EB42001C83D7 /* RLevel_17.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BF11BA0EB42001C83D7 /* RLevel_17.json */; };
 		AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7811B8C0CDF0028E14C /* GameOverController.swift */; };
 		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
 		ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCF97451B7D93DA00989E2A /* Swap.swift */; };
@@ -143,6 +152,15 @@
 		AC7DC0021B7C930E00822EDD /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		AC7DC0041B7C935600822EDD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AC8077C21B84356900B3D46B /* Chain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
+		AC908BE11BA0DFF9001C83D7 /* RLevel_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_13.json; sourceTree = "<group>"; };
+		AC908BE31BA0E250001C83D7 /* RLevel_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_14.json; sourceTree = "<group>"; };
+		AC908BE51BA0E48C001C83D7 /* RLevel_15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_15.json; sourceTree = "<group>"; };
+		AC908BE71BA0E4EB001C83D7 /* Level_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_13.json; sourceTree = "<group>"; };
+		AC908BE91BA0E643001C83D7 /* Level_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_14.json; sourceTree = "<group>"; };
+		AC908BEB1BA0E785001C83D7 /* Level_15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_15.json; sourceTree = "<group>"; };
+		AC908BED1BA0E8FA001C83D7 /* Level_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_16.json; sourceTree = "<group>"; };
+		AC908BEF1BA0E9D8001C83D7 /* RLevel_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_16.json; sourceTree = "<group>"; };
+		AC908BF11BA0EB42001C83D7 /* RLevel_17.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_17.json; sourceTree = "<group>"; };
 		AC96F7811B8C0CDF0028E14C /* GameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverController.swift; sourceTree = "<group>"; };
 		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		ACCF97451B7D93DA00989E2A /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
@@ -359,6 +377,10 @@
 				AC1B0DCE1B8FC51C005FFBBE /* Level_10.json */,
 				AC1B0DD01B8FC5C8005FFBBE /* Level_11.json */,
 				AC1B0DD21B8FC66D005FFBBE /* Level_12.json */,
+				AC908BE71BA0E4EB001C83D7 /* Level_13.json */,
+				AC908BE91BA0E643001C83D7 /* Level_14.json */,
+				AC908BEB1BA0E785001C83D7 /* Level_15.json */,
+				AC908BED1BA0E8FA001C83D7 /* Level_16.json */,
 				AC46C7871B9A4FD700C1C968 /* RLevel_0.json */,
 				ACE6F1481B9C03940056E66B /* RLevel_1.json */,
 				ACE6F14A1B9C03E00056E66B /* RLevel_2.json */,
@@ -372,6 +394,11 @@
 				ACE6F15A1B9C0A690056E66B /* RLevel_10.json */,
 				ACE6F15C1B9C0AD10056E66B /* RLevel_11.json */,
 				ACE6F15E1B9C0B1B0056E66B /* RLevel_12.json */,
+				AC908BE11BA0DFF9001C83D7 /* RLevel_13.json */,
+				AC908BE31BA0E250001C83D7 /* RLevel_14.json */,
+				AC908BE51BA0E48C001C83D7 /* RLevel_15.json */,
+				AC908BEF1BA0E9D8001C83D7 /* RLevel_16.json */,
+				AC908BF11BA0EB42001C83D7 /* RLevel_17.json */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -489,6 +516,7 @@
 				AC1B0DD11B8FC5C8005FFBBE /* Level_11.json in Resources */,
 				ACE6F15D1B9C0AD10056E66B /* RLevel_11.json in Resources */,
 				AC56011A1B857F3C009571EA /* hay.png in Resources */,
+				AC908BE21BA0DFF9001C83D7 /* RLevel_13.json in Resources */,
 				AC46C76D1B99E1FE00C1C968 /* cock.mp3 in Resources */,
 				ACE6F14F1B9C07BC0056E66B /* RLevel_4.json in Resources */,
 				AC1B0DC71B8FC2D2005FFBBE /* Level_6.json in Resources */,
@@ -496,11 +524,15 @@
 				ACE6F14D1B9C04180056E66B /* RLevel_3.json in Resources */,
 				AC1B0DC51B8FC1A9005FFBBE /* Level_5.json in Resources */,
 				AC46C76F1B99E1FE00C1C968 /* gunshot.mp3 in Resources */,
+				AC908BE81BA0E4EB001C83D7 /* Level_13.json in Resources */,
 				AC4A9E951B94035500EE9684 /* CowboyImages.atlas in Resources */,
 				AC7DBFFE1B7C92B200822EDD /* Level_1.json in Resources */,
 				ACE6F1591B9C0A1B0056E66B /* RLevel_9.json in Resources */,
 				ACE6F1571B9C09DA0056E66B /* RLevel_8.json in Resources */,
 				AC1B0DC91B8FC396005FFBBE /* Level_7.json in Resources */,
+				AC908BEA1BA0E643001C83D7 /* Level_14.json in Resources */,
+				AC908BF01BA0E9D8001C83D7 /* RLevel_16.json in Resources */,
+				AC908BEC1BA0E785001C83D7 /* Level_15.json in Resources */,
 				ACE0AD081B9516C900044D2B /* BombImages.atlas in Resources */,
 				AC46C7741B99E1FE00C1C968 /* whistle.mp3 in Resources */,
 				AC7DC0011B7C92B200822EDD /* Level_4.json in Resources */,
@@ -508,6 +540,7 @@
 				AC46C76B1B99E1FE00C1C968 /* banjo.mp3 in Resources */,
 				AC7DC0001B7C92B200822EDD /* Level_3.json in Resources */,
 				AC46C7721B99E1FE00C1C968 /* westerntune.mp3 in Resources */,
+				AC908BE61BA0E48C001C83D7 /* RLevel_15.json in Resources */,
 				AC1B0DCD1B8FC497005FFBBE /* Level_9.json in Resources */,
 				AC425E481B8AB66300B1BB9E /* Sahara.ttf in Resources */,
 				AC46C76E1B99E1FE00C1C968 /* cricket.mp3 in Resources */,
@@ -522,9 +555,12 @@
 				AC1B0DD31B8FC66D005FFBBE /* Level_12.json in Resources */,
 				ACE6F15F1B9C0B1B0056E66B /* RLevel_12.json in Resources */,
 				ACE6F15B1B9C0A690056E66B /* RLevel_10.json in Resources */,
+				AC908BEE1BA0E8FA001C83D7 /* Level_16.json in Resources */,
+				AC908BE41BA0E250001C83D7 /* RLevel_14.json in Resources */,
 				AC56011C1B8582F2009571EA /* pfHay.sks in Resources */,
 				AC1B0DCF1B8FC51C005FFBBE /* Level_10.json in Resources */,
 				ACE6F1491B9C03940056E66B /* RLevel_1.json in Resources */,
+				AC908BF21BA0EB42001C83D7 /* RLevel_17.json in Resources */,
 				AC6BDE871B868A850047C55C /* Mag3Theme.mp3 in Resources */,
 				AC7DBFFF1B7C92B200822EDD /* Level_2.json in Resources */,
 				AC67684E1B8EAD26004B4CEB /* Sprites.atlas in Resources */,

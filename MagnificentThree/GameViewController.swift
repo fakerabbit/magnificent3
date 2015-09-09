@@ -43,8 +43,8 @@ class GameViewController: UIViewController, NodeButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let lvlNum = Int(arc4random_uniform(13))
-        //level = Level(filename: "Level_0")
+        let lvlNum = Int(arc4random_uniform(17))
+        //level = Level(filename: "Level_16")
         level = Level(filename: "Level_\(lvlNum)")
         scene.level = level
         scene.shuffle?.delegate = self
