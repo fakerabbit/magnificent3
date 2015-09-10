@@ -66,6 +66,7 @@
 		AC908BEE1BA0E8FA001C83D7 /* Level_16.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BED1BA0E8FA001C83D7 /* Level_16.json */; };
 		AC908BF01BA0E9D8001C83D7 /* RLevel_16.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BEF1BA0E9D8001C83D7 /* RLevel_16.json */; };
 		AC908BF21BA0EB42001C83D7 /* RLevel_17.json in Resources */ = {isa = PBXBuildFile; fileRef = AC908BF11BA0EB42001C83D7 /* RLevel_17.json */; };
+		AC908BF61BA13102001C83D7 /* LeaveSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC908BF51BA13102001C83D7 /* LeaveSign.swift */; };
 		AC96F7821B8C0CE00028E14C /* GameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7811B8C0CDF0028E14C /* GameOverController.swift */; };
 		AC96F7841B8C0D440028E14C /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC96F7831B8C0D440028E14C /* GameOverScene.swift */; };
 		ACCF97461B7D93DA00989E2A /* Swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCF97451B7D93DA00989E2A /* Swap.swift */; };
@@ -161,6 +162,7 @@
 		AC908BED1BA0E8FA001C83D7 /* Level_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_16.json; sourceTree = "<group>"; };
 		AC908BEF1BA0E9D8001C83D7 /* RLevel_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_16.json; sourceTree = "<group>"; };
 		AC908BF11BA0EB42001C83D7 /* RLevel_17.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RLevel_17.json; sourceTree = "<group>"; };
+		AC908BF51BA13102001C83D7 /* LeaveSign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaveSign.swift; sourceTree = "<group>"; };
 		AC96F7811B8C0CDF0028E14C /* GameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverController.swift; sourceTree = "<group>"; };
 		AC96F7831B8C0D440028E14C /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		ACCF97451B7D93DA00989E2A /* Swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swap.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				AC7DC0041B7C935600822EDD /* Extensions.swift */,
 				AC7DC0021B7C930E00822EDD /* Tile.swift */,
 				AC4E43EE1B8D47F500A67BBD /* NodeButton.swift */,
+				AC908BF51BA13102001C83D7 /* LeaveSign.swift */,
 				AC7DBFF51B7C7A1900822EDD /* Level.swift */,
 				AC7DBFF31B7C79C900822EDD /* Array2D.swift */,
 				AC7DBFE81B7C54ED00822EDD /* Item.swift */,
@@ -588,6 +591,7 @@
 			files = (
 				ACE4AA531B9E27EF005AA936 /* DataMgr.swift in Sources */,
 				AC7DBFE91B7C54ED00822EDD /* Item.swift in Sources */,
+				AC908BF61BA13102001C83D7 /* LeaveSign.swift in Sources */,
 				AC3EC7831B9F5324009F6B79 /* Sequencer.swift in Sources */,
 				AC7DC0051B7C935600822EDD /* Extensions.swift in Sources */,
 				AC7DBFF61B7C7A1900822EDD /* Level.swift in Sources */,

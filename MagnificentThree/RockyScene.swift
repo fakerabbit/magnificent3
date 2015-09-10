@@ -25,6 +25,10 @@ class RockyScene: SKScene {
     
     var level: Level!
     
+    var menu: NodeButton?
+    
+    var leaveSign: LeaveSign?
+    
     var targetLbl: SKLabelNode?,
         movesLbl: SKLabelNode?,
         scoreLbl: SKLabelNode?,
@@ -138,6 +142,13 @@ class RockyScene: SKScene {
         score?.fontSize = 20
         addChild(score!)
         score?.position = CGPointMake(size.width/2.5, size.height/2.4)
+        
+        menu = NodeButton(normalImage: "Menu", selectedImage: "MenuOn", tag: 1)
+        if let size = menu?.size {
+            menu?.size = CGSizeMake(size.width/2, size.height/2)
+        }
+        menu?.position = CGPointMake(-size.width/3, size.height/2.2)
+        addChild(menu!)
     }
     
     // MARK: Scene methods
@@ -303,6 +314,36 @@ class RockyScene: SKScene {
             if let sprite = item.sprite {
                 sprite.removeFromParent()
             }
+        }
+    }
+    
+    func showLeaveSign() {
+        
+        if leaveSign == nil {
+            
+            leaveSign = LeaveSign(tag: 333)
+            leaveSign?.position = CGPointMake(0, -size.height)
+            leaveSign?.size = CGSizeMake(size.width - 25, leaveSign!.size.height)
+            self.addChild(leaveSign!)
+            
+            let move = SKAction.moveTo(CGPointMake(0, -(size.height/2 - leaveSign!.size.height/2)), duration: 0.5)
+            move.timingMode = .EaseOut
+            leaveSign?.runAction(move, completion: { () -> Void in
+            })
+        }
+    }
+    
+    func hideLeaveSign() {
+        
+        if leaveSign != nil {
+            
+            let move = SKAction.moveTo(CGPointMake(0, -size.height), duration: 0.5)
+            move.timingMode = .EaseOut
+            let remove = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([move, remove])
+            leaveSign?.runAction(sequence, completion: {
+                self.leaveSign = nil
+            })
         }
     }
     

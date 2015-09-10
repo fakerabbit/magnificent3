@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class RockyViewController: UIViewController {
+class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegate {
     
     // MARK: Audio
     
@@ -47,6 +47,7 @@ class RockyViewController: UIViewController {
         let lvlNum = Int(arc4random_uniform(18))
         level = Level(filename: "RLevel_\(lvlNum)")
         scene.level = level
+        scene.menu?.delegate = self
         scene.addTiles()
         scene.swipeHandler = {[unowned self]
             (swap:Swap) in
@@ -209,5 +210,42 @@ class RockyViewController: UIViewController {
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
+    }
+    
+    func showLeaveSign() {
+        scene.showLeaveSign()
+        scene.leaveSign?.delegate = self
+    }
+    
+    func hideLeaveSign() {
+        scene.hideLeaveSign()
+    }
+    
+    func leaveGame() {
+        scene.userInteractionEnabled = false
+        var controller: MenuViewController = MenuViewController()
+        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.popViewControllerAnimated(false)
+        appDel.navController?.pushViewController(controller, animated: true)
+        appDel.navController?.viewControllers = [controller]
+    }
+    
+    // MARK: NodeButtonDelegate methods
+    
+    func NodeButtonDelegateOnTouch(button: NodeButton) {
+        
+        if button.tag == 1 {
+            showLeaveSign()
+        }
+    }
+    
+    // MARK: LeaveSignDelegate delegate
+    
+    func LeaveSignDelegateOnYes(button: LeaveSign) {
+        leaveGame()
+    }
+    
+    func LeaveSignDelegateOnNo(button: LeaveSign) {
+        hideLeaveSign()
     }
 }

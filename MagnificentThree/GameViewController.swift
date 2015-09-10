@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController, NodeButtonDelegate {
+class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegate {
     
     // MARK: Audio
     
@@ -48,6 +48,7 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         level = Level(filename: "Level_\(lvlNum)")
         scene.level = level
         scene.shuffle?.delegate = self
+        scene.menu?.delegate = self
         scene.addTiles()
         scene.swipeHandler = {[unowned self]
             (swap:Swap) in
@@ -207,11 +208,45 @@ class GameViewController: UIViewController, NodeButtonDelegate {
         appDel.navController?.viewControllers = [controller]
     }
     
+    func showLeaveSign() {
+        scene.showLeaveSign()
+        scene.leaveSign?.delegate = self
+    }
+    
+    func hideLeaveSign() {
+        scene.hideLeaveSign()
+    }
+    
+    func leaveGame() {
+        scene.userInteractionEnabled = false
+        var controller: MenuViewController = MenuViewController()
+        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
+        appDel.navController?.popViewControllerAnimated(false)
+        appDel.navController?.pushViewController(controller, animated: true)
+        appDel.navController?.viewControllers = [controller]
+    }
+    
     // MARK: NodeButtonDelegate methods
     
     func NodeButtonDelegateOnTouch(button: NodeButton) {
-        scene.runAction(shuffleSound)
-        shuffle()
-        decrementMoves()
+        
+        if button.tag == 1 {
+            scene.runAction(shuffleSound)
+            shuffle()
+            decrementMoves()
+        }
+        else if button.tag == 2 {
+            showLeaveSign()
+        }
+    }
+    
+    // MARK: LeaveSignDelegate delegate
+    
+    func LeaveSignDelegateOnYes(button: LeaveSign) {
+        leaveGame()
+    }
+    
+    func LeaveSignDelegateOnNo(button: LeaveSign) {
+        hideLeaveSign()
     }
 }
