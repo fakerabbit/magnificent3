@@ -148,6 +148,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         
         scene.removeBomb()
         scene.animateMatchedItems(chains) {
+            self.scene.makeSureItemsAreRemoved([])
             
             for chain in chains {
                 self.score += chain.score

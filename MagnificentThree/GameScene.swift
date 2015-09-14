@@ -60,7 +60,10 @@ class GameScene: SKScene {
         cowboyWalkingFrames : [SKTexture]!,
         bomb : SKSpriteNode!,
         bombShiningFrames : [SKTexture]!,
-        selectedNode = SKSpriteNode()
+        selectedNode = SKSpriteNode(),
+        fires = [SKEmitterNode]()
+    
+    var smoke: SKEmitterNode?
     
     // MARK: Init
     
@@ -292,6 +295,10 @@ class GameScene: SKScene {
     }
     
     func makeSureItemsAreRemoved(items: [Item]) {
+        for fire: SKEmitterNode in self.fires {
+            fire.removeFromParent()
+        }
+        self.fires.removeAll(keepCapacity: false)
         for item in items {
             if let sprite = item.sprite {
                 sprite.removeFromParent()
@@ -392,6 +399,17 @@ class GameScene: SKScene {
                         scaleAction.timingMode = .EaseOut
                         let completeAction = SKAction.sequence([scaleAction, SKAction.removeFromParent()])
                         sprite.runAction(completeAction)
+                        next(nil)
+                    }
+                    
+                    sequencer.enqueueStep() { result, next in
+                        if let myParticlePath = NSBundle.mainBundle().pathForResource("fire", ofType: "sks") {
+                            if let fParticles = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode {
+                                fParticles.position = sprite.position
+                                self.itemsLayer.addChild(fParticles)
+                                self.fires.append(fParticles)
+                            }
+                        }
                         next(nil)
                     }
                 }
@@ -530,7 +548,6 @@ class GameScene: SKScene {
             bomb = SKSpriteNode(texture: firstFrame)
             bomb.position = CGPoint(x: -(CGRectGetMidX(self.view!.frame) - bomb.size.width), y: -(CGRectGetMidY(self.view!.frame) - bomb.size.height/1.5))
             bomb.name = kMovableNodeName
-            addChild(bomb)
             
             let animeAction = SKAction.repeatActionForever(
                 SKAction.animateWithTextures(bombShiningFrames,
@@ -538,6 +555,14 @@ class GameScene: SKScene {
                     resize: false,
                     restore: true))
             bomb.runAction(animeAction,withKey:"bombShiningAnime")
+            
+            if let myParticlePath = NSBundle.mainBundle().pathForResource("smoke", ofType: "sks") {
+                self.smoke = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode
+                self.smoke?.position = CGPointMake(bomb.position.x, bomb.position.y)
+                self.addChild(self.smoke!)
+            }
+            
+            addChild(bomb)
         }
     }
     
@@ -550,6 +575,7 @@ class GameScene: SKScene {
                     withKey:"removing")
                 bomb = nil
                 selectedNode = SKSpriteNode()
+                self.smoke?.removeFromParent()
             }
         }
     }
@@ -689,6 +715,7 @@ class GameScene: SKScene {
         
         if selectedNode.name == kMovableNodeName {
             selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            smoke?.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
         } else {
             let aNewPosition = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
             backgroundImg?.position = self.boundLayerPos(aNewPosition)

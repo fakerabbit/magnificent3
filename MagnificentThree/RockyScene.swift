@@ -60,7 +60,10 @@ class RockyScene: SKScene {
         cowboyWalkingFrames : [SKTexture]!,
         bomb : SKSpriteNode!,
         bombShiningFrames : [SKTexture]!,
-        selectedNode = SKSpriteNode()
+        selectedNode = SKSpriteNode(),
+        fires = [SKEmitterNode]()
+    
+    var smoke: SKEmitterNode?
     
     // MARK: Init
     
@@ -310,6 +313,10 @@ class RockyScene: SKScene {
     }
     
     func makeSureItemsAreRemoved(items: [Item]) {
+        for fire: SKEmitterNode in self.fires {
+            fire.removeFromParent()
+        }
+        self.fires.removeAll(keepCapacity: false)
         for item in items {
             if let sprite = item.sprite {
                 sprite.removeFromParent()
@@ -416,6 +423,14 @@ class RockyScene: SKScene {
                         scaleAction.timingMode = .EaseOut
                         sprite.runAction(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
                             withKey:"removing")
+                        
+                        if let myParticlePath = NSBundle.mainBundle().pathForResource("fire", ofType: "sks") {
+                            if let fParticles = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode {
+                                fParticles.position = sprite.position
+                                self.itemsLayer.addChild(fParticles)
+                                self.fires.append(fParticles)
+                            }
+                        }
                     }
                 }
             }
@@ -544,7 +559,6 @@ class RockyScene: SKScene {
             bomb = SKSpriteNode(texture: firstFrame)
             bomb.position = CGPoint(x: -(CGRectGetMidX(self.view!.frame) - bomb.size.width), y: -(CGRectGetMidY(self.view!.frame) - bomb.size.height/1.5))
             bomb.name = kMovableNodeName
-            addChild(bomb)
             
             let animeAction = SKAction.repeatActionForever(
                 SKAction.animateWithTextures(bombShiningFrames,
@@ -552,6 +566,14 @@ class RockyScene: SKScene {
                     resize: false,
                     restore: true))
             bomb.runAction(animeAction,withKey:"bombShiningAnime")
+            
+            if let myParticlePath = NSBundle.mainBundle().pathForResource("smoke", ofType: "sks") {
+                self.smoke = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode
+                self.smoke?.position = CGPointMake(bomb.position.x, bomb.position.y)
+                self.addChild(self.smoke!)
+            }
+            
+            addChild(bomb)
         }
     }
     
@@ -564,6 +586,7 @@ class RockyScene: SKScene {
                     withKey:"removing")
                 bomb = nil
                 selectedNode = SKSpriteNode()
+                self.smoke?.removeFromParent()
             }
         }
     }
@@ -707,6 +730,7 @@ class RockyScene: SKScene {
         
         if selectedNode.name == kMovableNodeName {
             selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            smoke?.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
         } else {
             let aNewPosition = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
             backgroundImg?.position = self.boundLayerPos(aNewPosition)
