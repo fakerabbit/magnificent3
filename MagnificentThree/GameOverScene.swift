@@ -163,7 +163,7 @@ class GameOverScene: SKScene {
         
         if maxCard != nil {
             
-            let move = SKAction.moveTo(CGPointMake(0, scoreCard!.position.y + scoreCard!.size.height), duration: 0.5)
+            let move = SKAction.moveTo(CGPointMake(0, scoreCard!.position.y + scoreCard!.size.height/2), duration: 0.5)
             move.timingMode = .EaseOut
             maxCard!.runAction(move, completion: { () -> Void in
                 self.maxScoreLbl?.text = String(self.maxScore)
