@@ -498,6 +498,7 @@
 					};
 					AC7DBFD71B7C3D2D00822EDD = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0830;
 						TestTargetID = AC7DBFBE1B7C3D2C00822EDD;
 					};
 				};
@@ -780,6 +781,7 @@
 				INFOPLIST_FILE = MagnificentThreeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MagnificentThree.app/MagnificentThree";
 			};
 			name = Debug;
@@ -795,6 +797,7 @@
 				INFOPLIST_FILE = MagnificentThreeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MagnificentThree.app/MagnificentThree";
 			};
 			name = Release;
