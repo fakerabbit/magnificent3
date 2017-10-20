@@ -65,11 +65,11 @@ class DataMgr {
         var games = [DGame]()
         
         if let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: kGameEntity, in: self.managedObjectContext!) {
-            var request: NSFetchRequest = NSFetchRequest()
+            let request = NSFetchRequest<NSFetchRequestResult>()
             request.entity = entity
             request.predicate = NSPredicate(format: "%K == %@", argumentArray: [kGameEntityType, String(type.hashValue)])
             
-            if let mutableFetchResults = self.managedObjectContext!.executeFetchRequest(request, error: nil) {
+            if let mutableFetchResults = try! self.managedObjectContext!.fetch(request) as [AnyObject]? {
                 if mutableFetchResults.count > 0 {
                     games = mutableFetchResults as! [DGame]
                 }
@@ -156,7 +156,8 @@ class DataMgr {
         let url = self.applicationDocumentsDirectory.appendingPathComponent("MagnificentThree.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        
+        if try! coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil) == nil {
             if let err = error {
                 if err.code == 134100 {
                     self.deleteStore()
@@ -174,7 +175,7 @@ class DataMgr {
                 self.displayWarning()
             }
             // Report any error we got.
-            println("Unresolved error \(error), \(error!.userInfo)")
+            debugPrint("Unresolved error \(String(describing: error)), \(error!.userInfo)")
         }
         
         return coordinator
@@ -195,11 +196,12 @@ class DataMgr {
     
     func saveContext () {
         if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
+            //var error: NSError? = nil
+            if moc.hasChanges {
+                try! moc.save()
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
+                NSLog("Unresolved error ")
                 abort()
             }
        }
@@ -210,7 +212,7 @@ class DataMgr {
         let model: URL? = self.applicationDocumentsDirectory.appendingPathComponent("CurationLayer.sqlite")
         if let modelUrl = model {
             if FileManager.default.fileExists(atPath: modelUrl.path) {
-                FileManager.default.removeItemAtURL(modelUrl, error: nil)
+                try! FileManager.default.removeItem(at: modelUrl)
             }
         }
     }

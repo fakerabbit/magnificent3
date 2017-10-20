@@ -27,7 +27,7 @@ class LeaveSign: SKSpriteNode {
     
     // MARK: Init
     
-    override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
+    override init(texture: SKTexture!, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
     
@@ -64,9 +64,9 @@ class LeaveSign: SKSpriteNode {
     
     // MARK: Touch Events
     
-    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
         

@@ -65,8 +65,8 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         return true
     }
 
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)))
     }
 
     override func didReceiveMemoryWarning() {

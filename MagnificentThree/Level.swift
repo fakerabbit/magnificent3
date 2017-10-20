@@ -34,11 +34,11 @@ class Level {
             // 2
             if let tilesArray: AnyObject = dictionary["tiles"] {
                 // 3
-                for (row, rowArray) in enumerate(tilesArray as! [[Int]]) {
+                for (row, rowArray) in (tilesArray as! [[Int]]).enumerated() {
                     // 4
                     let tileRow = NumRows - row - 1
                     // 5
-                    for (column, value) in enumerate(rowArray) {
+                    for (column, value) in rowArray.enumerated() {
                         if value == 1 {
                             tiles[column, tileRow] = Tile(column: column, row: tileRow, rocky: false)
                         }
@@ -247,7 +247,8 @@ class Level {
         for column in 0..<NumColumns {
             var array = [Item]()
             // 1
-            for var row = NumRows - 1; row >= 0; row -= 1 {
+            var row = NumRows - 1
+            while  row >= 0 {
                 // 2
                 if tiles[column, row] != nil && items[column, row] == nil {
                     // 3
@@ -261,6 +262,7 @@ class Level {
                     items[column, row] = item
                     array.append(item)
                 }
+                row = row - 1
             }
             // 5
             if !array.isEmpty {
@@ -332,26 +334,41 @@ class Level {
         let itemType = items[column, row]!.itemType
         
         var horzLength = 1
-        for var i = column - 1; i >= 0 && items[i, row]?.itemType == itemType;
-            --i, ++horzLength { }
-        for var i = column + 1; i < NumColumns && items[i, row]?.itemType == itemType;
-            ++i, ++horzLength { }
+        var i = column - 1
+        while i >= 0 && items[i, row]?.itemType == itemType {
+            i = i - 1
+            horzLength = horzLength + 1
+        }
+        i = column + 1
+        while i < NumColumns && items[i, row]?.itemType == itemType {
+            i = i + 1
+            horzLength = horzLength + 1
+        }
         if horzLength >= 3 { return true }
         
         var vertLength = 1
-        for var i = row - 1; i >= 0 && items[column, i]?.itemType == itemType;
-            --i, ++vertLength { }
-        for var i = row + 1; i < NumRows && items[column, i]?.itemType == itemType;
-            ++i, ++vertLength { }
+        
+        i = row - 1
+        while i >= 0 && items[column, i]?.itemType == itemType {
+            i = i - 1
+            vertLength = vertLength + 1
+        }
+        
+        i = row + 1
+        while i < NumRows && items[column, i]?.itemType == itemType {
+            i = i + 1
+            vertLength = vertLength + 1
+        }
         return vertLength >= 3
     }
     
     fileprivate func detectHorizontalMatches() -> Set<Chain> {
         // 1
-        let set = Set<Chain>()
+        var set = Set<Chain>()
         // 2
         for row in 0..<NumRows {
-            for var column = 0; column < NumColumns - 2 ; {
+            var column = 0
+            while column < NumColumns - 2 {
                 // 3
                 if let item = items[column, row] {
                     let matchType = item.itemType
@@ -378,10 +395,11 @@ class Level {
     }
     
     fileprivate func detectVerticalMatches() -> Set<Chain> {
-        let set = Set<Chain>()
+        var set = Set<Chain>()
         
         for column in 0..<NumColumns {
-            for var row = 0; row < NumRows - 2; {
+            var row = 0
+            while row < NumRows - 2 {
                 if let item = items[column, row] {
                     let matchType = item.itemType
                     

@@ -18,7 +18,7 @@ class MenuView: SKView {
     
     // MARK: Delegate
     
-    weak var delegate: MenuViewDelegate?
+    weak var menuDelegate: MenuViewDelegate?
     
     // MARK: Audio
     
@@ -165,11 +165,11 @@ class MenuView: SKView {
     
     func onArcade(_ sender: UIButton?) {
         cscene?.run(clickSound)
-        delegate?.MenuViewOnArcade(self)
+        menuDelegate?.MenuViewOnArcade(self)
     }
     
     func onRocky(_ sender: UIButton?) {
         cscene?.run(clickSound)
-        delegate?.MenuViewOnRocky(self)
+        menuDelegate?.MenuViewOnRocky(self)
     }
 }
