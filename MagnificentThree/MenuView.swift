@@ -66,7 +66,7 @@ class MenuView: SKView {
         cscene?.addChild(town!)
         
         
-        var path = NSBundle.mainBundle().pathForResource("pfHay", ofType: "sks")
+        let path = NSBundle.mainBundle().pathForResource("pfHay", ofType: "sks")
         hayParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as? SKEmitterNode
         hayParticle!.position = CGPointMake(8, 15)
         hayParticle!.zPosition = 100
@@ -79,7 +79,7 @@ class MenuView: SKView {
         arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), forState: .Highlighted)
         arcadeBtn?.sizeToFit()
         arcadeBtn?.contentMode = .ScaleAspectFit
-        arcadeBtn?.addTarget(self, action: Selector("onArcade:"), forControlEvents: .TouchUpInside)
+        arcadeBtn?.addTarget(self, action: #selector(MenuView.onArcade(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(arcadeBtn!)
         
         rockyBtn = UIButton(frame: CGRectZero)
@@ -87,7 +87,7 @@ class MenuView: SKView {
         rockyBtn?.setImage(UIImage(named: "RockyOn"), forState: .Highlighted)
         rockyBtn?.sizeToFit()
         rockyBtn?.contentMode = .ScaleAspectFit
-        rockyBtn?.addTarget(self, action: Selector("onRocky:"), forControlEvents: .TouchUpInside)
+        rockyBtn?.addTarget(self, action: #selector(MenuView.onRocky(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(rockyBtn!)
         
         self.presentScene(cscene)
@@ -142,21 +142,21 @@ class MenuView: SKView {
                 bg.zPosition = -100
                 bg.position = CGPointMake(CGFloat(i) * tile.size().width, CGFloat(j) * tile.size().height)
                 cscene?.addChild(bg)
-                i++
+                i += 1
                 totW += tile.size().width
             }
             
-            j++
+            j += 1
             totH += tile.size().height
         }
     }
     
     private func printFontNamesInSystem() {
         for family in UIFont.familyNames() {
-            println("*", family);
+            print("*", family);
             
-            for name in UIFont.fontNamesForFamilyName(family as! String) {
-                println(name);
+            for name in UIFont.fontNamesForFamilyName(family ) {
+                print(name);
             }
         }
     }

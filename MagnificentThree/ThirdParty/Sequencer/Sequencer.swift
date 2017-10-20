@@ -32,7 +32,7 @@ class Sequencer {
             return
         }
         
-        var step = dequeueNextStep()
+        let step = dequeueNextStep()
         step(result, { self.runNextStepWithResult($0) })
     }
     

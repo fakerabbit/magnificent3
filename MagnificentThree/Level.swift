@@ -74,7 +74,7 @@ class Level {
     
     func shuffle() -> Set<Item> {
         var set: Set<Item>
-        do {
+        repeat {
             set = createInitialItems()
             detectPossibleSwaps()
             //println("possible swaps: \(possibleSwaps)")
@@ -168,9 +168,9 @@ class Level {
     }
     
     func removeMatches() -> Set<Chain> {
-        var horizontalChains = detectHorizontalMatches()
-        var verticalChains = detectVerticalMatches()
-        var lshapedChains = detectLshapedMatches(horizontalChains, verticalChains: verticalChains)
+        let horizontalChains = detectHorizontalMatches()
+        let verticalChains = detectVerticalMatches()
+        let lshapedChains = detectLshapedMatches(horizontalChains, verticalChains: verticalChains)
         
         removeItems(horizontalChains)
         removeItems(verticalChains)
@@ -191,13 +191,13 @@ class Level {
     func markForDelete(rock: Tile) {
         if let t = tiles[rock.column, rock.row] {
             t.rocky = false
-            self.targetScore--
+            self.targetScore -= 1
             tiles[rock.column, rock.row] = t
         }
     }
     
     func removeBombedItems(type: ItemType) -> Set<Chain> {
-        var bombChains = detectBombMatches(type)
+        let bombChains = detectBombMatches(type)
         
         removeItems(bombChains)
         calculateBombScores(bombChains)
@@ -242,17 +242,17 @@ class Level {
     
     func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
-        var itemType: ItemType = .Unknown
+        let itemType: ItemType = .Unknown
         
         for column in 0..<NumColumns {
             var array = [Item]()
             // 1
-            for var row = NumRows - 1; row >= 0; --row {
+            for var row = NumRows - 1; row >= 0; row -= 1 {
                 // 2
                 if tiles[column, row] != nil && items[column, row] == nil {
                     // 3
                     var newItemType: ItemType
-                    do {
+                    repeat {
                         newItemType = ItemType.random()
                     } while newItemType == itemType
                     itemType = newItemType
@@ -306,7 +306,7 @@ class Level {
                     
                     // 2
                     var itemType: ItemType
-                    do {
+                    repeat {
                         itemType = ItemType.random()
                     }
                         while (column >= 2 &&
@@ -348,7 +348,7 @@ class Level {
     
     private func detectHorizontalMatches() -> Set<Chain> {
         // 1
-        var set = Set<Chain>()
+        let set = Set<Chain>()
         // 2
         for row in 0..<NumRows {
             for var column = 0; column < NumColumns - 2 ; {
@@ -360,9 +360,9 @@ class Level {
                         items[column + 2, row]?.itemType == matchType {
                             // 5
                             let chain = Chain(chainType: .Horizontal)
-                            do {
+                            repeat {
                                 chain.addItem(items[column, row]!)
-                                ++column
+                                column += 1
                             }
                                 while column < NumColumns && items[column, row]?.itemType == matchType
                             
@@ -371,14 +371,14 @@ class Level {
                     }
                 }
                 // 6
-                ++column
+                column += 1
             }
         }
         return set
     }
     
     private func detectVerticalMatches() -> Set<Chain> {
-        var set = Set<Chain>()
+        let set = Set<Chain>()
         
         for column in 0..<NumColumns {
             for var row = 0; row < NumRows - 2; {
@@ -389,9 +389,9 @@ class Level {
                         items[column, row + 2]?.itemType == matchType {
                             
                             let chain = Chain(chainType: .Vertical)
-                            do {
+                            repeat {
                                 chain.addItem(items[column, row]!)
-                                ++row
+                                row += 1
                             }
                                 while row < NumRows && items[column, row]?.itemType == matchType
                             
@@ -399,7 +399,7 @@ class Level {
                             continue
                     }
                 }
-                ++row
+                row += 1
             }
         }
         return set
@@ -505,7 +505,7 @@ class Level {
                 value = 60
             }
             chain.score = value * (chain.length - 2) * comboMultiplier
-            ++comboMultiplier
+            comboMultiplier += 1
         }
     }
     

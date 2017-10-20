@@ -55,7 +55,7 @@ class MenuViewController: UIViewController, MenuViewDelegate {
     // MARK: MenuViewDelegate methods
     
     func MenuViewOnArcade(view: MenuView) {
-        var controller: GameViewController = GameViewController()
+        let controller: GameViewController = GameViewController()
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
@@ -63,7 +63,7 @@ class MenuViewController: UIViewController, MenuViewDelegate {
     }
     
     func MenuViewOnRocky(view: MenuView) {
-        var controller: RockyViewController = RockyViewController()
+        let controller: RockyViewController = RockyViewController()
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)

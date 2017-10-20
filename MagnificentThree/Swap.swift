@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 MT. All rights reserved.
 //
 
-struct Swap: Printable, Hashable {
+struct Swap: CustomStringConvertible, Hashable {
     
     let itemA: Item
     let itemB: Item

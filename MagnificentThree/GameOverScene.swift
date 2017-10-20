@@ -150,7 +150,7 @@ class GameOverScene: SKScene {
         moveB.timingMode = .EaseOut
         scoreCard?.runAction(moveB, completion: { () -> Void in
             //self.runAction(increaseAction)
-            score?.text = String(self.finalScore)
+            self.score?.text = String(self.finalScore)
         })
         
         let moveC = SKAction.moveTo(CGPointMake(size.width/4, -(size.height/2 - menu!.size.height/2)), duration: Duration)

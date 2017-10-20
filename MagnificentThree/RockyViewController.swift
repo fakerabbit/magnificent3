@@ -183,11 +183,11 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     }
     
     func decrementMoves() {
-        --movesLeft
+        movesLeft -= 1
         updateLabels()
         if level.targetScore == 0 {
             while movesLeft > 0 {
-                movesLeft--
+                movesLeft -= 1
                 self.score += 100
                 updateLabels()
             }
@@ -206,7 +206,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         }
         
         // Show game over controller
-        var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Rocky)
+        let controller: GameOverController = GameOverController(victory: victory, score: score, type: .Rocky)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
@@ -224,7 +224,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     
     func leaveGame() {
         scene.userInteractionEnabled = false
-        var controller: MenuViewController = MenuViewController()
+        let controller: MenuViewController = MenuViewController()
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)

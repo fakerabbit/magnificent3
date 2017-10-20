@@ -169,14 +169,14 @@ class GameScene: SKScene {
         var walkFrames = [SKTexture]()
         
         var numImages = cowboyAnimatedAtlas.textureNames.count
-        for var i=1; i<=numImages/2; i++ {
+        for var i=1; i<=numImages/2; i += 1 {
             let cowboyTextureName = "cowboy\(i)"
             walkFrames.append(cowboyAnimatedAtlas.textureNamed(cowboyTextureName))
         }
         
         cowboyWalkingFrames = walkFrames
         
-        var firstFrame = cowboyWalkingFrames[0]
+        let firstFrame = cowboyWalkingFrames[0]
         cowboy = SKSpriteNode(texture: firstFrame)
         cowboy.position = CGPoint(x:-view.frame.size.width, y:-(CGRectGetMidY(view.frame) - cowboy.size.height/2))
         addChild(cowboy)
@@ -186,7 +186,7 @@ class GameScene: SKScene {
         var bombFrames = [SKTexture]()
         
         numImages = bombAnimatedAtlas.textureNames.count
-        for var i=1; i<=numImages/2; i++ {
+        for var i=1; i<=numImages/2; i += 1 {
             let bombTextureName = "bomb\(i)"
             bombFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
         }

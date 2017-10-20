@@ -21,15 +21,15 @@ extension Dictionary {
                 if let dictionary = dictionary as? Dictionary<String, AnyObject> {
                     return dictionary
                 } else {
-                    println("Level file '\(filename)' is not valid JSON: \(error!)")
+                    print("Level file '\(filename)' is not valid JSON: \(error!)")
                     return nil
                 }
             } else {
-                println("Could not load level file: \(filename), error: \(error!)")
+                print("Could not load level file: \(filename), error: \(error!)")
                 return nil
             }
         } else {
-            println("Could not find level file: \(filename)")
+            print("Could not find level file: \(filename)")
             return nil
         }
     }

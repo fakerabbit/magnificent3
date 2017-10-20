@@ -43,7 +43,7 @@ class LeaveSign: SKSpriteNode {
         self.scene?.scaleMode = .AspectFit
         self.tag = tag
         
-        var leave = SKLabelNode(text: "YES")
+        let leave = SKLabelNode(text: "YES")
         leave.fontName = "Sahara"
         leave.fontColor = UIColor.whiteColor()
         leave.fontSize = 24
@@ -52,7 +52,7 @@ class LeaveSign: SKSpriteNode {
         leave.userInteractionEnabled = false
         leave.name = "YES"
         
-        var stay = SKLabelNode(text: "NO")
+        let stay = SKLabelNode(text: "NO")
         stay.fontName = "Sahara"
         stay.fontColor = UIColor.whiteColor()
         stay.fontSize = 24

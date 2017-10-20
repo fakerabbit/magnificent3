@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Tile: Printable, Hashable {
+class Tile: CustomStringConvertible, Hashable {
     
     // MARK: variables
     

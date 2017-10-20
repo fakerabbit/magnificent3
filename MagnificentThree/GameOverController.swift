@@ -92,7 +92,7 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         }
         else if button.tag == 2 { // menu
             scene.userInteractionEnabled = false
-            var controller: MenuViewController = MenuViewController()
+            let controller: MenuViewController = MenuViewController()
             let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
             appDel.navController?.popViewControllerAnimated(false)
             appDel.navController?.pushViewController(controller, animated: true)

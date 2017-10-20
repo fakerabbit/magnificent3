@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-enum ItemType: Int, Printable {
+enum ItemType: Int, CustomStringConvertible {
     case Unknown = 0, Star, Cactus, Pistols, Boots, Hat, Shoe
     
     var spriteName: String {
@@ -36,7 +36,7 @@ enum ItemType: Int, Printable {
     }
 }
 
-class Item: Printable, Hashable {
+class Item: CustomStringConvertible, Hashable {
     
     // MARK: variables
     

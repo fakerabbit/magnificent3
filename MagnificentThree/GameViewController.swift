@@ -179,11 +179,11 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     }
     
     func decrementMoves() {
-        --movesLeft
+        movesLeft -= 1
         updateLabels()
         if score >= level.targetScore {
             while movesLeft > 0 {
-                movesLeft--
+                movesLeft -= 1
                 self.score += 100
                 updateLabels()
             }
@@ -202,7 +202,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         }
         
         // Show game over controller
-        var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Arcade)
+        let controller: GameOverController = GameOverController(victory: victory, score: score, type: .Arcade)
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
@@ -220,7 +220,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     
     func leaveGame() {
         scene.userInteractionEnabled = false
-        var controller: MenuViewController = MenuViewController()
+        let controller: MenuViewController = MenuViewController()
         let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
         appDel.navController?.popViewControllerAnimated(false)
         appDel.navController?.pushViewController(controller, animated: true)
