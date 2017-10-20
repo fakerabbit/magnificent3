@@ -9,7 +9,7 @@
 import SpriteKit
 
 enum ItemType: Int, CustomStringConvertible {
-    case Unknown = 0, Star, Cactus, Pistols, Boots, Hat, Shoe
+    case unknown = 0, star, cactus, pistols, boots, hat, shoe
     
     var spriteName: String {
         let spriteNames = [

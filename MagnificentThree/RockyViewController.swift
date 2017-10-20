@@ -28,13 +28,13 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     override func loadView() {
         super.loadView()
         // Configure the view.
-        let skView: SKView = SKView(frame: UIScreen.mainScreen().bounds)
-        skView.multipleTouchEnabled = false
+        let skView: SKView = SKView(frame: UIScreen.main.bounds)
+        skView.isMultipleTouchEnabled = false
         self.view = skView
         
         // Create and configure the scene.
         scene = RockyScene(size: skView.bounds.size)
-        scene.scaleMode = SKSceneScaleMode.AspectFit
+        scene.scaleMode = SKSceneScaleMode.aspectFit
         
         // Present the scene.
         skView.presentScene(scene)
@@ -60,12 +60,12 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         beginGame()
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +73,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -95,15 +95,15 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         scene.addSpritesForItems(newItems)
     }
     
-    func handleSwipe(swap: Swap) {
-        view.userInteractionEnabled = false
+    func handleSwipe(_ swap: Swap) {
+        view.isUserInteractionEnabled = false
         
         if level.isPossibleSwap(swap) {
             level.performSwap(swap)
             scene.animateSwap(swap, completion: handleMatches)
         } else {
             scene.animateInvalidSwap(swap) {
-                self.view.userInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
                 self.decrementMoves()
             }
         }
@@ -112,7 +112,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     func handleMatches() {
         let chains = level.removeMatches()
         let itemsToRemove = level.itemsToRemove
-        level.itemsToRemove.removeAll(keepCapacity: false)
+        level.itemsToRemove.removeAll(keepingCapacity: false)
         
         if chains.count == 0 {
             beginNextTurn()
@@ -138,8 +138,8 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         }
     }
     
-    func handleBomb(type: ItemType) {
-        view.userInteractionEnabled = false
+    func handleBomb(_ type: ItemType) {
+        view.isUserInteractionEnabled = false
         let chains = level.removeBombedItems(type)
         
         if chains.count == 0 {
@@ -173,7 +173,7 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         if swaps.count == 0 {
             self.shuffle()
         }
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
     }
     
     func updateLabels() {
@@ -197,18 +197,18 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         }
     }
     
-    func onGameOver(victory: Bool) {
-        scene.userInteractionEnabled = false
+    func onGameOver(_ victory: Bool) {
+        scene.isUserInteractionEnabled = false
         
         // Save game record
         if victory {
-            DataMgr.sharedInstance.storeGame(.Rocky, score: score)
+            DataMgr.sharedInstance.storeGame(.rocky, score: score)
         }
         
         // Show game over controller
-        let controller: GameOverController = GameOverController(victory: victory, score: score, type: .Rocky)
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        let controller: GameOverController = GameOverController(victory: victory, score: score, type: .rocky)
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
@@ -223,17 +223,17 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     }
     
     func leaveGame() {
-        scene.userInteractionEnabled = false
+        scene.isUserInteractionEnabled = false
         let controller: MenuViewController = MenuViewController()
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
     
     // MARK: NodeButtonDelegate methods
     
-    func NodeButtonDelegateOnTouch(button: NodeButton) {
+    func NodeButtonDelegateOnTouch(_ button: NodeButton) {
         
         if button.tag == 1 {
             showLeaveSign()
@@ -242,11 +242,11 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
     
     // MARK: LeaveSignDelegate delegate
     
-    func LeaveSignDelegateOnYes(button: LeaveSign) {
+    func LeaveSignDelegateOnYes(_ button: LeaveSign) {
         leaveGame()
     }
     
-    func LeaveSignDelegateOnNo(button: LeaveSign) {
+    func LeaveSignDelegateOnNo(_ button: LeaveSign) {
         hideLeaveSign()
     }
 }

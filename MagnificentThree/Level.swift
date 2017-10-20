@@ -22,7 +22,7 @@ class Level {
     
     // MARK: Private variables
     
-    private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
+    fileprivate var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
                 tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
                 possibleSwaps = Set<Swap>()
     
@@ -56,13 +56,13 @@ class Level {
     
     // MARK: Public methods
     
-    func itemAtColumn(column: Int, row: Int) -> Item? {
+    func itemAtColumn(_ column: Int, row: Int) -> Item? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return items[column, row]
     }
     
-    func isRockAtColumn(column: Int, row: Int) -> Bool {
+    func isRockAtColumn(_ column: Int, row: Int) -> Bool {
         var isRock = false
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
@@ -84,13 +84,13 @@ class Level {
         return set
     }
     
-    func tileAtColumn(column: Int, row: Int) -> Tile? {
+    func tileAtColumn(_ column: Int, row: Int) -> Tile? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return tiles[column, row]
     }
     
-    func performSwap(swap: Swap) {
+    func performSwap(_ swap: Swap) {
         let columnA = swap.itemA.column
         let rowA = swap.itemA.row
         let columnB = swap.itemB.column
@@ -163,7 +163,7 @@ class Level {
         return set
     }
     
-    func isPossibleSwap(swap: Swap) -> Bool {
+    func isPossibleSwap(_ swap: Swap) -> Bool {
         return possibleSwaps.contains(swap)
     }
     
@@ -188,7 +188,7 @@ class Level {
         }
     }
     
-    func markForDelete(rock: Tile) {
+    func markForDelete(_ rock: Tile) {
         if let t = tiles[rock.column, rock.row] {
             t.rocky = false
             self.targetScore -= 1
@@ -196,7 +196,7 @@ class Level {
         }
     }
     
-    func removeBombedItems(type: ItemType) -> Set<Chain> {
+    func removeBombedItems(_ type: ItemType) -> Set<Chain> {
         let bombChains = detectBombMatches(type)
         
         removeItems(bombChains)
@@ -242,7 +242,7 @@ class Level {
     
     func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
-        let itemType: ItemType = .Unknown
+        var itemType: ItemType = .unknown
         
         for column in 0..<NumColumns {
             var array = [Item]()
@@ -295,7 +295,7 @@ class Level {
     
     // MARK: Private methods
     
-    private func createInitialItems() -> Set<Item> {
+    fileprivate func createInitialItems() -> Set<Item> {
         var set = Set<Item>()
         
         // 1
@@ -328,7 +328,7 @@ class Level {
         return set
     }
     
-    private func hasChainAtColumn(column: Int, row: Int) -> Bool {
+    fileprivate func hasChainAtColumn(_ column: Int, row: Int) -> Bool {
         let itemType = items[column, row]!.itemType
         
         var horzLength = 1
@@ -346,7 +346,7 @@ class Level {
         return vertLength >= 3
     }
     
-    private func detectHorizontalMatches() -> Set<Chain> {
+    fileprivate func detectHorizontalMatches() -> Set<Chain> {
         // 1
         let set = Set<Chain>()
         // 2
@@ -359,7 +359,7 @@ class Level {
                     if items[column + 1, row]?.itemType == matchType &&
                         items[column + 2, row]?.itemType == matchType {
                             // 5
-                            let chain = Chain(chainType: .Horizontal)
+                            let chain = Chain(chainType: .horizontal)
                             repeat {
                                 chain.addItem(items[column, row]!)
                                 column += 1
@@ -377,7 +377,7 @@ class Level {
         return set
     }
     
-    private func detectVerticalMatches() -> Set<Chain> {
+    fileprivate func detectVerticalMatches() -> Set<Chain> {
         let set = Set<Chain>()
         
         for column in 0..<NumColumns {
@@ -388,7 +388,7 @@ class Level {
                     if items[column, row + 1]?.itemType == matchType &&
                         items[column, row + 2]?.itemType == matchType {
                             
-                            let chain = Chain(chainType: .Vertical)
+                            let chain = Chain(chainType: .vertical)
                             repeat {
                                 chain.addItem(items[column, row]!)
                                 row += 1
@@ -405,7 +405,7 @@ class Level {
         return set
     }
     
-    private func detectLshapedMatches(horizontalChains: Set<Chain>, verticalChains: Set<Chain>) -> Set<Chain> {
+    fileprivate func detectLshapedMatches(_ horizontalChains: Set<Chain>, verticalChains: Set<Chain>) -> Set<Chain> {
         var set = Set<Chain>()
         var found = false
         
@@ -422,7 +422,7 @@ class Level {
                         let hchainSet = Set(chain.items)
                         let vchainSet = Set(vchain.items)
                         let union = hchainSet.union(vchainSet)
-                        let c = Chain(chainType: .Lshaped)
+                        let c = Chain(chainType: .lshaped)
                         for i in union {
                             c.addItem(i)
                         }
@@ -448,14 +448,14 @@ class Level {
         }
         
         if (found) {
-            horizontalChains.subtract(set)
-            verticalChains.subtract(set)
+            horizontalChains.subtracting(set)
+            verticalChains.subtracting(set)
         }
         
         return set
     }
     
-    private func detectBombMatches(type: ItemType) -> Set<Chain> {
+    fileprivate func detectBombMatches(_ type: ItemType) -> Set<Chain> {
         var set = Set<Chain>()
         
         for row in 0..<NumRows {
@@ -469,7 +469,7 @@ class Level {
                             
                             if items[column, row]?.itemType == type {
                                 
-                                let chain = Chain(chainType: .Bomb)
+                                let chain = Chain(chainType: .bomb)
                                 chain.addItem(items[column, row]!)
                                 set.insert(chain)
                             }
@@ -482,7 +482,7 @@ class Level {
         return set
     }
     
-    private func removeItems(chains: Set<Chain>) {
+    fileprivate func removeItems(_ chains: Set<Chain>) {
         for chain in chains {
             for item in chain.items {
                 if !self.isRockAtColumn(item.column, row: item.row) {
@@ -494,11 +494,11 @@ class Level {
         }
     }
     
-    private func calculateScores(chains: Set<Chain>) {
+    fileprivate func calculateScores(_ chains: Set<Chain>) {
         // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
         var value = 60
         for chain in chains {
-            if chain.chainType == .Lshaped {
+            if chain.chainType == .lshaped {
                 value = 120
             }
             else {
@@ -509,7 +509,7 @@ class Level {
         }
     }
     
-    private func calculateBombScores(chains: Set<Chain>) {
+    fileprivate func calculateBombScores(_ chains: Set<Chain>) {
         for chain in chains {
             chain.score = 20
         }

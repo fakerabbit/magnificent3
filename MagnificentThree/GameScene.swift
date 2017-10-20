@@ -48,7 +48,7 @@ class GameScene: SKScene {
         cropLayer = SKCropNode(),
         maskLayer = SKNode()
     
-    private var swipeFromColumn: Int?,
+    fileprivate var swipeFromColumn: Int?,
                 swipeFromRow: Int?,
                 selectionSprite = SKSpriteNode(),
                 backgroundImg: SKSpriteNode?
@@ -104,64 +104,64 @@ class GameScene: SKScene {
         
         targetLbl = SKLabelNode(text: "Target:")
         targetLbl?.fontName = "Sahara"
-        targetLbl?.fontColor = UIColor.whiteColor()
+        targetLbl?.fontColor = UIColor.white
         targetLbl?.fontSize = 14
         addChild(targetLbl!)
-        targetLbl?.position = CGPointMake(0, size.height/2.2)
+        targetLbl?.position = CGPoint(x: 0, y: size.height/2.2)
         
         movesLbl = SKLabelNode(text: "Moves:")
         movesLbl?.fontName = "Sahara"
-        movesLbl?.fontColor = UIColor.whiteColor()
+        movesLbl?.fontColor = UIColor.white
         movesLbl?.fontSize = 14
         addChild(movesLbl!)
-        movesLbl?.position = CGPointMake(size.width/4.8, size.height/2.2)
+        movesLbl?.position = CGPoint(x: size.width/4.8, y: size.height/2.2)
         
         scoreLbl = SKLabelNode(text: "Score:")
         scoreLbl?.fontName = "Sahara"
-        scoreLbl?.fontColor = UIColor.whiteColor()
+        scoreLbl?.fontColor = UIColor.white
         scoreLbl?.fontSize = 14
         addChild(scoreLbl!)
-        scoreLbl?.position = CGPointMake(size.width/2.5, size.height/2.2)
+        scoreLbl?.position = CGPoint(x: size.width/2.5, y: size.height/2.2)
         
         target = SKLabelNode(text: "0")
         target?.fontName = "Sahara"
-        target?.fontColor = UIColor.whiteColor()
+        target?.fontColor = UIColor.white
         target?.fontSize = 20
         addChild(target!)
-        target?.position = CGPointMake(0, size.height/2.4)//CGPointMake(-size.width/2.5, size.height/2.4)
+        target?.position = CGPoint(x: 0, y: size.height/2.4)//CGPointMake(-size.width/2.5, size.height/2.4)
         
         moves = SKLabelNode(text: "0")
         moves?.fontName = "Sahara"
-        moves?.fontColor = UIColor.whiteColor()
+        moves?.fontColor = UIColor.white
         moves?.fontSize = 20
         addChild(moves!)
-        moves?.position = CGPointMake(size.width/4.8, size.height/2.4)//CGPointMake(0, size.height/2.4)
+        moves?.position = CGPoint(x: size.width/4.8, y: size.height/2.4)//CGPointMake(0, size.height/2.4)
         
         score = SKLabelNode(text: "0")
         score?.fontName = "Sahara"
-        score?.fontColor = UIColor.whiteColor()
+        score?.fontColor = UIColor.white
         score?.fontSize = 20
         addChild(score!)
-        score?.position = CGPointMake(size.width/2.5, size.height/2.4)
+        score?.position = CGPoint(x: size.width/2.5, y: size.height/2.4)
         
         shuffle = NodeButton(normalImage: "Shuffle", selectedImage: "ShuffleOn", tag: 1)
         if let size = shuffle?.size {
-            shuffle?.size = CGSizeMake(size.width/2, size.height/2)
+            shuffle?.size = CGSize(width: size.width/2, height: size.height/2)
         }
-        shuffle?.position = CGPointMake(size.width/3, -(size.height/2 - shuffle!.size.height))
+        shuffle?.position = CGPoint(x: size.width/3, y: -(size.height/2 - shuffle!.size.height))
         addChild(shuffle!)
         
         menu = NodeButton(normalImage: "Menu", selectedImage: "MenuOn", tag: 2)
         if let size = menu?.size {
-            menu?.size = CGSizeMake(size.width/2, size.height/2)
+            menu?.size = CGSize(width: size.width/2, height: size.height/2)
         }
-        menu?.position = CGPointMake(-size.width/3, size.height/2.2)
+        menu?.position = CGPoint(x: -size.width/3, y: size.height/2.2)
         addChild(menu!)
     }
     
     // MARK: Scene methods
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         
         // Cowboy
@@ -178,7 +178,7 @@ class GameScene: SKScene {
         
         let firstFrame = cowboyWalkingFrames[0]
         cowboy = SKSpriteNode(texture: firstFrame)
-        cowboy.position = CGPoint(x:-view.frame.size.width, y:-(CGRectGetMidY(view.frame) - cowboy.size.height/2))
+        cowboy.position = CGPoint(x:-view.frame.size.width, y:-(view.frame.midY - cowboy.size.height/2))
         addChild(cowboy)
         
         // Bomb
@@ -194,13 +194,13 @@ class GameScene: SKScene {
         bombShiningFrames = bombFrames
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     
     // MARK: Public methods
     
-    func addSpritesForItems(items: Set<Item>) {
+    func addSpritesForItems(_ items: Set<Item>) {
         for item in items {
             let sprite = SKSpriteNode(imageNamed: item.itemType.spriteName)
             sprite.position = pointForColumn(item.column, row:item.row)
@@ -211,18 +211,18 @@ class GameScene: SKScene {
             sprite.xScale = 0.5
             sprite.yScale = 0.5
             
-            sprite.runAction(
+            sprite.run(
                 SKAction.sequence([
-                    SKAction.waitForDuration(0.25, withRange: 0.5),
+                    SKAction.wait(forDuration: 0.25, withRange: 0.5),
                     SKAction.group([
-                        SKAction.fadeInWithDuration(0.25),
-                        SKAction.scaleTo(1.0, duration: 0.25)
+                        SKAction.fadeIn(withDuration: 0.25),
+                        SKAction.scale(to: 1.0, duration: 0.25)
                         ])
                     ]))
         }
     }
     
-    func pointForColumn(column: Int, row: Int) -> CGPoint {
+    func pointForColumn(_ column: Int, row: Int) -> CGPoint {
         return CGPoint(
             x: CGFloat(column)*TileWidth + TileWidth/2,
             y: CGFloat(row)*TileHeight + TileHeight/2)
@@ -269,7 +269,7 @@ class GameScene: SKScene {
         }
     }
     
-    func showSelectionIndicatorForItem(item: Item) {
+    func showSelectionIndicatorForItem(_ item: Item) {
         if selectionSprite.parent != nil {
             selectionSprite.removeFromParent()
         }
@@ -277,7 +277,7 @@ class GameScene: SKScene {
         if let sprite = item.sprite {
             let texture = SKTexture(imageNamed: item.itemType.highlightedSpriteName)
             selectionSprite.size = texture.size()
-            selectionSprite.runAction(SKAction.setTexture(texture))
+            selectionSprite.run(SKAction.setTexture(texture))
             
             sprite.addChild(selectionSprite)
             selectionSprite.alpha = 1.0
@@ -285,8 +285,8 @@ class GameScene: SKScene {
     }
     
     func hideSelectionIndicator() {
-        selectionSprite.runAction(SKAction.sequence([
-            SKAction.fadeOutWithDuration(0.3),
+        selectionSprite.run(SKAction.sequence([
+            SKAction.fadeOut(withDuration: 0.3),
             SKAction.removeFromParent()]))
     }
     
@@ -294,11 +294,11 @@ class GameScene: SKScene {
         itemsLayer.removeAllChildren()
     }
     
-    func makeSureItemsAreRemoved(items: [Item]) {
+    func makeSureItemsAreRemoved(_ items: [Item]) {
         for fire: SKEmitterNode in self.fires {
             fire.removeFromParent()
         }
-        self.fires.removeAll(keepCapacity: false)
+        self.fires.removeAll(keepingCapacity: false)
         for item in items {
             if let sprite = item.sprite {
                 sprite.removeFromParent()
@@ -311,13 +311,13 @@ class GameScene: SKScene {
         if leaveSign == nil {
             
             leaveSign = LeaveSign(tag: 333)
-            leaveSign?.position = CGPointMake(0, -size.height)
-            leaveSign?.size = CGSizeMake(size.width - 25, leaveSign!.size.height)
+            leaveSign?.position = CGPoint(x: 0, y: -size.height)
+            leaveSign?.size = CGSize(width: size.width - 25, height: leaveSign!.size.height)
             self.addChild(leaveSign!)
             
-            let move = SKAction.moveTo(CGPointMake(0, -(size.height/2 - leaveSign!.size.height/2)), duration: 0.5)
-            move.timingMode = .EaseOut
-            leaveSign?.runAction(move, completion: { () -> Void in
+            let move = SKAction.move(to: CGPoint(x: 0, y: -(size.height/2 - leaveSign!.size.height/2)), duration: 0.5)
+            move.timingMode = .easeOut
+            leaveSign?.run(move, completion: { () -> Void in
             })
         }
     }
@@ -326,11 +326,11 @@ class GameScene: SKScene {
         
         if leaveSign != nil {
             
-            let move = SKAction.moveTo(CGPointMake(0, -size.height), duration: 0.5)
-            move.timingMode = .EaseOut
+            let move = SKAction.move(to: CGPoint(x: 0, y: -size.height), duration: 0.5)
+            move.timingMode = .easeOut
             let remove = SKAction.removeFromParent()
             let sequence = SKAction.sequence([move, remove])
-            leaveSign?.runAction(sequence, completion: {
+            leaveSign?.run(sequence, completion: {
                 self.leaveSign = nil
             })
         }
@@ -338,48 +338,48 @@ class GameScene: SKScene {
     
     // MARK: Animations
     
-    func animateSwap(swap: Swap, completion: () -> ()) {
+    func animateSwap(_ swap: Swap, completion: @escaping () -> ()) {
         let spriteA = swap.itemA.sprite!
         let spriteB = swap.itemB.sprite!
         
         spriteA.zPosition = 100
         spriteB.zPosition = 90
         
-        let Duration: NSTimeInterval = 0.3
+        let Duration: TimeInterval = 0.3
         
-        let moveA = SKAction.moveTo(spriteB.position, duration: Duration)
-        moveA.timingMode = .EaseOut
-        spriteA.runAction(moveA, completion: completion)
+        let moveA = SKAction.move(to: spriteB.position, duration: Duration)
+        moveA.timingMode = .easeOut
+        spriteA.run(moveA, completion: completion)
         
-        let moveB = SKAction.moveTo(spriteA.position, duration: Duration)
-        moveB.timingMode = .EaseOut
-        spriteB.runAction(moveB)
+        let moveB = SKAction.move(to: spriteA.position, duration: Duration)
+        moveB.timingMode = .easeOut
+        spriteB.run(moveB)
         
-        runAction(swapSound)
+        run(swapSound)
     }
     
-    func animateInvalidSwap(swap: Swap, completion: () -> ()) {
+    func animateInvalidSwap(_ swap: Swap, completion: @escaping () -> ()) {
         let spriteA = swap.itemA.sprite!
         let spriteB = swap.itemB.sprite!
         
         spriteA.zPosition = 100
         spriteB.zPosition = 90
         
-        let Duration: NSTimeInterval = 0.2
+        let Duration: TimeInterval = 0.2
         
-        let moveA = SKAction.moveTo(spriteB.position, duration: Duration)
-        moveA.timingMode = .EaseOut
+        let moveA = SKAction.move(to: spriteB.position, duration: Duration)
+        moveA.timingMode = .easeOut
         
-        let moveB = SKAction.moveTo(spriteA.position, duration: Duration)
-        moveB.timingMode = .EaseOut
+        let moveB = SKAction.move(to: spriteA.position, duration: Duration)
+        moveB.timingMode = .easeOut
         
-        spriteA.runAction(SKAction.sequence([moveA, moveB]), completion: completion)
-        spriteB.runAction(SKAction.sequence([moveB, moveA]))
+        spriteA.run(SKAction.sequence([moveA, moveB]), completion: completion)
+        spriteB.run(SKAction.sequence([moveB, moveA]))
         
-        runAction(invalidSwapSound)
+        run(invalidSwapSound)
     }
     
-    func animateMatchedItems(chains: Set<Chain>, completion: () -> ()) {
+    func animateMatchedItems(_ chains: Set<Chain>, completion: @escaping () -> ()) {
         
         let sequencer = Sequencer()
         
@@ -395,16 +395,16 @@ class GameScene: SKScene {
                     
                     sequencer.enqueueStep() { result, next in
                         //println("removing sprite: \(sprite), for item: \(item)")
-                        let scaleAction = SKAction.scaleTo(0.1, duration: 0.3)
-                        scaleAction.timingMode = .EaseOut
+                        let scaleAction = SKAction.scale(to: 0.1, duration: 0.3)
+                        scaleAction.timingMode = .easeOut
                         let completeAction = SKAction.sequence([scaleAction, SKAction.removeFromParent()])
-                        sprite.runAction(completeAction)
+                        sprite.run(completeAction)
                         next(nil)
                     }
                     
                     sequencer.enqueueStep() { result, next in
-                        if let myParticlePath = NSBundle.mainBundle().pathForResource("fire", ofType: "sks") {
-                            if let fParticles = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode {
+                        if let myParticlePath = Bundle.main.path(forResource: "fire", ofType: "sks") {
+                            if let fParticles = NSKeyedUnarchiver.unarchiveObject(withFile: myParticlePath) as? SKEmitterNode {
                                 fParticles.position = sprite.position
                                 self.itemsLayer.addChild(fParticles)
                                 self.fires.append(fParticles)
@@ -417,46 +417,46 @@ class GameScene: SKScene {
         }
         
         sequencer.enqueueStep() { result, next in
-            self.runAction(self.matchSound)
+            self.run(self.matchSound)
             next(nil)
         }
         
         sequencer.enqueueStep() { result, next in
-            self.runAction(SKAction.waitForDuration(0.3), completion: completion)
+            self.run(SKAction.wait(forDuration: 0.3), completion: completion)
         }
         
         sequencer.run()
     }
     
-    func animateFallingItems(columns: [[Item]], completion: () -> ()) {
+    func animateFallingItems(_ columns: [[Item]], completion: @escaping () -> ()) {
         // 1
-        var longestDuration: NSTimeInterval = 0
+        var longestDuration: TimeInterval = 0
         for array in columns {
             for (idx, item) in enumerate(array) {
                 let newPosition = pointForColumn(item.column, row: item.row)
                 // 2
-                let delay = 0.05 + 0.15*NSTimeInterval(idx)
+                let delay = 0.05 + 0.15*TimeInterval(idx)
                 // 3
                 let sprite = item.sprite!
-                let duration = NSTimeInterval(((sprite.position.y - newPosition.y) / TileHeight) * 0.1)
+                let duration = TimeInterval(((sprite.position.y - newPosition.y) / TileHeight) * 0.1)
                 // 4
                 longestDuration = max(longestDuration, duration + delay)
                 // 5
-                let moveAction = SKAction.moveTo(newPosition, duration: duration)
-                moveAction.timingMode = .EaseOut
-                sprite.runAction(
+                let moveAction = SKAction.move(to: newPosition, duration: duration)
+                moveAction.timingMode = .easeOut
+                sprite.run(
                     SKAction.sequence([
-                        SKAction.waitForDuration(delay),
+                        SKAction.wait(forDuration: delay),
                         SKAction.group([moveAction, fallingItemSound])]))
             }
         }
         // 6
-        runAction(SKAction.waitForDuration(longestDuration), completion: completion)
+        run(SKAction.wait(forDuration: longestDuration), completion: completion)
     }
     
-    func animateNewItems(columns: [[Item]], completion: () -> ()) {
+    func animateNewItems(_ columns: [[Item]], completion: @escaping () -> ()) {
         // 1
-        var longestDuration: NSTimeInterval = 0
+        var longestDuration: TimeInterval = 0
         
         for array in columns {
             // 2
@@ -469,30 +469,30 @@ class GameScene: SKScene {
                 itemsLayer.addChild(sprite)
                 item.sprite = sprite
                 // 4
-                let delay = 0.1 + 0.2 * NSTimeInterval(array.count - idx - 1)
+                let delay = 0.1 + 0.2 * TimeInterval(array.count - idx - 1)
                 // 5
-                let duration = NSTimeInterval(startRow - item.row) * 0.1
+                let duration = TimeInterval(startRow - item.row) * 0.1
                 longestDuration = max(longestDuration, duration + delay)
                 // 6
                 let newPosition = pointForColumn(item.column, row: item.row)
-                let moveAction = SKAction.moveTo(newPosition, duration: duration)
-                moveAction.timingMode = .EaseOut
+                let moveAction = SKAction.move(to: newPosition, duration: duration)
+                moveAction.timingMode = .easeOut
                 sprite.alpha = 0
-                sprite.runAction(
+                sprite.run(
                     SKAction.sequence([
-                        SKAction.waitForDuration(delay),
+                        SKAction.wait(forDuration: delay),
                         SKAction.group([
-                            SKAction.fadeInWithDuration(0.05),
+                            SKAction.fadeIn(withDuration: 0.05),
                             moveAction,
                             addItemSound])
                         ]))
             }
         }
         // 7
-        runAction(SKAction.waitForDuration(longestDuration), completion: completion)
+        run(SKAction.wait(forDuration: longestDuration), completion: completion)
     }
     
-    func animateScoreForChain(chain: Chain) {
+    func animateScoreForChain(_ chain: Chain) {
         
         // Figure out what the midpoint of the chain is.
         let firstSprite = chain.firstItem().sprite!
@@ -509,9 +509,9 @@ class GameScene: SKScene {
         scoreLabel.zPosition = 300
         itemsLayer.addChild(scoreLabel)
         
-        let moveAction = SKAction.moveBy(CGVector(dx: 0, dy: 3), duration: 0.7)
-        moveAction.timingMode = .EaseOut
-        scoreLabel.runAction(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
+        let moveAction = SKAction.move(by: CGVector(dx: 0, dy: 3), duration: 0.7)
+        moveAction.timingMode = .easeOut
+        scoreLabel.run(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
         
         if level.comboMultiplier > 3 {
             walkingCowboy()
@@ -520,18 +520,18 @@ class GameScene: SKScene {
     }
     
     func walkingCowboy() {
-        if cowboy.actionForKey("walkingInPlaceCowboy") == nil {
-            let animeAction = SKAction.repeatActionForever(
-                SKAction.animateWithTextures(cowboyWalkingFrames,
+        if cowboy.action(forKey: "walkingInPlaceCowboy") == nil {
+            let animeAction = SKAction.repeatForever(
+                SKAction.animate(with: cowboyWalkingFrames,
                     timePerFrame: 0.1,
                     resize: false,
                     restore: true))
-            cowboy.runAction(animeAction,withKey:"walkingInPlaceCowboy")
-            let moveAction = SKAction.moveBy(CGVector(dx: CGRectGetMidX(self.view!.frame) + cowboy.size.width/1.2, dy: 0), duration: 0.7)
-            let waitAction = SKAction.waitForDuration(1)
-            let moveBackAction = SKAction.moveBy(CGVector(dx: -(CGRectGetMidX(self.view!.frame) + cowboy.size.width/1.2), dy: 0), duration: 0.7)
+            cowboy.run(animeAction,withKey:"walkingInPlaceCowboy")
+            let moveAction = SKAction.move(by: CGVector(dx: self.view!.frame.midX + cowboy.size.width/1.2, dy: 0), duration: 0.7)
+            let waitAction = SKAction.wait(forDuration: 1)
+            let moveBackAction = SKAction.move(by: CGVector(dx: -(self.view!.frame.midX + cowboy.size.width/1.2), dy: 0), duration: 0.7)
             let fullSequence = SKAction.sequence([moveAction, cowboySound, waitAction, moveBackAction])
-            cowboy.runAction(fullSequence, completion: { () -> Void in
+            cowboy.run(fullSequence, completion: { () -> Void in
                 self.cowboyMoveEnded()
             })
         }
@@ -546,19 +546,19 @@ class GameScene: SKScene {
         if bomb == nil {
             let firstFrame = bombShiningFrames[0]
             bomb = SKSpriteNode(texture: firstFrame)
-            bomb.position = CGPoint(x: -(CGRectGetMidX(self.view!.frame) - bomb.size.width), y: -(CGRectGetMidY(self.view!.frame) - bomb.size.height/1.5))
+            bomb.position = CGPoint(x: -(self.view!.frame.midX - bomb.size.width), y: -(self.view!.frame.midY - bomb.size.height/1.5))
             bomb.name = kMovableNodeName
             
-            let animeAction = SKAction.repeatActionForever(
-                SKAction.animateWithTextures(bombShiningFrames,
+            let animeAction = SKAction.repeatForever(
+                SKAction.animate(with: bombShiningFrames,
                     timePerFrame: 0.1,
                     resize: false,
                     restore: true))
-            bomb.runAction(animeAction,withKey:"bombShiningAnime")
+            bomb.run(animeAction,withKey:"bombShiningAnime")
             
-            if let myParticlePath = NSBundle.mainBundle().pathForResource("smoke", ofType: "sks") {
-                self.smoke = NSKeyedUnarchiver.unarchiveObjectWithFile(myParticlePath) as? SKEmitterNode
-                self.smoke?.position = CGPointMake(bomb.position.x, bomb.position.y)
+            if let myParticlePath = Bundle.main.path(forResource: "smoke", ofType: "sks") {
+                self.smoke = NSKeyedUnarchiver.unarchiveObject(withFile: myParticlePath) as? SKEmitterNode
+                self.smoke?.position = CGPoint(x: bomb.position.x, y: bomb.position.y)
                 self.addChild(self.smoke!)
             }
             
@@ -568,10 +568,10 @@ class GameScene: SKScene {
     
     func removeBomb() {
         if selectedNode.name != nil {
-            if selectedNode.actionForKey("removing") == nil {
-                let scaleAction = SKAction.scaleTo(0.1, duration: 0.3)
-                scaleAction.timingMode = .EaseOut
-                selectedNode.runAction(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
+            if selectedNode.action(forKey: "removing") == nil {
+                let scaleAction = SKAction.scale(to: 0.1, duration: 0.3)
+                scaleAction.timingMode = .easeOut
+                selectedNode.run(SKAction.sequence([scaleAction, SKAction.removeFromParent()]),
                     withKey:"removing")
                 bomb = nil
                 selectedNode = SKSpriteNode()
@@ -582,10 +582,10 @@ class GameScene: SKScene {
     
     // MARK: Touch events
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
         
         let touch = touches.first as! UITouch
-        let location = touch.locationInNode(itemsLayer)
+        let location = touch.location(in: itemsLayer)
         
         let (success, column, row) = convertPoint(location)
         if success {
@@ -599,13 +599,13 @@ class GameScene: SKScene {
         }
         else {
             let touch = touches.first as! UITouch
-            let positionInScene = touch.locationInNode(self)
+            let positionInScene = touch.location(in: self)
             
             selectNodeForTouch(positionInScene)
         }
     }
     
-    func convertPoint(point: CGPoint) -> (success: Bool, column: Int, row: Int) {
+    func convertPoint(_ point: CGPoint) -> (success: Bool, column: Int, row: Int) {
         if point.x >= 0 && point.x < CGFloat(NumColumns)*TileWidth &&
             point.y >= 0 && point.y < CGFloat(NumRows)*TileHeight {
                 return (true, Int(point.x / TileWidth), Int(point.y / TileHeight))
@@ -614,19 +614,19 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(_ touches: Set<NSObject>, with event: UIEvent) {
         
         if swipeFromColumn == nil {
             let touch = touches.first as! UITouch
-            let positionInScene = touch.locationInNode(self)
-            let previousPosition = touch.previousLocationInNode(self)
+            let positionInScene = touch.location(in: self)
+            let previousPosition = touch.previousLocation(in: self)
             let translation = CGPoint(x: positionInScene.x - previousPosition.x, y: positionInScene.y - previousPosition.y)
             
             panForTranslation(translation)
         }
         else {
             let touch = touches.first as! UITouch
-            let location = touch.locationInNode(itemsLayer)
+            let location = touch.location(in: itemsLayer)
             
             let (success, column, row) = convertPoint(location)
             if success {
@@ -651,7 +651,7 @@ class GameScene: SKScene {
         }
     }
     
-    func trySwapHorizontal(horzDelta: Int, vertical vertDelta: Int) {
+    func trySwapHorizontal(_ horzDelta: Int, vertical vertDelta: Int) {
         // 1
         let toColumn = swipeFromColumn! + horzDelta
         let toRow = swipeFromRow! + vertDelta
@@ -670,7 +670,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(_ touches: Set<NSObject>, with event: UIEvent) {
         if selectionSprite.parent != nil && swipeFromColumn != nil {
             hideSelectionIndicator()
         }
@@ -680,7 +680,7 @@ class GameScene: SKScene {
         if selectedNode.name != nil {
             
             let touch = touches.first as! UITouch
-            let location = touch.locationInNode(itemsLayer)
+            let location = touch.location(in: itemsLayer)
             
             let (success, column, row) = convertPoint(location)
             if success {
@@ -696,11 +696,11 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
-        touchesEnded(touches, withEvent: event)
+    override func touchesCancelled(_ touches: Set<NSObject>, with event: UIEvent) {
+        touchesEnded(touches, with: event)
     }
     
-    func boundLayerPos(aNewPosition: CGPoint) -> CGPoint {
+    func boundLayerPos(_ aNewPosition: CGPoint) -> CGPoint {
         let winSize = self.view!.frame.size
         var retval = aNewPosition
         retval.x = CGFloat(min(retval.x, 0))
@@ -710,7 +710,7 @@ class GameScene: SKScene {
         return retval
     }
     
-    func panForTranslation(translation: CGPoint) {
+    func panForTranslation(_ translation: CGPoint) {
         let position = selectedNode.position
         
         if selectedNode.name == kMovableNodeName {
@@ -722,13 +722,13 @@ class GameScene: SKScene {
         }
     }
     
-    func degToRad(degree: Double) -> CGFloat {
+    func degToRad(_ degree: Double) -> CGFloat {
         return CGFloat(Double(degree) / 180.0 * M_PI)
     }
     
-    func selectNodeForTouch(touchLocation: CGPoint) {
+    func selectNodeForTouch(_ touchLocation: CGPoint) {
         
-        let touchedNode = self.nodeAtPoint(touchLocation)
+        let touchedNode = self.atPoint(touchLocation)
         
         if touchedNode is SKSpriteNode {
             

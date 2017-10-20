@@ -15,7 +15,7 @@ class GameOverController: UIViewController, NodeButtonDelegate {
     
     var victory: Bool = false,
         score = 0,
-        gameType: GameType = .Arcade
+        gameType: GameType = .arcade
     
     var scene: GameOverScene!
     
@@ -37,13 +37,13 @@ class GameOverController: UIViewController, NodeButtonDelegate {
     override func loadView() {
         super.loadView()
         // Configure the view.
-        let skView: SKView = SKView(frame: UIScreen.mainScreen().bounds)
-        skView.multipleTouchEnabled = false
+        let skView: SKView = SKView(frame: UIScreen.main.bounds)
+        skView.isMultipleTouchEnabled = false
         self.view = skView
         
         // Create and configure the scene.
         scene = GameOverScene(size: skView.bounds.size, victory: victory, points: score, type: gameType)
-        scene.scaleMode = SKSceneScaleMode.AspectFit
+        scene.scaleMode = SKSceneScaleMode.aspectFit
         scene.menu?.delegate = self
         scene.play?.delegate = self
         
@@ -55,12 +55,12 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         super.viewDidLoad()
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,33 +68,33 @@ class GameOverController: UIViewController, NodeButtonDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
     // MARK: NodeButtonDelegate methods
     
-    func NodeButtonDelegateOnTouch(button: NodeButton) {
+    func NodeButtonDelegateOnTouch(_ button: NodeButton) {
         scene?.playButton()
         if button.tag == 1 { // play
-            scene.userInteractionEnabled = false
+            scene.isUserInteractionEnabled = false
             var controller = UIViewController()
-            if self.gameType == .Arcade {
+            if self.gameType == .arcade {
                 controller = GameViewController()
             }
-            else if self.gameType == .Rocky {
+            else if self.gameType == .rocky {
                 controller = RockyViewController()
             }
-            let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-            appDel.navController?.popViewControllerAnimated(false)
+            let appDel = UIApplication.shared.delegate! as! AppDelegate
+            appDel.navController?.popViewController(animated: false)
             appDel.navController?.pushViewController(controller, animated: true)
             appDel.navController?.viewControllers = [controller]
         }
         else if button.tag == 2 { // menu
-            scene.userInteractionEnabled = false
+            scene.isUserInteractionEnabled = false
             let controller: MenuViewController = MenuViewController()
-            let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-            appDel.navController?.popViewControllerAnimated(false)
+            let appDel = UIApplication.shared.delegate! as! AppDelegate
+            appDel.navController?.popViewController(animated: false)
             appDel.navController?.pushViewController(controller, animated: true)
             appDel.navController?.viewControllers = [controller]
         }

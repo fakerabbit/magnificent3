@@ -19,14 +19,14 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         return player
         }()*/
     
-    private var v: MenuView?
+    fileprivate var v: MenuView?
     
     // MARK: View methods
     
     override func loadView() {
         super.loadView()
         // Configure the view.
-        v = MenuView(frame: UIScreen.mainScreen().bounds)
+        v = MenuView(frame: UIScreen.main.bounds)
         v?.delegate = self
         self.view = v!;
     }
@@ -35,12 +35,12 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         super.viewDidLoad()
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,24 +48,24 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
     // MARK: MenuViewDelegate methods
     
-    func MenuViewOnArcade(view: MenuView) {
+    func MenuViewOnArcade(_ view: MenuView) {
         let controller: GameViewController = GameViewController()
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
     
-    func MenuViewOnRocky(view: MenuView) {
+    func MenuViewOnRocky(_ view: MenuView) {
         let controller: RockyViewController = RockyViewController()
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }

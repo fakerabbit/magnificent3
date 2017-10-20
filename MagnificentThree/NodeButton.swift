@@ -9,7 +9,7 @@
 import SpriteKit
 
 protocol NodeButtonDelegate:class {
-    func NodeButtonDelegateOnTouch(button: NodeButton)
+    func NodeButtonDelegateOnTouch(_ button: NodeButton)
 }
 
 class NodeButton: SKSpriteNode {
@@ -40,7 +40,7 @@ class NodeButton: SKSpriteNode {
         
         self.init(texture: texture, color: UIColor(), size: texture.size())
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.normalImage = normalImage
         self.selectedImage = selectedImage
         self.tag = tag
@@ -48,12 +48,12 @@ class NodeButton: SKSpriteNode {
     
     // MARK: Touch Events
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
         self.texture = SKTexture(imageNamed: selectedImage!)
         delegate?.NodeButtonDelegateOnTouch(self)
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(_ touches: Set<NSObject>, with event: UIEvent) {
         self.texture = SKTexture(imageNamed: normalImage!)
     }
 }

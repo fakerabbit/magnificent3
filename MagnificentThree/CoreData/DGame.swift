@@ -13,7 +13,7 @@ import CoreData
 class DGame: NSManagedObject {
 
     @NSManaged var uuid: String
-    @NSManaged var date: NSDate
+    @NSManaged var date: Date
     @NSManaged var score: NSNumber
     @NSManaged var type: NSNumber
 }

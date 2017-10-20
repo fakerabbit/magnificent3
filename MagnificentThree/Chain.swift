@@ -8,25 +8,25 @@
 
 import Foundation
 
-class Chain: Hashable, Printable {
+class Chain: Hashable, CustomStringConvertible {
     
     // MARK: Variables
     
     var score = 0
     var items = [Item]()
     
-    enum ChainType: Printable {
-        case Horizontal
-        case Vertical
-        case Lshaped
-        case Bomb
+    enum ChainType: CustomStringConvertible {
+        case horizontal
+        case vertical
+        case lshaped
+        case bomb
         
         var description: String {
             switch self {
-            case .Horizontal: return "Horizontal"
-            case .Vertical: return "Vertical"
-            case .Lshaped: return "Lshaped"
-            case .Bomb: return "Bomb"
+            case .horizontal: return "Horizontal"
+            case .vertical: return "Vertical"
+            case .lshaped: return "Lshaped"
+            case .bomb: return "Bomb"
             }
         }
     }
@@ -41,13 +41,13 @@ class Chain: Hashable, Printable {
     
     // MARK: Public methods
     
-    func addItem(item: Item) {
+    func addItem(_ item: Item) {
         items.append(item)
     }
     
-    func removeItem(item: Item) {
+    func removeItem(_ item: Item) {
         if let index = find(items, item) {
-            items.removeAtIndex(index)
+            items.remove(at: index)
         }
     }
     
