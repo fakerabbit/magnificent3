@@ -9,8 +9,8 @@
 import SpriteKit
 
 protocol LeaveSignDelegate:class {
-    func LeaveSignDelegateOnYes(button: LeaveSign)
-    func LeaveSignDelegateOnNo(button: LeaveSign)
+    func LeaveSignDelegateOnYes(_ button: LeaveSign)
+    func LeaveSignDelegateOnNo(_ button: LeaveSign)
 }
 
 class LeaveSign: SKSpriteNode {
@@ -39,36 +39,36 @@ class LeaveSign: SKSpriteNode {
         
         let texture = SKTexture(imageNamed: "LeaveGame")
         self.init(texture: texture, color: UIColor(), size: texture.size())
-        self.userInteractionEnabled = true
-        self.scene?.scaleMode = .AspectFit
+        self.isUserInteractionEnabled = true
+        self.scene?.scaleMode = .aspectFit
         self.tag = tag
         
-        var leave = SKLabelNode(text: "YES")
+        let leave = SKLabelNode(text: "YES")
         leave.fontName = "Sahara"
-        leave.fontColor = UIColor.whiteColor()
+        leave.fontColor = UIColor.white
         leave.fontSize = 24
         addChild(leave)
-        leave.position = CGPointMake(0, -(leave.frame.size.height * 2))
-        leave.userInteractionEnabled = false
+        leave.position = CGPoint(x: 0, y: -(leave.frame.size.height * 2))
+        leave.isUserInteractionEnabled = false
         leave.name = "YES"
         
-        var stay = SKLabelNode(text: "NO")
+        let stay = SKLabelNode(text: "NO")
         stay.fontName = "Sahara"
-        stay.fontColor = UIColor.whiteColor()
+        stay.fontColor = UIColor.white
         stay.fontSize = 24
         addChild(stay)
-        stay.position = CGPointMake(stay.frame.size.width * 4, -(stay.frame.size.height * 2))
-        stay.userInteractionEnabled = false
+        stay.position = CGPoint(x: stay.frame.size.width * 4, y: -(stay.frame.size.height * 2))
+        stay.isUserInteractionEnabled = false
         stay.name = "NO"
     }
     
     // MARK: Touch Events
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
         
         let touch = touches.first as! UITouch
-        let positionInScene = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(positionInScene)
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
         
         if touchedNode is SKLabelNode {
             if touchedNode.name == "YES" {

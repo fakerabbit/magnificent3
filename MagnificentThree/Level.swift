@@ -22,7 +22,7 @@ class Level {
     
     // MARK: Private variables
     
-    private var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
+    fileprivate var items = Array2D<Item>(columns: NumColumns, rows: NumRows),
                 tiles = Array2D<Tile>(columns: NumColumns, rows: NumRows),
                 possibleSwaps = Set<Swap>()
     
@@ -56,13 +56,13 @@ class Level {
     
     // MARK: Public methods
     
-    func itemAtColumn(column: Int, row: Int) -> Item? {
+    func itemAtColumn(_ column: Int, row: Int) -> Item? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return items[column, row]
     }
     
-    func isRockAtColumn(column: Int, row: Int) -> Bool {
+    func isRockAtColumn(_ column: Int, row: Int) -> Bool {
         var isRock = false
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
@@ -74,7 +74,7 @@ class Level {
     
     func shuffle() -> Set<Item> {
         var set: Set<Item>
-        do {
+        repeat {
             set = createInitialItems()
             detectPossibleSwaps()
             //println("possible swaps: \(possibleSwaps)")
@@ -84,13 +84,13 @@ class Level {
         return set
     }
     
-    func tileAtColumn(column: Int, row: Int) -> Tile? {
+    func tileAtColumn(_ column: Int, row: Int) -> Tile? {
         assert(column >= 0 && column < NumColumns)
         assert(row >= 0 && row < NumRows)
         return tiles[column, row]
     }
     
-    func performSwap(swap: Swap) {
+    func performSwap(_ swap: Swap) {
         let columnA = swap.itemA.column
         let rowA = swap.itemA.row
         let columnB = swap.itemB.column
@@ -163,14 +163,14 @@ class Level {
         return set
     }
     
-    func isPossibleSwap(swap: Swap) -> Bool {
+    func isPossibleSwap(_ swap: Swap) -> Bool {
         return possibleSwaps.contains(swap)
     }
     
     func removeMatches() -> Set<Chain> {
-        var horizontalChains = detectHorizontalMatches()
-        var verticalChains = detectVerticalMatches()
-        var lshapedChains = detectLshapedMatches(horizontalChains, verticalChains: verticalChains)
+        let horizontalChains = detectHorizontalMatches()
+        let verticalChains = detectVerticalMatches()
+        let lshapedChains = detectLshapedMatches(horizontalChains, verticalChains: verticalChains)
         
         removeItems(horizontalChains)
         removeItems(verticalChains)
@@ -188,16 +188,16 @@ class Level {
         }
     }
     
-    func markForDelete(rock: Tile) {
+    func markForDelete(_ rock: Tile) {
         if let t = tiles[rock.column, rock.row] {
             t.rocky = false
-            self.targetScore--
+            self.targetScore -= 1
             tiles[rock.column, rock.row] = t
         }
     }
     
-    func removeBombedItems(type: ItemType) -> Set<Chain> {
-        var bombChains = detectBombMatches(type)
+    func removeBombedItems(_ type: ItemType) -> Set<Chain> {
+        let bombChains = detectBombMatches(type)
         
         removeItems(bombChains)
         calculateBombScores(bombChains)
@@ -242,17 +242,17 @@ class Level {
     
     func topUpItems() -> [[Item]] {
         var columns = [[Item]]()
-        var itemType: ItemType = .Unknown
+        var itemType: ItemType = .unknown
         
         for column in 0..<NumColumns {
             var array = [Item]()
             // 1
-            for var row = NumRows - 1; row >= 0; --row {
+            for var row = NumRows - 1; row >= 0; row -= 1 {
                 // 2
                 if tiles[column, row] != nil && items[column, row] == nil {
                     // 3
                     var newItemType: ItemType
-                    do {
+                    repeat {
                         newItemType = ItemType.random()
                     } while newItemType == itemType
                     itemType = newItemType
@@ -295,7 +295,7 @@ class Level {
     
     // MARK: Private methods
     
-    private func createInitialItems() -> Set<Item> {
+    fileprivate func createInitialItems() -> Set<Item> {
         var set = Set<Item>()
         
         // 1
@@ -306,7 +306,7 @@ class Level {
                     
                     // 2
                     var itemType: ItemType
-                    do {
+                    repeat {
                         itemType = ItemType.random()
                     }
                         while (column >= 2 &&
@@ -328,7 +328,7 @@ class Level {
         return set
     }
     
-    private func hasChainAtColumn(column: Int, row: Int) -> Bool {
+    fileprivate func hasChainAtColumn(_ column: Int, row: Int) -> Bool {
         let itemType = items[column, row]!.itemType
         
         var horzLength = 1
@@ -346,9 +346,9 @@ class Level {
         return vertLength >= 3
     }
     
-    private func detectHorizontalMatches() -> Set<Chain> {
+    fileprivate func detectHorizontalMatches() -> Set<Chain> {
         // 1
-        var set = Set<Chain>()
+        let set = Set<Chain>()
         // 2
         for row in 0..<NumRows {
             for var column = 0; column < NumColumns - 2 ; {
@@ -359,10 +359,10 @@ class Level {
                     if items[column + 1, row]?.itemType == matchType &&
                         items[column + 2, row]?.itemType == matchType {
                             // 5
-                            let chain = Chain(chainType: .Horizontal)
-                            do {
+                            let chain = Chain(chainType: .horizontal)
+                            repeat {
                                 chain.addItem(items[column, row]!)
-                                ++column
+                                column += 1
                             }
                                 while column < NumColumns && items[column, row]?.itemType == matchType
                             
@@ -371,14 +371,14 @@ class Level {
                     }
                 }
                 // 6
-                ++column
+                column += 1
             }
         }
         return set
     }
     
-    private func detectVerticalMatches() -> Set<Chain> {
-        var set = Set<Chain>()
+    fileprivate func detectVerticalMatches() -> Set<Chain> {
+        let set = Set<Chain>()
         
         for column in 0..<NumColumns {
             for var row = 0; row < NumRows - 2; {
@@ -388,10 +388,10 @@ class Level {
                     if items[column, row + 1]?.itemType == matchType &&
                         items[column, row + 2]?.itemType == matchType {
                             
-                            let chain = Chain(chainType: .Vertical)
-                            do {
+                            let chain = Chain(chainType: .vertical)
+                            repeat {
                                 chain.addItem(items[column, row]!)
-                                ++row
+                                row += 1
                             }
                                 while row < NumRows && items[column, row]?.itemType == matchType
                             
@@ -399,13 +399,13 @@ class Level {
                             continue
                     }
                 }
-                ++row
+                row += 1
             }
         }
         return set
     }
     
-    private func detectLshapedMatches(horizontalChains: Set<Chain>, verticalChains: Set<Chain>) -> Set<Chain> {
+    fileprivate func detectLshapedMatches(_ horizontalChains: Set<Chain>, verticalChains: Set<Chain>) -> Set<Chain> {
         var set = Set<Chain>()
         var found = false
         
@@ -422,7 +422,7 @@ class Level {
                         let hchainSet = Set(chain.items)
                         let vchainSet = Set(vchain.items)
                         let union = hchainSet.union(vchainSet)
-                        let c = Chain(chainType: .Lshaped)
+                        let c = Chain(chainType: .lshaped)
                         for i in union {
                             c.addItem(i)
                         }
@@ -448,14 +448,14 @@ class Level {
         }
         
         if (found) {
-            horizontalChains.subtract(set)
-            verticalChains.subtract(set)
+            horizontalChains.subtracting(set)
+            verticalChains.subtracting(set)
         }
         
         return set
     }
     
-    private func detectBombMatches(type: ItemType) -> Set<Chain> {
+    fileprivate func detectBombMatches(_ type: ItemType) -> Set<Chain> {
         var set = Set<Chain>()
         
         for row in 0..<NumRows {
@@ -469,7 +469,7 @@ class Level {
                             
                             if items[column, row]?.itemType == type {
                                 
-                                let chain = Chain(chainType: .Bomb)
+                                let chain = Chain(chainType: .bomb)
                                 chain.addItem(items[column, row]!)
                                 set.insert(chain)
                             }
@@ -482,7 +482,7 @@ class Level {
         return set
     }
     
-    private func removeItems(chains: Set<Chain>) {
+    fileprivate func removeItems(_ chains: Set<Chain>) {
         for chain in chains {
             for item in chain.items {
                 if !self.isRockAtColumn(item.column, row: item.row) {
@@ -494,22 +494,22 @@ class Level {
         }
     }
     
-    private func calculateScores(chains: Set<Chain>) {
+    fileprivate func calculateScores(_ chains: Set<Chain>) {
         // 3-chain is 60 pts, 4-chain is 120, 5-chain is 180, and so on
         var value = 60
         for chain in chains {
-            if chain.chainType == .Lshaped {
+            if chain.chainType == .lshaped {
                 value = 120
             }
             else {
                 value = 60
             }
             chain.score = value * (chain.length - 2) * comboMultiplier
-            ++comboMultiplier
+            comboMultiplier += 1
         }
     }
     
-    private func calculateBombScores(chains: Set<Chain>) {
+    fileprivate func calculateBombScores(_ chains: Set<Chain>) {
         for chain in chains {
             chain.score = 20
         }

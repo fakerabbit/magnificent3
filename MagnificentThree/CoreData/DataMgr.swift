@@ -10,61 +10,61 @@ import Foundation
 import CoreData
 import UIKit
 
-enum GameType: Printable {
-    case Arcade
-    case Rocky
+enum GameType: CustomStringConvertible {
+    case arcade
+    case rocky
     
     var description: String {
         switch self {
-        case .Arcade: return "Arcade"
-        case .Rocky: return "Rocky"
+        case .arcade: return "Arcade"
+        case .rocky: return "Rocky"
         }
     }
 }
 
 class DataMgr {
     
-    private let kGameEntity = "Game",
+    fileprivate let kGameEntity = "Game",
                 kGameEntityType = "type"
     
     var installTries: Int = 0
     
     // MARK: Public methods
     
-    func storeGame(type: GameType, score: Int) {
+    func storeGame(_ type: GameType, score: Int) {
         
         if let games = self.gamesForType(type) {
             if games.count >= 3 {
                 
                 if let maxGame = self.maxGameForType(type) {
-                    if score > maxGame.score.integerValue {
-                        maxGame.date = NSDate()
-                        maxGame.score = NSNumber(integer: score)
+                    if score > maxGame.score.intValue {
+                        maxGame.date = Date()
+                        maxGame.score = NSNumber(value: score as Int)
                     }
                 }
                 if let lowGame = self.lowGameForType(type) {
-                    if score < lowGame.score.integerValue {
-                        lowGame.date = NSDate()
-                        lowGame.score = NSNumber(integer: score)
+                    if score < lowGame.score.intValue {
+                        lowGame.date = Date()
+                        lowGame.score = NSNumber(value: score as Int)
                     }
                 }
             }
             else {
-                var game: DGame = NSEntityDescription.insertNewObjectForEntityForName(kGameEntity,
-                    inManagedObjectContext: self.managedObjectContext!) as! DGame;
-                game.uuid = NSUUID().UUIDString
-                game.date = NSDate()
-                game.type = NSNumber(integer: type.hashValue)
-                game.score = NSNumber(integer: score)
+                let game: DGame = NSEntityDescription.insertNewObject(forEntityName: kGameEntity,
+                    into: self.managedObjectContext!) as! DGame;
+                game.uuid = UUID().uuidString
+                game.date = Date()
+                game.type = NSNumber(value: type.hashValue as Int)
+                game.score = NSNumber(value: score as Int)
             }
             self.saveContext()
         }
     }
     
-    func gamesForType(type: GameType) -> [DGame]? {
+    func gamesForType(_ type: GameType) -> [DGame]? {
         var games = [DGame]()
         
-        if let entity: NSEntityDescription = NSEntityDescription.entityForName(kGameEntity, inManagedObjectContext: self.managedObjectContext!) {
+        if let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: kGameEntity, in: self.managedObjectContext!) {
             var request: NSFetchRequest = NSFetchRequest()
             request.entity = entity
             request.predicate = NSPredicate(format: "%K == %@", argumentArray: [kGameEntityType, String(type.hashValue)])
@@ -79,7 +79,7 @@ class DataMgr {
         return games
     }
     
-    func lowGameForType(type: GameType) -> DGame? {
+    func lowGameForType(_ type: GameType) -> DGame? {
         
         var game: DGame? = nil
         
@@ -87,7 +87,7 @@ class DataMgr {
             if games.count > 0 {
                 game = games.first!
                 for g: DGame in games {
-                    if g.score.integerValue <= game!.score.integerValue {
+                    if g.score.intValue <= game!.score.intValue {
                         game = g
                     }
                 }
@@ -97,7 +97,7 @@ class DataMgr {
         return game
     }
     
-    func maxGameForType(type: GameType) -> DGame? {
+    func maxGameForType(_ type: GameType) -> DGame? {
         
         var game: DGame? = nil
         
@@ -105,7 +105,7 @@ class DataMgr {
             if games.count > 0 {
                 game = games.first!
                 for g: DGame in games {
-                    if g.score.integerValue >= game!.score.integerValue {
+                    if g.score.intValue >= game!.score.intValue {
                         game = g
                     }
                 }
@@ -115,21 +115,21 @@ class DataMgr {
         return game
     }
     
-    func lowestScoreForGame(type: GameType) -> Int {
+    func lowestScoreForGame(_ type: GameType) -> Int {
         
         var score = 0
         if let game: DGame = self.lowGameForType(type) {
-            score = game.score.integerValue
+            score = game.score.intValue
         }
         
         return score
     }
     
-    func highestScoreForGame(type: GameType) -> Int {
+    func highestScoreForGame(_ type: GameType) -> Int {
         
         var score = 0
         if let game: DGame = self.maxGameForType(type) {
-            score = game.score.integerValue
+            score = game.score.intValue
         }
         
         return score
@@ -137,30 +137,30 @@ class DataMgr {
     
     // MARK: - Core Data stack
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.xxxx.ProjectName" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.count-1] 
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("MTData", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "MTData", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
         }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("MagnificentThree.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("MagnificentThree.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
             if let err = error {
                 if err.code == 134100 {
                     self.deleteStore()
-                    self.installTries++
+                    self.installTries += 1
                     if (self.installTries < 2) {
                         coordinator = self.persistentStoreCoordinator // recreate the coordinator
                     }
@@ -207,10 +207,10 @@ class DataMgr {
     
     func deleteStore() {
         // Delete the old store
-        let model: NSURL? = self.applicationDocumentsDirectory.URLByAppendingPathComponent("CurationLayer.sqlite")
+        let model: URL? = self.applicationDocumentsDirectory.appendingPathComponent("CurationLayer.sqlite")
         if let modelUrl = model {
-            if NSFileManager.defaultManager().fileExistsAtPath(modelUrl.path!) {
-                NSFileManager.defaultManager().removeItemAtURL(modelUrl, error: nil)
+            if FileManager.default.fileExists(atPath: modelUrl.path) {
+                FileManager.default.removeItemAtURL(modelUrl, error: nil)
             }
         }
     }

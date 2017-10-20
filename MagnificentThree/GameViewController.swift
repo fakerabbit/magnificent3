@@ -28,13 +28,13 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     override func loadView() {
         super.loadView()
         // Configure the view.
-        let skView: SKView = SKView(frame: UIScreen.mainScreen().bounds)
-        skView.multipleTouchEnabled = false
+        let skView: SKView = SKView(frame: UIScreen.main.bounds)
+        skView.isMultipleTouchEnabled = false
         self.view = skView
         
         // Create and configure the scene.
         scene = GameScene(size: skView.bounds.size)
-        scene.scaleMode = SKSceneScaleMode.AspectFit
+        scene.scaleMode = SKSceneScaleMode.aspectFit
         
         // Present the scene.
         skView.presentScene(scene)
@@ -61,12 +61,12 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         beginGame()
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,7 +74,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -94,15 +94,15 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         scene.addSpritesForItems(newItems)
     }
     
-    func handleSwipe(swap: Swap) {
-        view.userInteractionEnabled = false
+    func handleSwipe(_ swap: Swap) {
+        view.isUserInteractionEnabled = false
         
         if level.isPossibleSwap(swap) {
             level.performSwap(swap)
             scene.animateSwap(swap, completion: handleMatches)
         } else {
             scene.animateInvalidSwap(swap) {
-                self.view.userInteractionEnabled = true
+                self.view.isUserInteractionEnabled = true
                 self.decrementMoves()
             }
         }
@@ -111,7 +111,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     func handleMatches() {
         let chains = level.removeMatches()
         let itemsToRemove = level.itemsToRemove
-        level.itemsToRemove.removeAll(keepCapacity: false)
+        level.itemsToRemove.removeAll(keepingCapacity: false)
         
         if chains.count == 0 {
             beginNextTurn()
@@ -137,8 +137,8 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         }
     }
     
-    func handleBomb(type: ItemType) {
-        view.userInteractionEnabled = false
+    func handleBomb(_ type: ItemType) {
+        view.isUserInteractionEnabled = false
         let chains = level.removeBombedItems(type)
         
         if chains.count == 0 {
@@ -169,7 +169,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         level.resetComboMultiplier()
         level.detectPossibleSwaps()
         decrementMoves()
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
     }
     
     func updateLabels() {
@@ -179,11 +179,11 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     }
     
     func decrementMoves() {
-        --movesLeft
+        movesLeft -= 1
         updateLabels()
         if score >= level.targetScore {
             while movesLeft > 0 {
-                movesLeft--
+                movesLeft -= 1
                 self.score += 100
                 updateLabels()
             }
@@ -193,18 +193,18 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
         }
     }
     
-    func onGameOver(victory: Bool) {
-        scene.userInteractionEnabled = false
+    func onGameOver(_ victory: Bool) {
+        scene.isUserInteractionEnabled = false
         
         // Save game record
         if victory {
-            DataMgr.sharedInstance.storeGame(.Arcade, score: score)
+            DataMgr.sharedInstance.storeGame(.arcade, score: score)
         }
         
         // Show game over controller
-        var controller: GameOverController = GameOverController(victory: victory, score: score, type: .Arcade)
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        let controller: GameOverController = GameOverController(victory: victory, score: score, type: .arcade)
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
@@ -219,20 +219,20 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     }
     
     func leaveGame() {
-        scene.userInteractionEnabled = false
-        var controller: MenuViewController = MenuViewController()
-        let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
-        appDel.navController?.popViewControllerAnimated(false)
+        scene.isUserInteractionEnabled = false
+        let controller: MenuViewController = MenuViewController()
+        let appDel = UIApplication.shared.delegate! as! AppDelegate
+        appDel.navController?.popViewController(animated: false)
         appDel.navController?.pushViewController(controller, animated: true)
         appDel.navController?.viewControllers = [controller]
     }
     
     // MARK: NodeButtonDelegate methods
     
-    func NodeButtonDelegateOnTouch(button: NodeButton) {
+    func NodeButtonDelegateOnTouch(_ button: NodeButton) {
         
         if button.tag == 1 {
-            scene.runAction(shuffleSound)
+            scene.run(shuffleSound)
             shuffle()
             decrementMoves()
         }
@@ -243,11 +243,11 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     
     // MARK: LeaveSignDelegate delegate
     
-    func LeaveSignDelegateOnYes(button: LeaveSign) {
+    func LeaveSignDelegateOnYes(_ button: LeaveSign) {
         leaveGame()
     }
     
-    func LeaveSignDelegateOnNo(button: LeaveSign) {
+    func LeaveSignDelegateOnNo(_ button: LeaveSign) {
         hideLeaveSign()
     }
 }

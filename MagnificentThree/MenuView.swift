@@ -10,8 +10,8 @@ import UIKit
 import SpriteKit
 
 protocol MenuViewDelegate: class {
-    func MenuViewOnArcade(view: MenuView)
-    func MenuViewOnRocky(view: MenuView)
+    func MenuViewOnArcade(_ view: MenuView)
+    func MenuViewOnRocky(_ view: MenuView)
 }
 
 class MenuView: SKView {
@@ -32,9 +32,9 @@ class MenuView: SKView {
     let buttonH: CGFloat = 30.0
     let buttonW: CGFloat = 100.0
     
-    private var cscene: SKScene?
+    fileprivate var cscene: SKScene?
     
-    private var logoIv: UIImageView?,
+    fileprivate var logoIv: UIImageView?,
                 townIv: UIImageView?,
                 town: SKSpriteNode?,
                 hayParticle: SKEmitterNode?,
@@ -50,7 +50,7 @@ class MenuView: SKView {
         //self.printFontNamesInSystem()
         
         logoIv = UIImageView(image: UIImage(named: "Logo"))
-        logoIv?.contentMode = UIViewContentMode.ScaleAspectFit
+        logoIv?.contentMode = UIViewContentMode.scaleAspectFit
         self.addSubview(logoIv!)
         
         cscene = SKScene(size: self.bounds.size)
@@ -60,41 +60,41 @@ class MenuView: SKView {
         self.fillBackground()
         
         townIv = UIImageView(image: UIImage(named: "BgTown"))
-        townIv?.contentMode = UIViewContentMode.ScaleToFill
+        townIv?.contentMode = UIViewContentMode.scaleToFill
         
         town = SKSpriteNode(imageNamed: "BgTown")
         cscene?.addChild(town!)
         
         
-        var path = NSBundle.mainBundle().pathForResource("pfHay", ofType: "sks")
-        hayParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as? SKEmitterNode
-        hayParticle!.position = CGPointMake(8, 15)
+        let path = Bundle.main.path(forResource: "pfHay", ofType: "sks")
+        hayParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode
+        hayParticle!.position = CGPoint(x: 8, y: 15)
         hayParticle!.zPosition = 100
         hayParticle!.name = "Hay"
         hayParticle!.targetNode = scene
         cscene?.addChild(hayParticle!)
         
-        arcadeBtn = UIButton(frame: CGRectZero)
-        arcadeBtn?.setImage(UIImage(named: "Arcade"), forState: .Normal)
-        arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), forState: .Highlighted)
+        arcadeBtn = UIButton(frame: CGRect.zero)
+        arcadeBtn?.setImage(UIImage(named: "Arcade"), for: UIControlState())
+        arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), for: .highlighted)
         arcadeBtn?.sizeToFit()
-        arcadeBtn?.contentMode = .ScaleAspectFit
-        arcadeBtn?.addTarget(self, action: Selector("onArcade:"), forControlEvents: .TouchUpInside)
+        arcadeBtn?.contentMode = .scaleAspectFit
+        arcadeBtn?.addTarget(self, action: #selector(MenuView.onArcade(_:)), for: .touchUpInside)
         self.addSubview(arcadeBtn!)
         
-        rockyBtn = UIButton(frame: CGRectZero)
-        rockyBtn?.setImage(UIImage(named: "Rocky"), forState: .Normal)
-        rockyBtn?.setImage(UIImage(named: "RockyOn"), forState: .Highlighted)
+        rockyBtn = UIButton(frame: CGRect.zero)
+        rockyBtn?.setImage(UIImage(named: "Rocky"), for: UIControlState())
+        rockyBtn?.setImage(UIImage(named: "RockyOn"), for: .highlighted)
         rockyBtn?.sizeToFit()
-        rockyBtn?.contentMode = .ScaleAspectFit
-        rockyBtn?.addTarget(self, action: Selector("onRocky:"), forControlEvents: .TouchUpInside)
+        rockyBtn?.contentMode = .scaleAspectFit
+        rockyBtn?.addTarget(self, action: #selector(MenuView.onRocky(_:)), for: .touchUpInside)
         self.addSubview(rockyBtn!)
         
         self.presentScene(cscene)
         
-        let seq = SKAction.sequence([theme, SKAction.waitForDuration(30.0)])
-        let repeatAction = SKAction.repeatActionForever(seq)
-        town?.runAction(repeatAction, withKey: "themeAction")
+        let seq = SKAction.sequence([theme, SKAction.wait(forDuration: 30.0)])
+        let repeatAction = SKAction.repeatForever(seq)
+        town?.run(repeatAction, withKey: "themeAction")
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -113,16 +113,16 @@ class MenuView: SKView {
             return
         }
         
-        logoIv?.frame = CGRectMake(pad, 0, w - pad * 2, logoIv!.frame.size.height)
-        townIv?.frame = CGRectMake(-tpad, h - townIv!.frame.size.height + tpad, w + tpad * 2, townIv!.frame.size.height)
-        town?.position = CGPointMake(w/2, townIv!.frame.size.height/2)
-        arcadeBtn?.frame = CGRectMake(w/2 - arcadeBtn!.frame.size.width/2, h/2 - arcadeBtn!.frame.size.height/2, arcadeBtn!.frame.size.width, arcadeBtn!.frame.size.height)
-        rockyBtn?.frame = CGRectMake(w/2 - rockyBtn!.frame.size.width/2, CGRectGetMaxY(arcadeBtn!.frame), rockyBtn!.frame.size.width, rockyBtn!.frame.size.height)
+        logoIv?.frame = CGRect(x: pad, y: 0, width: w - pad * 2, height: logoIv!.frame.size.height)
+        townIv?.frame = CGRect(x: -tpad, y: h - townIv!.frame.size.height + tpad, width: w + tpad * 2, height: townIv!.frame.size.height)
+        town?.position = CGPoint(x: w/2, y: townIv!.frame.size.height/2)
+        arcadeBtn?.frame = CGRect(x: w/2 - arcadeBtn!.frame.size.width/2, y: h/2 - arcadeBtn!.frame.size.height/2, width: arcadeBtn!.frame.size.width, height: arcadeBtn!.frame.size.height)
+        rockyBtn?.frame = CGRect(x: w/2 - rockyBtn!.frame.size.width/2, y: arcadeBtn!.frame.maxY, width: rockyBtn!.frame.size.width, height: rockyBtn!.frame.size.height)
     }
     
     // MARK: Private methods
     
-    private func fillBackground() {
+    fileprivate func fillBackground() {
         
         let tile = SKTexture(imageNamed: "BgTile")
         var totH: CGFloat = 0
@@ -130,46 +130,46 @@ class MenuView: SKView {
         var i: Int = 0
         var j: Int = 0
         
-        while totH < UIScreen.mainScreen().bounds.size.height + tile.size().height {
+        while totH < UIScreen.main.bounds.size.height + tile.size().height {
             
-            if totW >= UIScreen.mainScreen().bounds.size.width {
+            if totW >= UIScreen.main.bounds.size.width {
                 totW = 0
                 i = 0
             }
             
-            while totW < UIScreen.mainScreen().bounds.size.width + tile.size().width {
+            while totW < UIScreen.main.bounds.size.width + tile.size().width {
                 let bg = SKSpriteNode(texture: tile)
                 bg.zPosition = -100
-                bg.position = CGPointMake(CGFloat(i) * tile.size().width, CGFloat(j) * tile.size().height)
+                bg.position = CGPoint(x: CGFloat(i) * tile.size().width, y: CGFloat(j) * tile.size().height)
                 cscene?.addChild(bg)
-                i++
+                i += 1
                 totW += tile.size().width
             }
             
-            j++
+            j += 1
             totH += tile.size().height
         }
     }
     
-    private func printFontNamesInSystem() {
-        for family in UIFont.familyNames() {
-            println("*", family);
+    fileprivate func printFontNamesInSystem() {
+        for family in UIFont.familyNames {
+            print("*", family);
             
-            for name in UIFont.fontNamesForFamilyName(family as! String) {
-                println(name);
+            for name in UIFont.fontNames(forFamilyName: family ) {
+                print(name);
             }
         }
     }
     
     // MARK: Public methods
     
-    func onArcade(sender: UIButton?) {
-        cscene?.runAction(clickSound)
+    func onArcade(_ sender: UIButton?) {
+        cscene?.run(clickSound)
         delegate?.MenuViewOnArcade(self)
     }
     
-    func onRocky(sender: UIButton?) {
-        cscene?.runAction(clickSound)
+    func onRocky(_ sender: UIButton?) {
+        cscene?.run(clickSound)
         delegate?.MenuViewOnRocky(self)
     }
 }
