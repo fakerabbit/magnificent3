@@ -169,7 +169,7 @@ class GameScene: SKScene {
         var walkFrames = [SKTexture]()
         
         var numImages = cowboyAnimatedAtlas.textureNames.count
-        for var i=1; i<=numImages/2; i += 1 {
+        for i in 1...numImages/2 {
             let cowboyTextureName = "cowboy\(i)"
             walkFrames.append(cowboyAnimatedAtlas.textureNamed(cowboyTextureName))
         }
@@ -186,7 +186,7 @@ class GameScene: SKScene {
         var bombFrames = [SKTexture]()
         
         numImages = bombAnimatedAtlas.textureNames.count
-        for var i=1; i<=numImages/2; i += 1 {
+        for i in 1...numImages/2 {
             let bombTextureName = "bomb\(i)"
             bombFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
         }
@@ -253,7 +253,7 @@ class GameScene: SKScene {
                 
                 // The tiles are named from 0 to 15, according to the bitmask that is
                 // made by combining these four values.
-                let value = Int(topLeft) | Int(topRight) << 1 | Int(bottomLeft) << 2 | Int(bottomRight) << 3
+                let value = (topLeft ? 1 : 0) | (topRight ? 1 : 0) << 1 | (bottomLeft ? 1 : 0) << 2 | (bottomRight ? 1 : 0) << 3
                 
                 // Values 0 (no tiles), 6 and 9 (two opposite tiles) are not drawn.
                 if value != 0 && value != 6 && value != 9 {
@@ -432,7 +432,7 @@ class GameScene: SKScene {
         // 1
         var longestDuration: TimeInterval = 0
         for array in columns {
-            for (idx, item) in enumerate(array) {
+            for (idx, item) in array.enumerated() {
                 let newPosition = pointForColumn(item.column, row: item.row)
                 // 2
                 let delay = 0.05 + 0.15*TimeInterval(idx)
@@ -462,7 +462,7 @@ class GameScene: SKScene {
             // 2
             let startRow = array[0].row + 1
             
-            for (idx, item) in enumerate(array) {
+            for (idx, item) in array.enumerated() {
                 // 3
                 let sprite = SKSpriteNode(imageNamed: item.itemType.spriteName)
                 sprite.position = pointForColumn(item.column, row: startRow)
@@ -582,7 +582,7 @@ class GameScene: SKScene {
     
     // MARK: Touch events
     
-    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first as! UITouch
         let location = touch.location(in: itemsLayer)
@@ -614,7 +614,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if swipeFromColumn == nil {
             let touch = touches.first as! UITouch
@@ -670,7 +670,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesEnded(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if selectionSprite.parent != nil && swipeFromColumn != nil {
             hideSelectionIndicator()
         }
@@ -696,7 +696,7 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesCancelled(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchesEnded(touches, with: event)
     }
     

@@ -27,7 +27,7 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         super.loadView()
         // Configure the view.
         v = MenuView(frame: UIScreen.main.bounds)
-        v?.delegate = self
+        v?.menuDelegate = self
         self.view = v!;
     }
     
@@ -39,8 +39,8 @@ class MenuViewController: UIViewController, MenuViewDelegate {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)))
     }
     
     override func didReceiveMemoryWarning() {

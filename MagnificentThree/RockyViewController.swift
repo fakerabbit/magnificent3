@@ -64,8 +64,8 @@ class RockyViewController: UIViewController, NodeButtonDelegate, LeaveSignDelega
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.allButUpsideDown
     }
     
     override func didReceiveMemoryWarning() {

@@ -48,12 +48,12 @@ class NodeButton: SKSpriteNode {
     
     // MARK: Touch Events
     
-    override func touchesBegan(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.texture = SKTexture(imageNamed: selectedImage!)
         delegate?.NodeButtonDelegateOnTouch(self)
     }
     
-    override func touchesEnded(_ touches: Set<NSObject>, with event: UIEvent) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.texture = SKTexture(imageNamed: normalImage!)
     }
 }
