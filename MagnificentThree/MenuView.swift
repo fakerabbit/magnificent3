@@ -50,7 +50,7 @@ class MenuView: SKView {
         //self.printFontNamesInSystem()
         
         logoIv = UIImageView(image: UIImage(named: "Logo"))
-        logoIv?.contentMode = UIViewContentMode.scaleAspectFit
+        logoIv?.contentMode = UIView.ContentMode.scaleAspectFit
         self.addSubview(logoIv!)
         
         cscene = SKScene(size: self.bounds.size)
@@ -60,7 +60,7 @@ class MenuView: SKView {
         self.fillBackground()
         
         townIv = UIImageView(image: UIImage(named: "BgTown"))
-        townIv?.contentMode = UIViewContentMode.scaleToFill
+        townIv?.contentMode = UIView.ContentMode.scaleToFill
         
         town = SKSpriteNode(imageNamed: "BgTown")
         cscene?.addChild(town!)
@@ -75,7 +75,7 @@ class MenuView: SKView {
         cscene?.addChild(hayParticle!)
         
         arcadeBtn = UIButton(frame: CGRect.zero)
-        arcadeBtn?.setImage(UIImage(named: "Arcade"), for: UIControlState())
+        arcadeBtn?.setImage(UIImage(named: "Arcade"), for: UIControl.State())
         arcadeBtn?.setImage(UIImage(named: "ArcadeOn"), for: .highlighted)
         arcadeBtn?.sizeToFit()
         arcadeBtn?.contentMode = .scaleAspectFit
@@ -83,7 +83,7 @@ class MenuView: SKView {
         self.addSubview(arcadeBtn!)
         
         rockyBtn = UIButton(frame: CGRect.zero)
-        rockyBtn?.setImage(UIImage(named: "Rocky"), for: UIControlState())
+        rockyBtn?.setImage(UIImage(named: "Rocky"), for: UIControl.State())
         rockyBtn?.setImage(UIImage(named: "RockyOn"), for: .highlighted)
         rockyBtn?.sizeToFit()
         rockyBtn?.contentMode = .scaleAspectFit
@@ -163,12 +163,12 @@ class MenuView: SKView {
     
     // MARK: Public methods
     
-    func onArcade(_ sender: UIButton?) {
+    @objc func onArcade(_ sender: UIButton?) {
         cscene?.run(clickSound)
         menuDelegate?.MenuViewOnArcade(self)
     }
     
-    func onRocky(_ sender: UIButton?) {
+    @objc func onRocky(_ sender: UIButton?) {
         cscene?.run(clickSound)
         menuDelegate?.MenuViewOnRocky(self)
     }

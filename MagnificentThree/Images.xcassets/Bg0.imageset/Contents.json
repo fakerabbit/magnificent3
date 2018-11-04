@@ -6,8 +6,13 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "2x",
-      "filename" : "bg-desert-4@2x-1-1.jpg"
+      "subtype" : "retina4",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "bg-desert-4@2x-1-1.jpg",
+      "scale" : "2x"
     },
     {
       "idiom" : "iphone",
@@ -17,8 +22,13 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "3x",
-      "filename" : "bg-desert@3x.jpg"
+      "filename" : "bg-desert@3x.jpg",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "subtype" : "retina4",
+      "scale" : "3x"
     }
   ],
   "info" : {

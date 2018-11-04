@@ -167,7 +167,7 @@ class GameViewController: UIViewController, NodeButtonDelegate, LeaveSignDelegat
     
     func beginNextTurn() {
         level.resetComboMultiplier()
-        level.detectPossibleSwaps()
+        _ = level.detectPossibleSwaps()
         decrementMoves()
         view.isUserInteractionEnabled = true
     }
