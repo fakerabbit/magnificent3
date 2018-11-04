@@ -584,7 +584,7 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         let location = touch.location(in: itemsLayer)
         
         let (success, column, row) = convertPoint(location)
@@ -598,7 +598,7 @@ class GameScene: SKScene {
             }
         }
         else {
-            let touch = touches.first as! UITouch
+            let touch = touches.first!
             let positionInScene = touch.location(in: self)
             
             selectNodeForTouch(positionInScene)
@@ -617,7 +617,7 @@ class GameScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if swipeFromColumn == nil {
-            let touch = touches.first as! UITouch
+            let touch = touches.first!
             let positionInScene = touch.location(in: self)
             let previousPosition = touch.previousLocation(in: self)
             let translation = CGPoint(x: positionInScene.x - previousPosition.x, y: positionInScene.y - previousPosition.y)
@@ -625,7 +625,7 @@ class GameScene: SKScene {
             panForTranslation(translation)
         }
         else {
-            let touch = touches.first as! UITouch
+            let touch = touches.first!
             let location = touch.location(in: itemsLayer)
             
             let (success, column, row) = convertPoint(location)
@@ -679,7 +679,7 @@ class GameScene: SKScene {
         
         if selectedNode.name != nil {
             
-            let touch = touches.first as! UITouch
+            let touch = touches.first!
             let location = touch.location(in: itemsLayer)
             
             let (success, column, row) = convertPoint(location)
@@ -723,7 +723,7 @@ class GameScene: SKScene {
     }
     
     func degToRad(_ degree: Double) -> CGFloat {
-        return CGFloat(Double(degree) / 180.0 * M_PI)
+        return CGFloat(Double(degree) / 180.0 * .pi)
     }
     
     func selectNodeForTouch(_ touchLocation: CGPoint) {

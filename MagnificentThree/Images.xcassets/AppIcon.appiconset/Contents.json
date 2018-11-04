@@ -1,23 +1,39 @@
 {
   "images" : [
     {
+      "size" : "20x20",
       "idiom" : "iphone",
-      "size" : "29x29",
+      "filename" : "Mag40.png",
       "scale" : "2x"
     },
     {
+      "size" : "20x20",
       "idiom" : "iphone",
-      "size" : "29x29",
+      "filename" : "Mag60.png",
       "scale" : "3x"
     },
     {
+      "size" : "29x29",
       "idiom" : "iphone",
-      "size" : "40x40",
+      "filename" : "Mag58.png",
       "scale" : "2x"
     },
     {
+      "size" : "29x29",
       "idiom" : "iphone",
+      "filename" : "Mag87.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Mag80.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Mag120.png",
       "scale" : "3x"
     },
     {
@@ -31,6 +47,12 @@
       "idiom" : "iphone",
       "filename" : "mag3icon.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Mag31024Icon.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

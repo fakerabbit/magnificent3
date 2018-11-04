@@ -76,7 +76,7 @@ class Level {
         var set: Set<Item>
         repeat {
             set = createInitialItems()
-            detectPossibleSwaps()
+            _ = detectPossibleSwaps()
             //println("possible swaps: \(possibleSwaps)")
         }
             while possibleSwaps.count == 0
@@ -466,8 +466,8 @@ class Level {
         }
         
         if (found) {
-            horizontalChains.subtracting(set)
-            verticalChains.subtracting(set)
+            _ = horizontalChains.subtracting(set)
+            _ = verticalChains.subtracting(set)
         }
         
         return set
@@ -483,7 +483,7 @@ class Level {
                     if !tile.rocky {
                         
                         if let item = items[column, row] {
-                            let matchType = item.itemType
+                            _ = item.itemType
                             
                             if items[column, row]?.itemType == type {
                                 
