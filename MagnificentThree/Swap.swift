@@ -22,8 +22,8 @@ struct Swap: CustomStringConvertible, Hashable {
     
     // MARK: Hash
     
-    var hashValue: Int {
-        return itemA.hashValue ^ itemB.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(itemA.hashValue ^ itemB.hashValue)
     }
 }
 

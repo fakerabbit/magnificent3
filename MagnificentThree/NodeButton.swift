@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-protocol NodeButtonDelegate:class {
+protocol NodeButtonDelegate: AnyObject {
     func NodeButtonDelegateOnTouch(_ button: NodeButton)
 }
 

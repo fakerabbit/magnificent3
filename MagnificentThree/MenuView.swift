@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-protocol MenuViewDelegate: class {
+protocol MenuViewDelegate: AnyObject {
     func MenuViewOnArcade(_ view: MenuView)
     func MenuViewOnRocky(_ view: MenuView)
 }
@@ -65,14 +65,21 @@ class MenuView: SKView {
         town = SKSpriteNode(imageNamed: "BgTown")
         cscene?.addChild(town!)
         
-        
-        let path = Bundle.main.path(forResource: "pfHay", ofType: "sks")
-        hayParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode
-        hayParticle!.position = CGPoint(x: 8, y: 15)
-        hayParticle!.zPosition = 100
-        hayParticle!.name = "Hay"
-        hayParticle!.targetNode = scene
-        cscene?.addChild(hayParticle!)
+        if let myParticlePath = Bundle.main.path(forResource: "pfHay", ofType: "sks") {
+            do {
+                let url = URL(fileURLWithPath: myParticlePath)
+                let fileData = try Data(contentsOf: url)
+                if let fParticles = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(fileData) as? SKEmitterNode {
+                    hayParticle = fParticles
+                    hayParticle!.position = CGPoint(x: 8, y: 15)
+                    hayParticle!.zPosition = 100
+                    hayParticle!.name = "Hay"
+                    hayParticle!.targetNode = scene
+                    cscene?.addChild(hayParticle!)
+                }
+            }
+            catch { }
+        }
         
         arcadeBtn = UIButton(frame: CGRect.zero)
         arcadeBtn?.setImage(UIImage(named: "Arcade"), for: UIControl.State())

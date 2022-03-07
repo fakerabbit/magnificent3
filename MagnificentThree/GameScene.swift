@@ -232,7 +232,7 @@ class GameScene: SKScene {
         
         for row in 0..<NumRows {
             for column in 0..<NumColumns {
-                if let tile = level.tileAtColumn(column, row: row) {
+                if level.tileAtColumn(column, row: row) != nil {
                     let tileNode = SKSpriteNode(imageNamed: "MaskTile")
                     tileNode.position = pointForColumn(column, row: row)
                     maskLayer.addChild(tileNode)
@@ -402,14 +402,18 @@ class GameScene: SKScene {
                         next(nil)
                     }
                     
-                    sequencer.enqueueStep() { result, next in
-                        if let myParticlePath = Bundle.main.path(forResource: "fire", ofType: "sks") {
-                            if let fParticles = NSKeyedUnarchiver.unarchiveObject(withFile: myParticlePath) as? SKEmitterNode {
+                    sequencer.enqueueStep() { [weak self] result, next in
+                        guard let myParticlePath = Bundle.main.path(forResource: "fire", ofType: "sks") else { return }
+                        do {
+                            let url = URL(fileURLWithPath: myParticlePath)
+                            let fileData = try Data(contentsOf: url)
+                            if let fParticles = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(fileData) as? SKEmitterNode {
                                 fParticles.position = sprite.position
-                                self.itemsLayer.addChild(fParticles)
-                                self.fires.append(fParticles)
+                                self?.itemsLayer.addChild(fParticles)
+                                self?.fires.append(fParticles)
                             }
                         }
+                        catch { }
                         next(nil)
                     }
                 }
@@ -555,13 +559,17 @@ class GameScene: SKScene {
                     resize: false,
                     restore: true))
             bomb.run(animeAction,withKey:"bombShiningAnime")
-            
-            if let myParticlePath = Bundle.main.path(forResource: "smoke", ofType: "sks") {
-                self.smoke = NSKeyedUnarchiver.unarchiveObject(withFile: myParticlePath) as? SKEmitterNode
-                self.smoke?.position = CGPoint(x: bomb.position.x, y: bomb.position.y)
-                self.addChild(self.smoke!)
+            guard let myParticlePath = Bundle.main.path(forResource: "smoke", ofType: "sks") else { return }
+            do {
+                let url = URL(fileURLWithPath: myParticlePath)
+                let fileData = try Data(contentsOf: url)
+                if let fParticles = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(fileData) as? SKEmitterNode {
+                    self.smoke = fParticles
+                    self.smoke?.position = CGPoint(x: bomb.position.x, y: bomb.position.y)
+                    self.addChild(self.smoke!)
+                }
             }
-            
+            catch { }
             addChild(bomb)
         }
     }

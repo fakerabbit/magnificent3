@@ -46,7 +46,7 @@ class Chain: Hashable, CustomStringConvertible {
     }
     
     func removeItem(_ item: Item) {
-        if let index = items.index(of: item) {
+        if let index = items.firstIndex(of: item) {
             items.remove(at: index)
         }
     }
@@ -69,8 +69,8 @@ class Chain: Hashable, CustomStringConvertible {
     
     // MARK: Hashable
     
-    var hashValue: Int {
-        return items.reduce(0, { $0.hashValue ^ $1.hashValue })
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(items.reduce(0, { $0.hashValue ^ $1.hashValue }))
     }
 }
 

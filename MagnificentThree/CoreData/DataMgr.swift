@@ -187,7 +187,7 @@ class DataMgr {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext()
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
         }()
@@ -198,11 +198,17 @@ class DataMgr {
         if let moc = self.managedObjectContext {
             //var error: NSError? = nil
             if moc.hasChanges {
-                try! moc.save()
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error ")
-                abort()
+                moc.perform {
+                    do {
+                        try moc.save()
+                    }
+                    catch {
+                        // Replace this implementation with code to handle the error appropriately.
+                        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                        NSLog("Unresolved error ")
+                        //abort()
+                    }
+                }
             }
        }
     }
@@ -220,9 +226,16 @@ class DataMgr {
     func displayWarning() {
         let title = NSLocalizedString("Issue", comment: "")
         let message = NSLocalizedString("There was a problem installing the database, please restart the app.", comment: "")
-        let cancel = NSLocalizedString("Ok", comment: "")
-        let alert: UIAlertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: cancel)
-        alert.show()
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(cancelAction)
+        let window = UIApplication
+            .shared
+            .connectedScenes
+            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+            .first { $0.isKeyWindow }
+        guard let win = window, let rootController = win.rootViewController else { return }
+        alertController.show(rootController, sender: nil)
     }
     
     /**

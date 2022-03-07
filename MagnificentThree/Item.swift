@@ -61,8 +61,8 @@ class Item: CustomStringConvertible, Hashable {
     
     // MARK: Hash
     
-    var hashValue: Int {
-        return row*10 + column
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(row*10 + column)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-protocol LeaveSignDelegate:class {
+protocol LeaveSignDelegate: AnyObject {
     func LeaveSignDelegateOnYes(_ button: LeaveSign)
     func LeaveSignDelegateOnNo(_ button: LeaveSign)
 }
