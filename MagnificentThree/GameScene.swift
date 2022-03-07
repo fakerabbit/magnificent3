@@ -81,6 +81,8 @@ class GameScene: SKScene {
         let bgNum = Int(arc4random_uniform(11))
         //println("\(bgNum)")
         backgroundImg = SKSpriteNode(imageNamed: "Bg\(bgNum)")
+        backgroundImg?.anchorPoint = anchorPoint
+        backgroundImg?.size = CGSize(width: self.size.width, height: self.size.height)
         //let background = SKSpriteNode(imageNamed: "Bg12")
         addChild(backgroundImg!)
         
@@ -101,48 +103,50 @@ class GameScene: SKScene {
         itemsLayer.position = layerPosition
         cropLayer.addChild(itemsLayer)
 
+        let ratioH = 2.3
+        let subRationH = 2.5
         
         targetLbl = SKLabelNode(text: "Target:")
         targetLbl?.fontName = "Sahara"
         targetLbl?.fontColor = UIColor.white
         targetLbl?.fontSize = 14
         addChild(targetLbl!)
-        targetLbl?.position = CGPoint(x: 0, y: size.height/2.2)
+        targetLbl?.position = CGPoint(x: 0, y: size.height/ratioH)
         
         movesLbl = SKLabelNode(text: "Moves:")
         movesLbl?.fontName = "Sahara"
         movesLbl?.fontColor = UIColor.white
         movesLbl?.fontSize = 14
         addChild(movesLbl!)
-        movesLbl?.position = CGPoint(x: size.width/4.8, y: size.height/2.2)
+        movesLbl?.position = CGPoint(x: size.width/4.8, y: size.height/ratioH)
         
         scoreLbl = SKLabelNode(text: "Score:")
         scoreLbl?.fontName = "Sahara"
         scoreLbl?.fontColor = UIColor.white
         scoreLbl?.fontSize = 14
         addChild(scoreLbl!)
-        scoreLbl?.position = CGPoint(x: size.width/2.5, y: size.height/2.2)
+        scoreLbl?.position = CGPoint(x: size.width/2.5, y: size.height/ratioH)
         
         target = SKLabelNode(text: "0")
         target?.fontName = "Sahara"
         target?.fontColor = UIColor.white
         target?.fontSize = 20
         addChild(target!)
-        target?.position = CGPoint(x: 0, y: size.height/2.4)//CGPointMake(-size.width/2.5, size.height/2.4)
+        target?.position = CGPoint(x: 0, y: size.height/subRationH)//CGPointMake(-size.width/2.5, size.height/2.4)
         
         moves = SKLabelNode(text: "0")
         moves?.fontName = "Sahara"
         moves?.fontColor = UIColor.white
         moves?.fontSize = 20
         addChild(moves!)
-        moves?.position = CGPoint(x: size.width/4.8, y: size.height/2.4)//CGPointMake(0, size.height/2.4)
+        moves?.position = CGPoint(x: size.width/4.8, y: size.height/subRationH)//CGPointMake(0, size.height/2.4)
         
         score = SKLabelNode(text: "0")
         score?.fontName = "Sahara"
         score?.fontColor = UIColor.white
         score?.fontSize = 20
         addChild(score!)
-        score?.position = CGPoint(x: size.width/2.5, y: size.height/2.4)
+        score?.position = CGPoint(x: size.width/2.5, y: size.height/subRationH)
         
         shuffle = NodeButton(normalImage: "Shuffle", selectedImage: "ShuffleOn", tag: 1)
         if let size = shuffle?.size {
@@ -155,7 +159,7 @@ class GameScene: SKScene {
         if let size = menu?.size {
             menu?.size = CGSize(width: size.width/2, height: size.height/2)
         }
-        menu?.position = CGPoint(x: -size.width/3, y: size.height/2.2)
+        menu?.position = CGPoint(x: -size.width/3, y: size.height/ratioH)
         addChild(menu!)
     }
     
